@@ -4,34 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discord 2.0</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="images/favicon2.ico">
 </head>
 <body>
     
     <div class="login">
 
     </div>
-    <div class="main">
+    <div class="main" style="position: absolute; left: 0px; top: 0px; width: 100vw; height: 100vh; overflow: hidden;">
+        <div style="background-color: #1f2022ff;">
+            <img src="images/textIcon.png" style="height: 9px; padding-left: 10px; width: 85px;">
+        </div>
         <div class="row">
-            <div class="column Groups">
-                <p>
-                    h
-                </p>
-            </div>
-            <div class="column MessageList">
-                <p>
-                    h
-                </p>
-            </div>
-            <div class="column MessageThread">
-                <p>
+            <div class="ServerList">
+                <div class="serverListItem">
+                    <button class="serverButton dmButton">
 
-                </p>
+                    </button>
+                    <hr style="width: 45px; margin-left: 30px; outline: 0; border-width: 0px; background-color: #323338ff; height: 3px; border-radius: 1.5px;">
+                </div>
+
             </div>
-            <div class="column Members">
-                <p>
-                    h
-                </p>
+            <div class="MessageList">
+
+            </div>
+            <div class="MessageThread">
+
+            </div>
+            <div class="Members">
+
             </div>
         </div>
     </div>
@@ -42,22 +43,53 @@
 	}
 
 	body{
-	    background-color:color(srgb red green blue)
+	    background-color: #323338ff;
 	}
 
-	.Groups{
+	.ServerList{
 	    background-color: #1f2022ff;
 		float: left;
-	    width: 25%;
-	    padding: 10px;
+	    width: 100px;
+	    padding: 0px;
 	    height: 100vh;
 	}
+
+    .serverListItem{
+        width: 100px;
+        height: 60px;
+    }
+
+    .serverButton{
+        color: #000000FF;
+        position: relative;
+        margin-left: 20px;
+        margin-top: 0.5vw;
+        border-width: 0px;
+        padding: 0px;
+        width: 66px;
+        height: 66px;
+        border-radius: 50%;
+        transition: 0.4s;
+    }
+
+    .dmButton{
+        background-image: url(images/dmIcon.png);
+        background-size: 66px;
+    }
+    
+    .dmButton:hover{
+        background-image: url(images/dmHoveredIcon.png);
+    }
+
+    .serverButton:hover{
+        border-radius: 30%;
+    }
 
 	.MessageList{
 	    background-color: #323338ff;
 		float: left;
-	    width: 25%;
-	    padding: 10px;
+	    width: 300px;
+	    padding: 0px;
 	    height: 100vh;
 	}
 
@@ -65,15 +97,15 @@
 	    background-color: #383840ff;
 		float: left;
 	    width: 25%;
-	    padding: 10px;
+	    padding: 0px;
 	    height: 100vh;
 	}
 
 	.Members{
 	    background-color: #323338ff;
-		float: left;
-	    width: 25%;
-	    padding: 10px;
+		float: right;
+	    width: 300px;
+	    padding: 0px;
 	    height: 100vh;
 	}
 
@@ -86,7 +118,7 @@
 	.column{
 	    float: left;
 	    width: 25%;
-	    padding: 10px;
+	    padding: 0px;
 	    height: 100vh;
 	}
 </style>
