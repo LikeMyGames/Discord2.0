@@ -15,26 +15,58 @@
         <div style="background-color: #1f2022ff;">
             <img src="images/textIcon.png" style="height: 9px; padding-left: 10px; width: 85px;">
         </div>
-        <div class="row">
-            <div class="ServerList">
-                <div class="serverListItem">
-                    <button class="serverButton dmButton">
-
-                    </button>
-                    <hr style="width: 45px; margin-left: 30px; outline: 0; border-width: 0px; background-color: #323338ff; height: 3px; border-radius: 1.5px;">
-                </div>
-
-            </div>
-            <div class="MessageList">
-
-            </div>
-            <div class="MessageThread">
-
-            </div>
-            <div class="Members">
-
-            </div>
-        </div>
+		<table style="width: 100%;" cellspacing="0">
+			<!--
+			<tr height="0px">
+				<th>
+					Servers
+				</th>
+				<th>
+					Messages
+				</th>
+				<th>
+					Thread
+				</th>
+				<th>
+					Members
+				</th>
+			</tr>
+			-->
+			<tr height="100%">
+				<td width="100px">
+					<div class="ServerList">
+						<div class="serverListItem">
+							<button class="serverButton dmButton">
+		
+							</button>
+							<hr style="width: 45px; margin-left: 30px; outline: 0; border-width: 0px; background-color: #323338ff; height: 3px; border-radius: 1.5px;">
+						</div>
+		
+					</div>
+				</td>
+				<td width="300px">
+					<div class="MessageList">
+						<p>
+							h
+						</p>
+					</div>
+				</td>
+				<td>
+					<div class="MessageThread">
+						<p style="font-size: 30px; color: white;">
+							hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.
+						</p>
+					</div>
+				</td>
+				<td width="300px">
+					<div class="Members">
+						<p>
+							h
+						</p>
+					</div>
+				</td>
+			</tr>
+		</table>
     </div>
 </body>
 <style>
@@ -42,16 +74,25 @@
     box-sizing: border-box;
 	}
 
+	table, th, td {
+		border:0px solid black;
+		border-collapse: collapse;
+		border-spacing: 0;
+		outline-width: 0px;
+		border-width: 0px;
+		padding: 0px;
+	}
+
 	body{
-	    background-color: #323338ff;
+	    background-color: #ffffff;
 	}
 
 	.ServerList{
 	    background-color: #1f2022ff;
 		float: left;
-	    width: 100px;
 	    padding: 0px;
 	    height: 100vh;
+		width: 100%;
 	}
 
     .serverListItem{
@@ -69,7 +110,7 @@
         width: 66px;
         height: 66px;
         border-radius: 50%;
-        transition: 0.4s;
+        transition: 0.2s;
     }
 
     .dmButton{
@@ -86,27 +127,32 @@
     }
 
 	.MessageList{
-	    background-color: #323338ff;
+	    background-color: #2b2d31ff;
 		float: left;
-	    width: 300px;
 	    padding: 0px;
 	    height: 100vh;
+		padding: 0px;
+		width: 100%;
 	}
 
 	.MessageThread{
-	    background-color: #383840ff;
+	    background-color: #303338ff;
 		float: left;
-	    width: 25%;
 	    padding: 0px;
 	    height: 100vh;
+        overflow-wrap: break-word;
+        overflow-y: auto;
+		padding: 0px;
+		width: 100%;
 	}
 
 	.Members{
-	    background-color: #323338ff;
+	    background-color: #2b2d31ff;
 		float: right;
-	    width: 300px;
 	    padding: 0px;
 	    height: 100vh;
+		padding: 0px;
+		width: 100%;
 	}
 
 	.row:after{
@@ -121,6 +167,23 @@
 	    padding: 0px;
 	    height: 100vh;
 	}
+
+    ::-webkit-scrollbar {
+        width: 10px;
+  	}
+
+  	::-webkit-scrollbar-track {
+  		background: #f1f1f1;
+  	}
+
+  	::-webkit-scrollbar-thumb {
+    	background: #888;
+		border-radius: 5px;
+  	}
+
+  	::-webkit-scrollbar-thumb:hover {
+    	background: #555;
+  	}
 </style>
 </html>
 <!--
