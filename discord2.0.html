@@ -16,48 +16,62 @@
             <img src="images/textIcon.png" style="height: 9px; padding-left: 10px; width: 85px;">
         </div>
 		<table style="width: 100%;" cellspacing="0">
-			<!--
-			<tr height="0px">
-				<th>
-					Servers
-				</th>
-				<th>
-					Messages
-				</th>
-				<th>
-					Thread
-				</th>
-				<th>
-					Members
-				</th>
-			</tr>
-			-->
 			<tr height="100%">
 				<td width="80px">
 					<div class="ServerList">
 						<div class="serverListItem">
-							<button class="serverButton dmButton" onclick="openDMs()">
+							<img class="unSeenMessage" id="DMsNotification">
+							<button class="serverButton dmButton" id="DMs" onclick="openDMs()" onmouseout="unHoverServerButton(this.id)" onmouseover="hoverServerButton(this.id)">
 		
 							</button>
 						</div>
-						<hr style="width: 35px; margin-left: 27.5px; outline: 0; border-width: 0px; background-color: #323338ff; height: 3px; border-radius: 1.5px;">
+						<hr style="width: 35px; margin-right: 22.5px; outline: 0; border-width: 0px; background-color: #323338ff; height: 3px; border-radius: 1.5px;">
 						<div class="addServerButtons">
 							<div class="serverListItem">
-								<button class="serverButton createServerButton" onclick="createNewServer()">
+								<img class="SeenMessage" id="addServerNotification">
+								<button class="serverButton createServerButton" id="addServer" onclick="createNewServer()">
 			
 								</button>
 							</div>
 							<div class="serverListItem">
-								<button class="serverButton exploreServersButton" onclick="findPublicServer()">
+								<img class="SeenMessage" id="exploreServerNotification">
+								<button class="serverButton exploreServersButton" id="exploreServer" onclick="findPublicServer()" onmouseout="unHoverServerButton(this.id)" onmouseover="hoverServerButton(this.id)">
 			
 								</button>
 							</div>
-							<hr style="width: 35px; margin-left: 27.5px; outline: 0; border-width: 0px; background-color: #323338ff; height: 3px; border-radius: 1.5px;">
+							<!--<hr style="width: 35px; margin-right: 22.5px; outline: 0; border-width: 0px; background-color: #323338ff; height: 3px; border-radius: 1.5px;">-->
 						</div>
 		
 					</div>
+					<script type="text/javascript">
+						function hoverServerButton(id){
+							console.warn(id + "Notification");
+							var element = document.getElementById(id + "Notification");
+							if(element.className === "unSeenMessage"){
+								element.className = "unSeenMessageHovered";
+							} else {
+								element.className = "SeenMessageHovered";
+							}
+							
+							//element.style.setProperty("content", "url(images/unseenMessageHovered.png)");
+							//element.style.marginTop = "20px";
+							//element.style.height = "24px";
+						}
+					
+						function unHoverServerButton(id){
+							var element = document.getElementById(id + "Notification");
+							if(element.className === "unSeenMessageHovered"){
+								element.className = "unSeenMessage";
+							} else {
+								element.className = "SeenMessage";
+							}
+							//element.style.setProperty("content", "url(images/unseenMessage.png)");
+							//element.style.marginTop = "27.5px";
+							//element.style.height = "8px";
+						}
+					</script>
 				</td>
-				<td width="200px">
+				<td width="250px">
 					<div class="MessageList">
 						<p>
 							h
@@ -71,7 +85,7 @@
 						</p>
 					</div>
 				</td>
-				<td width="200px">
+				<td width="250px">
 					<div class="Members">
 						<p>
 							h
@@ -96,6 +110,42 @@
 		padding: 0px;
 	}
 
+	.unSeenMessage{
+		float: left;
+		content: url(images/unSeenMessage.png);
+		height: 8px;
+		width: 8px;
+		margin-top: 27.5px;
+		transition: 0.2s;
+	}
+
+	.unSeenMessageHovered{
+		float: left;
+		content: url(images/unSeenMessageHovered.png);
+		height: 24px;
+		width: 8px;
+		margin-top: 20px;
+		transition: 0.2s;
+	}
+
+	.SeenMessage{
+		float: left;
+		content: url(images/unSeenMessage.png);
+		height: 0px;
+		width: 0px;
+		margin-top: 30px;
+		transition: 0.2s;
+	}
+	
+	.SeenMessageHovered{
+		float: left;
+		content: url(images/unSeenMessageHovered.png);
+		height: 24px;
+		width: 8px;
+		margin-top: 25px;
+		transition: 0.2s;
+	}
+
 	body{
 	    background-color: #ffffff;
 	}
@@ -116,15 +166,17 @@
     .serverButton{
         color: #000000FF;
         position: relative;
-        margin-left: 20px;
-        margin-top: 0.5vw;
+        margin-top: 6px;
+		margin-right: 15px;
         border-width: 0px;
+		margin-bottom: 10px;
         padding: 0px;
         width: 50px;
         height: 50px;
         border-radius: 50%;
 		background-size: 50px;
         transition: 0.2s;
+		float: right;
     }
 
     .dmButton{
@@ -139,10 +191,6 @@
         border-radius: 30%;
     }
 
-	.addServerButtons{
-        
-    }
-
 	.createServerButton{
 		background-image: url(images/createServerIcon.png);
 	}
@@ -150,6 +198,14 @@
 	.createServerButton:hover{
 		background-image: url(images/createServerHoveredIcon.png);
 	}
+
+	.exploreServersButton{
+		background-image: url(images/exploreServersIcon.png);
+	}
+
+	.exploreServersButton:hover{
+		background-image: url(images/exploreServersHoveredIcon.png);
+	} 
 
 	.MessageList{
 	    background-color: #2b2d31ff;
@@ -210,6 +266,7 @@
     	background: #1f2022ff;
   	}
 </style>
+
 </html>
 <!--
 <!DOCTYPE html>
