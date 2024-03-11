@@ -43,33 +43,6 @@
 						</div>
 		
 					</div>
-					<script type="text/javascript">
-						function hoverServerButton(id){
-							console.warn(id + "Notification");
-							var element = document.getElementById(id + "Notification");
-							if(element.className === "unSeenMessage"){
-								element.className = "unSeenMessageHovered";
-							} else {
-								element.className = "SeenMessageHovered";
-							}
-							
-							//element.style.setProperty("content", "url(images/unseenMessageHovered.png)");
-							//element.style.marginTop = "20px";
-							//element.style.height = "24px";
-						}
-					
-						function unHoverServerButton(id){
-							var element = document.getElementById(id + "Notification");
-							if(element.className === "unSeenMessageHovered"){
-								element.className = "unSeenMessage";
-							} else {
-								element.className = "SeenMessage";
-							}
-							//element.style.setProperty("content", "url(images/unseenMessage.png)");
-							//element.style.marginTop = "27.5px";
-							//element.style.height = "8px";
-						}
-					</script>
 				</td>
 				<td width="250px">
 					<div class="MessageList">
@@ -80,7 +53,7 @@
 				</td>
 				<td>
 					<div class="MessageThread">
-						<p style="font-size: 30px; color: white;">
+						<p>
 							hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are.
 						</p>
 					</div>
@@ -96,6 +69,40 @@
 		</table>
     </div>
 </body>
+<script type="text/javascript">
+	const servers = []
+	fetch("myText.txt")
+  		.then((res) => res.text())
+  		.then((text) => {
+		// do something with "text"
+   		})
+  		.catch((e) => console.error(e));
+	function hoverServerButton(id){
+		console.warn(id + "Notification");
+		var element = document.getElementById(id + "Notification");
+		if(element.className === "unSeenMessage"){
+			element.className = "unSeenMessageHovered";
+		} else {
+			element.className = "SeenMessageHovered";
+		}
+		
+		//element.style.setProperty("content", "url(images/unseenMessageHovered.png)");
+		//element.style.marginTop = "20px";
+		//element.style.height = "24px";
+	}
+
+	function unHoverServerButton(id){
+		var element = document.getElementById(id + "Notification");
+		if(element.className === "unSeenMessageHovered"){
+			element.className = "unSeenMessage";
+		} else {
+			element.className = "SeenMessage";
+		}
+		//element.style.setProperty("content", "url(images/unseenMessage.png)");
+		//element.style.marginTop = "27.5px";
+		//element.style.height = "8px";
+	}
+</script>
 <style>
 	*{
     box-sizing: border-box;
@@ -108,6 +115,21 @@
 		outline-width: 0px;
 		border-width: 0px;
 		padding: 0px;
+	}
+
+	p{
+		font-family: Verdana, Geneva, Tahoma, sans-serif;
+		font-size: 15px;
+		margin: 20px;
+		color: #f0f0f0ff;
+	}
+
+	.message{
+		margin: 20px;
+	}
+
+	.MessageGroup{
+
 	}
 
 	.unSeenMessage{
