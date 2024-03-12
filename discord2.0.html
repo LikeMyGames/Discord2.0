@@ -5,13 +5,291 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discord 2.0</title>
     <link rel="icon" type="image/x-icon" href="images/favicon2.ico">
+	<style>
+		*{
+			box-sizing: border-box;
+			font-family: Verdana, Geneva, Tahoma, sans-serif;
+		}
+
+		h1{
+			color: #ffffffff;
+		}
+
+		.main{
+			display: none;
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			width: 100vw;
+			height: 100vh;
+			overflow: hidden;
+		}
+
+		.login{
+			display: block;
+			text-align: center;
+			position: absolute;
+			width: 100vw;
+			height: 100vh;
+			left: 0px;
+			top: 0px;
+			overflow: hidden;
+			background-color: #303338ff;
+		}
+
+		.loginBox{
+			background-color: #2b2d31ff;
+			border-color: #2b2d31ff;
+			border-width: 5%;
+			border-radius: 10px;
+			height: 40vh;
+			width: 40vw;
+			position: absolute;
+			left: 30vw;
+			top: 30vh;
+		}
+	
+		table, th, td {
+			border:0px solid black;
+			border-collapse: collapse;
+			border-spacing: 0;
+			outline-width: 0px;
+			border-width: 0px;
+			padding: 0px;
+		}
+	
+		p{
+			font-family: Verdana, Geneva, Tahoma, sans-serif;
+			font-size: 15px;
+			margin: 20px;
+			color: #f0f0f0ff;
+		}
+	
+		.message{
+			margin: 20px;
+		}
+	
+		.MessageGroup{
+	
+		}
+	
+		.unSeenMessage{
+			float: left;
+			content: url(images/unSeenMessage.png);
+			height: 8px;
+			width: 8px;
+			margin-top: 27.5px;
+			transition: 0.2s;
+		}
+	
+		.unSeenMessageHovered{
+			float: left;
+			content: url(images/unSeenMessageHovered.png);
+			height: 24px;
+			width: 8px;
+			margin-top: 20px;
+			transition: 0.2s;
+		}
+	
+		.SeenMessage{
+			float: left;
+			content: url(images/unSeenMessage.png);
+			height: 0px;
+			width: 0px;
+			margin-top: 30px;
+			transition: 0.2s;
+		}
+		
+		.SeenMessageHovered{
+			float: left;
+			content: url(images/unSeenMessageHovered.png);
+			height: 24px;
+			width: 8px;
+			margin-top: 25px;
+			transition: 0.2s;
+		}
+	
+		body{
+			background-color: #ffffff;
+		}
+	
+		.ServerList{
+			background-color: #1f2022ff;
+			float: left;
+			padding: 0px;
+			height: 100vh;
+			width: 100%;
+		}
+	
+		.serverListItem{
+			width: 100%;
+			height: 60px;
+		}
+	
+		.serverButton{
+			color: #000000FF;
+			position: relative;
+			margin-top: 6px;
+			margin-right: 15px;
+			border-width: 0px;
+			margin-bottom: 10px;
+			padding: 0px;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			background-size: 50px;
+			transition: 0.2s;
+			float: right;
+		}
+	
+		.dmButton{
+			background-image: url(images/dmIcon.png);
+		}
+		
+		.dmButton:hover{
+			background-image: url(images/dmHoveredIcon.png);
+		}
+	
+		.serverButton:hover{
+			border-radius: 30%;
+		}
+	
+		.createServerButton{
+			background-image: url(images/createServerIcon.png);
+		}
+	
+		.createServerButton:hover{
+			background-image: url(images/createServerHoveredIcon.png);
+		}
+	
+		.exploreServersButton{
+			background-image: url(images/exploreServersIcon.png);
+		}
+	
+		.exploreServersButton:hover{
+			background-image: url(images/exploreServersHoveredIcon.png);
+		} 
+	
+		.MessageList{
+			background-color: #2b2d31ff;
+			float: left;
+			padding: 0px;
+			height: 100vh;
+			padding: 0px;
+			width: 100%;
+		}
+	
+		.MessageThread{
+			background-color: #303338ff;
+			float: left;
+			padding: 0px;
+			height: 100vh;
+			overflow-wrap: break-word;
+			overflow-y: auto;
+			padding: 0px;
+			width: 100%;
+		}
+	
+		.Members{
+			background-color: #2b2d31ff;
+			float: right;
+			padding: 0px;
+			height: 100vh;
+			padding: 0px;
+			width: 100%;
+		}
+	
+		.row:after{
+			content: "";
+			display: table;
+			clear: both;
+		}
+	
+		.column{
+			float: left;
+			width: 25%;
+			padding: 0px;
+			height: 100vh;
+		}
+	
+		::-webkit-scrollbar {
+			width: 6px;
+		  }
+	
+		::-webkit-scrollbar-track {
+			background: #2b2d31ff;
+		}
+	
+		::-webkit-scrollbar-thumb {
+			background: #1f2022ff;
+			border-radius: 5px;
+		}
+	
+		::-webkit-scrollbar-thumb:hover {
+			background: #1f2022ff;
+		}
+	</style>
+	<script type="text/javascript" src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js">
+		function hoverServerButton(id){
+			console.warn(id + "Notification");
+			var element = document.getElementById(id + "Notification");
+			if(element.className === "unSeenMessage"){
+				element.className = "unSeenMessageHovered";
+			} else {
+				element.className = "SeenMessageHovered";
+			}
+			
+			//element.style.setProperty("content", "url(images/unseenMessageHovered.png)");
+			//element.style.marginTop = "20px";
+			//element.style.height = "24px";
+		}
+	
+		// Function to download data to a file
+	function download(data, filename, type) {
+		var file = new Blob([data], {type: type});
+		if (window.navigator.msSaveOrOpenBlob) // IE10+
+			window.navigator.msSaveOrOpenBlob(file, filename);
+		else { // Others
+			var a = document.createElement("a"),
+					url = URL.createObjectURL(file);
+			a.href = url;
+			a.download = filename;
+			document.body.appendChild(a);
+			a.click();
+			setTimeout(function() {
+				document.body.removeChild(a);
+				window.URL.revokeObjectURL(url);  
+			}, 0); 
+		}
+		alert(file);
+	}
+	
+		function unHoverServerButton(id){
+			var element = document.getElementById(id + "Notification");
+			if(element.className === "unSeenMessageHovered"){
+				element.className = "unSeenMessage";
+			} else {
+				element.className = "SeenMessage";
+			}
+			//element.style.setProperty("content", "url(images/unseenMessage.png)");
+			//element.style.marginTop = "27.5px";
+			//element.style.height = "8px";
+		}
+	</script>
 </head>
 <body>
     
     <div class="login">
-
+		<div class="loginBox">
+			<h1>
+				Login
+			</h1>
+			<button style="margin-top: 5vh; height: 10vh; width: 20vw; background-color: #1f2022ff" onclick="download('hello', 'hello', '.txt')">
+				LOGIN
+			</button>
+		</div>
     </div>
-    <div class="main" style="position: absolute; left: 0px; top: 0px; width: 100vw; height: 100vh; overflow: hidden;">
+    <div class="main">
         <div style="background-color: #1f2022ff;">
             <img src="images/textIcon.png" style="height: 9px; padding-left: 10px; width: 85px;">
         </div>
@@ -69,225 +347,8 @@
 		</table>
     </div>
 </body>
-<script type="text/javascript">
-	const servers = []
-	fetch("myText.txt")
-  		.then((res) => res.text())
-  		.then((text) => {
-		// do something with "text"
-   		})
-  		.catch((e) => console.error(e));
-	function hoverServerButton(id){
-		console.warn(id + "Notification");
-		var element = document.getElementById(id + "Notification");
-		if(element.className === "unSeenMessage"){
-			element.className = "unSeenMessageHovered";
-		} else {
-			element.className = "SeenMessageHovered";
-		}
-		
-		//element.style.setProperty("content", "url(images/unseenMessageHovered.png)");
-		//element.style.marginTop = "20px";
-		//element.style.height = "24px";
-	}
 
-	function unHoverServerButton(id){
-		var element = document.getElementById(id + "Notification");
-		if(element.className === "unSeenMessageHovered"){
-			element.className = "unSeenMessage";
-		} else {
-			element.className = "SeenMessage";
-		}
-		//element.style.setProperty("content", "url(images/unseenMessage.png)");
-		//element.style.marginTop = "27.5px";
-		//element.style.height = "8px";
-	}
-</script>
-<style>
-	*{
-    box-sizing: border-box;
-	}
 
-	table, th, td {
-		border:0px solid black;
-		border-collapse: collapse;
-		border-spacing: 0;
-		outline-width: 0px;
-		border-width: 0px;
-		padding: 0px;
-	}
-
-	p{
-		font-family: Verdana, Geneva, Tahoma, sans-serif;
-		font-size: 15px;
-		margin: 20px;
-		color: #f0f0f0ff;
-	}
-
-	.message{
-		margin: 20px;
-	}
-
-	.MessageGroup{
-
-	}
-
-	.unSeenMessage{
-		float: left;
-		content: url(images/unSeenMessage.png);
-		height: 8px;
-		width: 8px;
-		margin-top: 27.5px;
-		transition: 0.2s;
-	}
-
-	.unSeenMessageHovered{
-		float: left;
-		content: url(images/unSeenMessageHovered.png);
-		height: 24px;
-		width: 8px;
-		margin-top: 20px;
-		transition: 0.2s;
-	}
-
-	.SeenMessage{
-		float: left;
-		content: url(images/unSeenMessage.png);
-		height: 0px;
-		width: 0px;
-		margin-top: 30px;
-		transition: 0.2s;
-	}
-	
-	.SeenMessageHovered{
-		float: left;
-		content: url(images/unSeenMessageHovered.png);
-		height: 24px;
-		width: 8px;
-		margin-top: 25px;
-		transition: 0.2s;
-	}
-
-	body{
-	    background-color: #ffffff;
-	}
-
-	.ServerList{
-	    background-color: #1f2022ff;
-		float: left;
-	    padding: 0px;
-	    height: 100vh;
-		width: 100%;
-	}
-
-    .serverListItem{
-        width: 100%;
-        height: 60px;
-    }
-
-    .serverButton{
-        color: #000000FF;
-        position: relative;
-        margin-top: 6px;
-		margin-right: 15px;
-        border-width: 0px;
-		margin-bottom: 10px;
-        padding: 0px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-		background-size: 50px;
-        transition: 0.2s;
-		float: right;
-    }
-
-    .dmButton{
-        background-image: url(images/dmIcon.png);
-    }
-    
-    .dmButton:hover{
-        background-image: url(images/dmHoveredIcon.png);
-    }
-
-    .serverButton:hover{
-        border-radius: 30%;
-    }
-
-	.createServerButton{
-		background-image: url(images/createServerIcon.png);
-	}
-
-	.createServerButton:hover{
-		background-image: url(images/createServerHoveredIcon.png);
-	}
-
-	.exploreServersButton{
-		background-image: url(images/exploreServersIcon.png);
-	}
-
-	.exploreServersButton:hover{
-		background-image: url(images/exploreServersHoveredIcon.png);
-	} 
-
-	.MessageList{
-	    background-color: #2b2d31ff;
-		float: left;
-	    padding: 0px;
-	    height: 100vh;
-		padding: 0px;
-		width: 100%;
-	}
-
-	.MessageThread{
-	    background-color: #303338ff;
-		float: left;
-	    padding: 0px;
-	    height: 100vh;
-        overflow-wrap: break-word;
-        overflow-y: auto;
-		padding: 0px;
-		width: 100%;
-	}
-
-	.Members{
-	    background-color: #2b2d31ff;
-		float: right;
-	    padding: 0px;
-	    height: 100vh;
-		padding: 0px;
-		width: 100%;
-	}
-
-	.row:after{
-	    content: "";
-	    display: table;
-	    clear: both;
-	}
-
-	.column{
-	    float: left;
-	    width: 25%;
-	    padding: 0px;
-	    height: 100vh;
-	}
-
-    ::-webkit-scrollbar {
-        width: 6px;
-  	}
-
-  	::-webkit-scrollbar-track {
-  		background: #2b2d31ff;
-  	}
-
-  	::-webkit-scrollbar-thumb {
-    	background: #1f2022ff;
-		border-radius: 5px;
-  	}
-
-  	::-webkit-scrollbar-thumb:hover {
-    	background: #1f2022ff;
-  	}
-</style>
 
 </html>
 <!--
