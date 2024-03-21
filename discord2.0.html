@@ -325,16 +325,21 @@
 			//element.style.height = "8px";
 		}
 
+		var messageList = document.querySelector(".MessageList");
+
 		const loadDMs = (data) => {
-			data.DMs.forEach((userName) => {
-				const newDMsDiv = document.createElement('div');
-				
-			})
+			data.DMs.forEach((DMs) => {
+				MessageList.appendChild(elementFromHTML(`
+					<div class="DmThread">
+						<h2>${DMs.userName}</h2>
+					</div>
+				`));
+			});
 		};
 
 		function openDMs(){
-			fetch("users/user1.json")
-			.then(repson => response.json())
+			fetch("./users/user1.json")
+			.then(repsonse => response.json())
 			.then(data => loadDMs(data));
 		}
 
@@ -350,11 +355,11 @@
 								<td>
 									<div style="vertical-align: top; overflow: auto; padding-left: 10px; ">
 										<div style="display: inline-block; overflow: hidden;">
-											<h2 class="messageUsername" id="message1Username">` + user.getUser() + `</h2>
-											<h3 class="messageDate" id="message1Date">` + date + `</h3>
-											<h3 class="messageTime" id="message1Time">` + time + `</h3>
+											<h2 class="messageUsername" id="message1Username">${user.getUser()}</h2>
+											<h3 class="messageDate" id="message1Date">${date}</h3>
+											<h3 class="messageTime" id="message1Time">${time}</h3>
 										</div>
-										<p>` + body + `</p>
+										<p>${body}</p>
 									</div>
 								</td>
 							</tr>
