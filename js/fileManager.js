@@ -1,4 +1,4 @@
-function readDirectory(directory) {
+export function readDirectory(directory) {
 	let dirReader = directory.createReader();
 	let entries = [];
   
@@ -18,28 +18,6 @@ function readDirectory(directory) {
   
 	getEntries();
 	return entries;
-}
-
-class User{
-	constructor(user, pass){
-		this.user = user;
-		this.pass = pass;
-	}
-
-	checkPass(pass){
-		return pass === this.pass;
-	}
-
-	getUser(){
-		return this.user;
-	}
-
-	setNewPass(oldPass, newPass){
-		if(oldpass === this.pass){
-			this.pass = newPass;
-		}
-		return;
-	}
 }
 
 const servers = []
