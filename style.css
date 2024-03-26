@@ -61,6 +61,7 @@ h3{
     height: 60%;
     overflow-x: hidden;
     overflow-y: scroll;
+    border-radius: 10px;
 }
 
 .availableUser{
@@ -71,7 +72,7 @@ h3{
     margin-bottom: 0px;
     margin-left: 2%;
     margin-right: 2%;
-    border-radius: 2%;
+    border-radius: 10px;
 }
 
 table, th, td {
