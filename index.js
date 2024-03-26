@@ -1,21 +1,14 @@
 
 var user = null;
-alert(user);
 if(user === null){
 	openLogin();
 }
 
 async function openLogin(){
-	alert("hello");
 	var main = document.querySelector(".main");
-	alert("main = " + main);
 	var login = document.querySelector(".login");
-	alert(main.style.display);
 	main.style.display = "none";
-	alert(main.style.display);
-	alert(login.style.display);
 	login.style.display = "block";
-	alert(login.style.display);
 }
 
 function hoverServerButton(id){

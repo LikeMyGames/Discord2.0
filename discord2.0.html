@@ -8,15 +8,21 @@
 	<link rel="stylesheet" href="./style.css">
 </head>
 <body>
-	<script src="./index.js"></script>
     <div class="login" id="login">
 		<div class="loginBox">
 			<h1>
 				Login
 			</h1>
-			<button style="margin-top: 5vh; height: 10vh; width: 20vw; background-color: #1f2022ff; border-color: #ffffffff; border-width: 5px;" onclick="download('hello', 'hello', '.txt')">
+			<div class="availableUsers">
+				<div class="availableUser">
+
+				</div>
+			</div>
+			<!--
+			<button class="loginButton" onclick="setUser()">
 				LOGIN
 			</button>
+			-->
 		</div>
     </div>
     <div class="main" id="main">
@@ -75,6 +81,7 @@
 			</tbody>
 		</table>
     </div>
+	<script src="./index.js"></script>
 </body>
 
 

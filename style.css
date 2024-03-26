@@ -18,7 +18,7 @@ h3{
 }
 
 .main{
-    display: none;
+    display: block;
     position: absolute;
     left: 0px;
     top: 0px;
@@ -28,7 +28,7 @@ h3{
 }
 
 .login{
-    display: block;
+    display: none;
     text-align: center;
     position: absolute;
     width: 100vw;
@@ -49,6 +49,29 @@ h3{
     position: absolute;
     left: 30vw;
     top: 30vh;
+}
+
+.availableUsers{
+    background-color: #303338ff;
+    position: absolute;
+    left: 20%;
+    top: 20%;
+    margin-top: 5%;
+    width: 60%;
+    height: 60%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.availableUser{
+    background-color: #2b2d31ff;
+    height: 50px;
+    width: 96%;
+    margin-top: 2%;
+    margin-bottom: 0px;
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 2%;
 }
 
 table, th, td {
