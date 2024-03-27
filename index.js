@@ -10,6 +10,13 @@ async function openLogin(){
 	login.style.display = "block";
 }
 
+async function openSettings(){
+	let main = document.querySelector(".main");
+	let settings = document.querySelector(".settings");
+	main.style.display = "none";
+	settings.style.display = "block";
+}
+
 async function login(){
 	let username = document.querySelector("#userNameInput").value;
 	let pass = document.querySelector("#passwordInput").value;
@@ -41,43 +48,55 @@ async function login(){
 				alert("The username or password that you entered is not correct. Please input a correct username and password.");
 			});
 	}
+	else{
+		alert("Please enter a username and password to login with");
+	}
 }
 
 async function logout(){
 	user = null;
-	let main = document.querySelector(".main");
+	let settings = document.querySelector(".settings");
 	let login = document.querySelector(".login");
-	main.style.display = "none";
+	settings.style.display = "none";
 	login.style.display = "block";
+	let username = document.querySelector("#userNameInput");
+	let pass = document.querySelector("#passwordInput");
+	username.value = "";
+	pass.value = "";
+	let servers = document.querySelector(".customServerList");
+	while(servers.hasChildNodes()){
+		servers.removeChild(servers.firstChild);
+	}
+	let messageThreads = document.querySelector(".MessageList");
+	while(messageThreads.hasChildNodes()){
+		messageThreads.removeChild(messageThreads.firstChild);
+	}
+	let messages = document.querySelector(".MessageThread");
+	while(messages.hasChildNodes()){
+		messages.removeChild(messages.firstChild);
+	}
 }
 
 async function createAccount(){
 	let username = document.querySelector("#userNameInput").value;
 	let pass = document.querySelector("#passwordInput").value;
 	if(!(username === "" || pass === "")){
-		alert("you are logging in with the username " + username + " and the password " + pass);
 		fetch(`./users/${username}.json`)
 			.then(res => {
-				if(res.ok){
+				if(res.status === 404){
+					
+				}
+				else{
 					throw new Error();
 				}
-				return res.json();
-			})
-			.then(data => {
-				fetch(`./users/${username}.json`, {method: "POST"})
-					.then(res => {
-						if(!res.ok){
-							throw new Error();
-						}
-						return res.json();
-					})
-					.then(data => {console.log(data)})
-					.catch(error => console.error(error));
 			})
 			.catch(error => {
-				console.error(error);
-				alert("Account with this name already exists. Please input a different name.");
+				console.warn(error);
+				alert("An account with this username already exists. Please choose a different username");
 			});
+	}
+	else{
+		alert("Please enter a username and password to create an account with");
 	}
 }
 

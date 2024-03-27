@@ -10,9 +10,6 @@
 <body>
     <div class="login" id="login">
 		<div class="loginBox">
-			<h1>
-				Login
-			</h1>
 			<div class="loginInputs">
 				<div class="loginInput">
 					<input class="loginTextInput" id="userNameInput" name="username" placeholder="user name">
@@ -23,7 +20,7 @@
 				<div class="loginInput">
 					<button title="loginButton" class="loginButton" onclick="login()">
 						<h1 class="loginText">
-							LOGIN IN
+							LOGIN
 						</h1>
 					</button>
 				</div>
@@ -49,12 +46,12 @@
         <div style="background-color: #1f2022ff;">
             <img src="images/textIcon.png" style="height: 9px; padding-left: 10px; width: 85px;" title="WebsiteName">
         </div>
-		<div class="accountInfo">
+		<button class="accountInfo" onclick="openSettings()">
 			<img class="accountInfoPFP" src="./images/dmIcon.png">
 			<h2 id="accountInfoUser" class="accountInfoText">
 				This text should not be here
 			</h2>
-		</div>
+		</button>
 		<table style="width: 100%;" cellspacing="0">
 			<tbody>
 				<tr height="100%">
@@ -67,6 +64,9 @@
 								</button>
 							</div>
 							<hr style="width: 35px; margin-right: 22.5px; outline: 0; border-width: 0px; background-color: #323338ff; height: 3px; border-radius: 1.5px;">
+							<div class="customServerList">
+
+							</div>
 							<div class="addServerButtons">
 								<div class="serverListItem">
 									<img class="SeenMessage" id="addServerNotification">
@@ -103,6 +103,13 @@
 			</tbody>
 		</table>
     </div>
+	<div class="settings">
+		<button class="loggoutButton" onclick="logout()">
+			<h1>
+				LOG OUT
+			</h1>
+		</button>
+	</div>
 	<script src="./index.js"></script>
 </body>
 
