@@ -51,25 +51,71 @@ h3{
     top: 30vh;
 }
 
-.availableUsers{
+.loginButton{
+    background-color: #00000000;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    border-width: 0px;
+    outline-width: 0px;
+}
+
+.loginText{
+    color: #ffffffff;
+    margin: 0px;
+}
+
+.createAccountButton{
+    background-color: #00000000;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    border-width: 0px;
+    outline-width: 0px;
+}
+
+.loginInputs{
     background-color: #303338ff;
     position: absolute;
     left: 20%;
-    top: 20%;
+    top: 15%;
     margin-top: 5%;
     width: 60%;
-    height: 60%;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    height: 65%;
+    overflow: hidden;
     border-radius: 10px;
 }
 
-.availableUser{
+.loginInput{
     background-color: #2b2d31ff;
     height: 50px;
     width: 96%;
     margin-top: 2%;
-    margin-bottom: 0px;
+    margin-bottom: 4%;
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 10px;
+}
+
+.loginTextInput{
+    color: #ffffffff;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+    outline-width: 0px;
+    border-width: 0px;
+    background-color: #00000000;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 15px;
+}
+
+.createAccountInput{
+    background-color: #2b2d31ff;
+    height: 50px;
+    width: 96%;
+    margin-top: 3%;
+    margin-bottom: 4%;
     margin-left: 2%;
     margin-right: 2%;
     border-radius: 10px;
@@ -185,6 +231,15 @@ body{
     width: 100%;
 }
 
+.customServerList{
+    height: 100%;
+    width: 100%;
+    border-width: 0px;
+    margin: 0px;
+    padding: 0px;
+    background-color: #00000000;
+}
+
 .serverListItem{
     width: 100%;
     height: 60px;
@@ -241,7 +296,7 @@ body{
 .DmPFP{
     width: 40px;
     height: 40px;
-    border-radius: 15px;
+    border-radius: 50%;
     border-width: 0px;
     outline-width: 0px;
     margin-left: 5px;
@@ -296,6 +351,36 @@ body{
     padding: 0px;
     width: 100%;
 }
+
+.accountInfo{
+    position: absolute;
+    left: 80px;
+    bottom: 0px;
+    width: 250px;
+    height: 60px;
+    vertical-align: bottom;
+    background-color: #1f2022ff;
+
+    align-items: center;
+}
+
+.accountInfoPFP{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border-width: 0px;
+    outline-width: 0px;
+    margin-left: 10px;
+    margin-top: 10px;
+    float: left;
+}
+
+.accountInfoText{
+    margin-top: 15px;
+    margin-left: 10px;
+    padding-left: 50px;
+}
+
 
 ::-webkit-scrollbar {
     width: 6px;

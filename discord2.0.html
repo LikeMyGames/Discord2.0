@@ -13,9 +13,29 @@
 			<h1>
 				Login
 			</h1>
-			<div class="availableUsers">
-				<div class="availableUser">
-
+			<div class="loginInputs">
+				<div class="loginInput">
+					<input class="loginTextInput" id="userNameInput" name="username" placeholder="user name">
+				</div>
+				<div class="loginInput">
+					<input class="loginTextInput" id="passwordInput" name="password" placeholder="password">
+				</div>
+				<div class="loginInput">
+					<button title="loginButton" class="loginButton" onclick="login()">
+						<h1 class="loginText">
+							LOGIN IN
+						</h1>
+					</button>
+				</div>
+				<h2>
+					OR
+				</h2>
+				<div class="createAccountInput">
+					<button title="createAccountButton" class="createAccountButton" onclick="createAccount()">
+						<h1 class="loginText">
+							CREATE ACCOUNT
+						</h1>
+					</button>
 				</div>
 			</div>
 			<!--
@@ -27,8 +47,14 @@
     </div>
     <div class="main" id="main">
         <div style="background-color: #1f2022ff;">
-            <img src="images/textIcon.png" style="height: 9px; padding-left: 10px; width: 85px;">
+            <img src="images/textIcon.png" style="height: 9px; padding-left: 10px; width: 85px;" title="WebsiteName">
         </div>
+		<div class="accountInfo">
+			<img class="accountInfoPFP" src="./images/dmIcon.png">
+			<h2 id="accountInfoUser" class="accountInfoText">
+				This text should not be here
+			</h2>
+		</div>
 		<table style="width: 100%;" cellspacing="0">
 			<tbody>
 				<tr height="100%">
@@ -56,14 +82,10 @@
 								</div>
 								<!--<hr style="width: 35px; margin-right: 22.5px; outline: 0; border-width: 0px; background-color: #323338ff; height: 3px; border-radius: 1.5px;">-->
 							</div>
-			
 						</div>
 					</td>
 					<td width="250px">
 						<div class="MessageList">
-						</div>
-						<div class="userDetails">
-
 						</div>
 					</td>
 					<td>

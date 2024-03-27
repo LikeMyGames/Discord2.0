@@ -1,14 +1,84 @@
-
 var user = null;
 if(user === null){
 	openLogin();
 }
 
 async function openLogin(){
-	var main = document.querySelector(".main");
-	var login = document.querySelector(".login");
+	let main = document.querySelector(".main");
+	let login = document.querySelector(".login");
 	main.style.display = "none";
 	login.style.display = "block";
+}
+
+async function login(){
+	let username = document.querySelector("#userNameInput").value;
+	let pass = document.querySelector("#passwordInput").value;
+	if(!(username === "" || pass === "")){
+		fetch(`./users/${username}.json`)
+			.then(res => {
+				if(!res.ok){
+					throw new Error();
+				}
+				return res.json();
+			})
+			.then(data => {
+				console.log(data.password);
+				if(data.password === pass){
+					user = username;
+				}
+				console.log("user = " + user);
+				let main = document.querySelector(".main");
+				let login = document.querySelector(".login");
+				let accountInfoUsername = document.querySelector("#accountInfoUser");
+				main.style.display = "block";
+				login.style.display = "none";
+				accountInfoUsername.textContent = user;
+
+				return user;
+			})
+			.catch(error => {
+				console.error(error);
+				alert("The username or password that you entered is not correct. Please input a correct username and password.");
+			});
+	}
+}
+
+async function logout(){
+	user = null;
+	let main = document.querySelector(".main");
+	let login = document.querySelector(".login");
+	main.style.display = "none";
+	login.style.display = "block";
+}
+
+async function createAccount(){
+	let username = document.querySelector("#userNameInput").value;
+	let pass = document.querySelector("#passwordInput").value;
+	if(!(username === "" || pass === "")){
+		alert("you are logging in with the username " + username + " and the password " + pass);
+		fetch(`./users/${username}.json`)
+			.then(res => {
+				if(res.ok){
+					throw new Error();
+				}
+				return res.json();
+			})
+			.then(data => {
+				fetch(`./users/${username}.json`, {method: "POST"})
+					.then(res => {
+						if(!res.ok){
+							throw new Error();
+						}
+						return res.json();
+					})
+					.then(data => {console.log(data)})
+					.catch(error => console.error(error));
+			})
+			.catch(error => {
+				console.error(error);
+				alert("Account with this name already exists. Please input a different name.");
+			});
+	}
 }
 
 function hoverServerButton(id){
@@ -68,7 +138,7 @@ async function loadDmThread(data, index){
 
 async function openDmThread(id){
     let index = id.substring(2);
-    fetch("./users/baby-yoda.json")
+    fetch(`./users/${user}.json`)
 		.then(res => {
 			if(!res.ok){
 				throw new Error("user file does not exist");
@@ -99,7 +169,7 @@ async function loadDMs(data){
 async function openDMs(){
     let messageList = document.querySelector(".MessageList");
     messageList.innerHTML = '';
-	fetch("./users/baby-yoda.json")
+	fetch(`./users/${user}.json`)
 		.then(res => {
 			if(!res.ok){
 				throw new Error("user file does not exist");
