@@ -81,19 +81,24 @@ async function createAccount(){
 	let username = document.querySelector("#userNameInput").value;
 	let pass = document.querySelector("#passwordInput").value;
 	if(!(username === "" || pass === "")){
-		fetch(`./users/${username}.json`)
-			.then(res => {
-				if(res.status === 404){
-					
-				}
-				else{
-					throw new Error();
-				}
-			})
-			.catch(error => {
-				console.warn(error);
-				alert("An account with this username already exists. Please choose a different username");
-			});
+		if(!(username.includes("<") || username.includes(">") || username.includes(":") || username.includes("\"") || username.includes("/") || username.includes("\\") || username.includes("|") || username.includes("?") || username.includes("*")) && !(pass.includes("<") || pass.includes(">") || pass.includes(":") || pass.includes("\"") || pass.includes("/") || pass.includes("\\") || pass.includes("|") || pass.includes("?") || pass.includes("*"))){
+			fetch(`./users/${username}.json`, {method: "HEAD"})
+				.then(res => {
+					if(!res.ok){
+						fetch(`./users/${username}`, {method: "PUT"})
+							.then(res => {
+								console.log(res);
+							})
+					}	
+				})
+				.catch(error => {
+					console.warn(error);
+					alert("An account with this username already exists. Please choose a different username");
+				});
+		}
+		else{
+			alert("The username and/or password that you entered used one the following: < > : \" / \\ | ? *. The username and password that you enter are not allowed to contain the previous characters.")
+		}
 	}
 	else{
 		alert("Please enter a username and password to create an account with");
