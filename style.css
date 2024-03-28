@@ -83,7 +83,7 @@ h3{
     margin-top: 5%;
     width: 60%;
     height: 75%;
-    overflow: hidden;
+    overflow: auto;
     border-radius: 10px;
 }
 
@@ -339,11 +339,19 @@ body{
     background-color: #303338ff;
     float: left;
     padding: 0px;
-    height: 100vh;
+    height: 90vh;
     overflow-wrap: break-word;
     overflow-y: auto;
     padding: 0px;
     width: 100%;
+}
+
+.MessageThreadInput{
+    align-self: baseline;
+    overflow-wrap: hidden;
+    padding: 0px;
+    margin: 0px;
+    height: 10vh;
 }
 
 .Members{
