@@ -1,14 +1,108 @@
-
 var user = null;
 if(user === null){
 	openLogin();
 }
 
 async function openLogin(){
-	var main = document.querySelector(".main");
-	var login = document.querySelector(".login");
+	let main = document.querySelector(".main");
+	let login = document.querySelector(".login");
 	main.style.display = "none";
 	login.style.display = "block";
+}
+
+async function openSettings(){
+	let main = document.querySelector(".main");
+	let settings = document.querySelector(".settings");
+	main.style.display = "none";
+	settings.style.display = "block";
+}
+
+async function login(){
+	let username = document.querySelector("#userNameInput").value;
+	let pass = document.querySelector("#passwordInput").value;
+	if(!(username === "" || pass === "")){
+		fetch(`./users/${username}.json`)
+			.then(res => {
+				if(!res.ok){
+					throw new Error();
+				}
+				return res.json();
+			})
+			.then(data => {
+				console.log(data.password);
+				if(data.password === pass){
+					user = username;
+				}
+				console.log("user = " + user);
+				let main = document.querySelector(".main");
+				let login = document.querySelector(".login");
+				let accountInfoUsername = document.querySelector("#accountInfoUser");
+				main.style.display = "block";
+				login.style.display = "none";
+				accountInfoUsername.textContent = user;
+
+				return user;
+			})
+			.catch(error => {
+				console.error(error);
+				alert("The username or password that you entered is not correct. Please input a correct username and password.");
+			});
+	}
+	else{
+		alert("Please enter a username and password to login with");
+	}
+}
+
+async function logout(){
+	user = null;
+	let settings = document.querySelector(".settings");
+	let login = document.querySelector(".login");
+	settings.style.display = "none";
+	login.style.display = "block";
+	let username = document.querySelector("#userNameInput");
+	let pass = document.querySelector("#passwordInput");
+	username.value = "";
+	pass.value = "";
+	let servers = document.querySelector(".customServerList");
+	while(servers.hasChildNodes()){
+		servers.removeChild(servers.firstChild);
+	}
+	let messageThreads = document.querySelector(".MessageList");
+	while(messageThreads.hasChildNodes()){
+		messageThreads.removeChild(messageThreads.firstChild);
+	}
+	let messages = document.querySelector(".MessageThread");
+	while(messages.hasChildNodes()){
+		messages.removeChild(messages.firstChild);
+	}
+}
+
+async function createAccount(){
+	let username = document.querySelector("#userNameInput").value;
+	let pass = document.querySelector("#passwordInput").value;
+	if(!(username === "" || pass === "")){
+		if(!(username.includes("<") || username.includes(">") || username.includes(":") || username.includes("\"") || username.includes("/") || username.includes("\\") || username.includes("|") || username.includes("?") || username.includes("*")) && !(pass.includes("<") || pass.includes(">") || pass.includes(":") || pass.includes("\"") || pass.includes("/") || pass.includes("\\") || pass.includes("|") || pass.includes("?") || pass.includes("*"))){
+			fetch(`./users/${username}.json`, {method: "HEAD"})
+				.then(res => {
+					if(!res.ok){
+						fetch(`./users/${username}`, {method: "PUT"})
+							.then(res => {
+								console.log(res);
+							})
+					}	
+				})
+				.catch(error => {
+					console.warn(error);
+					alert("An account with this username already exists. Please choose a different username");
+				});
+		}
+		else{
+			alert("The username and/or password that you entered used one the following: < > : \" / \\ | ? *. The username and password that you enter are not allowed to contain the previous characters.")
+		}
+	}
+	else{
+		alert("Please enter a username and password to create an account with");
+	}
 }
 
 function hoverServerButton(id){
@@ -68,7 +162,7 @@ async function loadDmThread(data, index){
 
 async function openDmThread(id){
     let index = id.substring(2);
-    fetch("./users/baby-yoda.json")
+    fetch(`./users/${user}.json`)
 		.then(res => {
 			if(!res.ok){
 				throw new Error("user file does not exist");
@@ -99,7 +193,7 @@ async function loadDMs(data){
 async function openDMs(){
     let messageList = document.querySelector(".MessageList");
     messageList.innerHTML = '';
-	fetch("./users/baby-yoda.json")
+	fetch(`./users/${user}.json`)
 		.then(res => {
 			if(!res.ok){
 				throw new Error("user file does not exist");

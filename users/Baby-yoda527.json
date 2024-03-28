@@ -1,20 +1,21 @@
 {
     "id": "",
-    "userName": "baby-yoda",
+    "userName": "Baby-yoda527",
+    "password": "burger",
     "DMs": [
         {
-            "userName": "Baby-yoda",
+            "userName": "baby-yoda",
             "pfp": "./images/dmIcon.png",
             "messages": [
                 {
-                    "userName": "Baby-yoda",
+                    "userName": "baby-yoda",
                     "pfp": "./images/dmIcon.png",
                     "date": "3/19/2024",
                     "time": "10:30pm",
                     "body": "hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are."
                 },
                 {
-                    "userName": "baby-yoda",
+                    "userName": "Baby-yoda527",
                     "pfp": "./images/dmIcon.png",
                     "date": "3/19/2024",
                     "time": "10:30pm",
@@ -34,7 +35,7 @@
                     "body": "hello how are you doing this is just some test text and this is a whole bunch of randomness so if you are reading this,  i don't know why you are."
                 },
                 {
-                    "userName": "baby-yoda",
+                    "userName": "Baby-yoda527",
                     "pfp": "./images/dmIcon.png",
                     "date": "3/19/2024",
                     "time": "10:30pm",
