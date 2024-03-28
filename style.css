@@ -111,6 +111,15 @@ h3{
     border-radius: 15px;
 }
 
+.loginInputSeperator{
+    height: 10px;
+    border-radius: 5px;
+    background-color: #f0f0f0ff;
+    width: 60%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .createAccountInput{
     background-color: #2b2d31ff;
     height: 50px;
@@ -430,15 +439,15 @@ body{
 }
 
 .loggoutButton{
-    height: 80vh;
-    width: 80vw;
+    height: 20vh;
+    width: 20vw;
     border-radius: 20px;
     border-width: 0px;
     background-color: #303338ff;
     align-items: center;
     align-self: center;
     position: absolute;
-    left: 10vw;
-    top: 10vh;
+    left: 40vw;
+    top: 40vh;
     margin: 0px;
 }
