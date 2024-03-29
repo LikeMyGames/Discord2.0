@@ -337,21 +337,61 @@ body{
 
 .MessageThread{
     background-color: #303338ff;
-    float: left;
     padding: 0px;
-    height: 90vh;
+    height: calc(100% - 100px);
     overflow-wrap: break-word;
     overflow-y: auto;
     padding: 0px;
     width: 100%;
+    justify-self: left;
+    position: absolute;
+    vertical-align: top;
+    top: 0px;
+    left: 0px;
 }
 
-.MessageThreadInput{
-    align-self: baseline;
+.MessageThreadInputBox{
+    position: absolute;
+    left: 0px;
+    top: calc(100% - 100px);
     overflow-wrap: hidden;
     padding: 0px;
     margin: 0px;
-    height: 10vh;
+    height: 100px;
+    background-color: #303338ff;
+    width: 100%;
+}
+
+.MessageThreadInput{
+    background-color: #383a40ff;
+    position: absolute;
+    left: 10%;
+    top: calc(100% - 75px);
+    overflow-wrap: hidden;
+    padding: 0px;
+    margin: 0px;
+    height: 50px;
+    border-radius: 10px;
+    width: 80%;
+}
+
+.MessageThreadTextInput{
+    border-radius: 15px;
+    background-color: #00000000;
+    border-color: white;
+    border-style: solid;
+    height: 60%;
+    width: 80%;
+    position: absolute;
+    left: 7.5%;
+    top: 20%;
+    outline: 0px;
+    overflow-wrap: break-word;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-width: 0px;
+    color: #f0f0f0ff;
+    font-size: 20px;
 }
 
 .Members{
