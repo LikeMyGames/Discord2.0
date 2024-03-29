@@ -2,6 +2,41 @@ var user = null;
 if(user === null){
 	openLogin();
 }
+var activeMessageThread = false;
+console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
+var localTime = new Date().toString().substring(28,31);
+var gmtTime = new Date().toISOString().substring(11, 16);
+console.log(gmtTime);
+localTime = parseInt(gmtTime) + parseInt(localTime);
+localTime += gmtTime.substring(2);
+console.log(localTime);
+
+console.log(gmtToLocal(new Date().toISOString()));
+
+const messageInput = document.querySelector("#MessageInputText");
+messageInput.addEventListener("keydown", (e) => {
+	if(e.code === "Enter"){
+		e.preventDefault();
+		if(activeMessageThread){
+			sendMessage();
+		}
+	}
+});
+
+async function gmtISOToLocal(time){
+	let localTime = new Date().toString().substring(28,31);
+	let gmtTime = time.substring(11, 16);
+	localTime = parseInt(gmtTime) + parseInt(localTime);
+	localTime += gmtTime.substring(2);
+	return localTime;
+}
+
+async function gmtToLocal(time){
+	let localTime = new Date().toString().substring(28,31);
+	localTime = parseInt(gmtTime) + parseInt(localTime);
+	localTime += gmtTime.substring(2);
+	return localTime;
+}
 
 async function openLogin(){
 	let main = document.querySelector(".main");
@@ -105,6 +140,13 @@ async function createAccount(){
 	}
 }
 
+async function sendMessage(){
+	let input = messageInput.value;
+	let messageThread = document.querySelector(".MessageThread");
+	messageThread.appendChild(createMessage(user, new Date().toString().substring(0,16), new Date().toString().substring(18), input));
+	messageInput.value = "";
+}
+
 function hoverServerButton(id){
 	var element = document.getElementById(id + "Notification");
 	if(element.className === "unSeenMessage"){
@@ -158,6 +200,7 @@ async function loadDmThread(data, index){
        let message = data.DMs[index].messages[i];
         messageThread.appendChild(createMessage(message.userName, message.date, message.time, message.body));
     }
+	activeMessageThread = true;
 }
 
 async function openDmThread(id){
@@ -218,7 +261,7 @@ function createMessage(user, date, time, body){
 								<div style="display: inline-block; overflow: hidden;">
 									<h2 class="messageUsername" id="message1Username">${user}</h2>
 									<h3 class="messageDate" id="message1Date">${date}</h3>
-									<h3 class="messageTime" id="message1Time">${time}</h3>
+									<h3 class="messageTime" id="message1Time">${gmtToLocal(time)}</h3>
 								</div>
 								<p>${body}</p>
 							</div>
