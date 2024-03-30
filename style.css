@@ -152,7 +152,6 @@ p{
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 0px;
-    display: inline-block;
 }
 
 .messagePFP{
@@ -392,6 +391,18 @@ body{
     border-width: 0px;
     color: #f0f0f0ff;
     font-size: 20px;
+}
+
+.MessageThreadTextInput:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 50px #00000000 inset; /* Change the color to your own background color */
+    -webkit-text-fill-color: #333; /* Change the text color */
+    background-color: #00000000;
+}
+
+.MessageThreadTextInput:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 50px #00000000 inset; /* Your custom box-shadow */
+    -webkit-text-fill-color: #333; /* Text color when focused */
+    background-color: #00000000;
 }
 
 .Members{

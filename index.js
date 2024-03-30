@@ -4,6 +4,7 @@ if(user === null){
 }
 var activeMessageThread = false;
 console.log(gmtISOToLocal(new Date().toISOString()));
+console.log(gmtToLocal(new Date().toISOString().substring(28, 31)));
 
 const messageInput = document.querySelector("#MessageInputText");
 messageInput.addEventListener("keydown", (e) => {
@@ -24,15 +25,9 @@ async function gmtISOToLocal(time){
 }
 
 function gmtToLocal(time){
-	let localTime = new Date()
-	alert(localTime);
-	localTime = localTime.toString();
-	alert(localTime);
-	localTime = localTime.substring(28, 31);
-	alert(localTime);
+	let localTime = new Date().toString().substring(28, 31);
 	localTime = parseInt(time.toString()) + parseInt(localTime.toString());
-	localTime += time.substring(2);
-	alert(localTime);
+	localTime += time.substring(2,5);
 	return localTime;
 }
 
@@ -149,7 +144,13 @@ async function createAccount(){
 async function sendMessage(){
 	let input = messageInput.value;
 	let messageThread = document.querySelector(".MessageThread");
-	messageThread.appendChild(createMessage(user, new Date().toString().substring(0,16), new Date().toString().substring(18), input));
+	console.log(new Date().toISOString());
+	let date =  new Date().toUTCString().substring(0,17);
+	let time =  new Date().toUTCString();
+	console.log(time);
+	time = time.substring(17);
+	console.log(time);
+	messageThread.appendChild(createMessage(user, date, time, input));
 	messageInput.value = "";
 }
 
@@ -219,7 +220,6 @@ async function openDmThread(id){
 			return res.json();
 		})
 		.then(data => {
-            console.log(index);
             loadDmThread(data, index);
         })
 		.catch(error => console.error(error));
@@ -256,7 +256,7 @@ async function openDMs(){
 function createMessage(user, date, time, body){
 	time = gmtToLocal(time);
 	return elementFromHTML(`
-		<div class="message" style="display: inline-block;">
+		<div class="message">
 			<table>
 				<tbody>
 					<tr>
