@@ -16,6 +16,14 @@ messageInput.addEventListener("keydown", (e) => {
 	}
 });
 
+const passwordInput = document.querySelector("#passwordInput");
+passwordInput.addEventListener("keydown", (e) => {
+	if(e.code === "Enter"){
+		e.preventDefault();
+		login();
+	}
+});
+
 async function gmtISOToLocal(time){
 	let localTime = new Date().toString().substring(28,31);
 	let gmtTime = time.substring(11, 16);
@@ -152,6 +160,18 @@ async function sendMessage(){
 	console.log(time);
 	messageThread.appendChild(createMessage(user, date, time, input));
 	messageInput.value = "";
+	saveToJson();
+}
+
+async function saveToJson(){
+	let thread = document.querySelector(".MessageThread");
+	let htmlToObject = () => {
+
+	}
+	let json = {};
+	for(let i = 0; i<thread.length; i++){
+		htmlToObject(thread[i].innerHTML);
+	}
 }
 
 function hoverServerButton(id){

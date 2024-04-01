@@ -43,12 +43,12 @@ h3{
     left: 0px;
     top: 0px;
     overflow: hidden;
-    background-color: #303338ff;
+    background-color: var(--light-color);
 }
 
 .loginBox{
-    background-color: #2b2d31ff;
-    border-color: #2b2d31ff;
+    background-color: var(--darkLight-color);
+    border-color: var(--darkLight-color);
     border-width: 5%;
     border-radius: 10px;
     height: 60vh;
@@ -69,7 +69,7 @@ h3{
 }
 
 .loginPageButton:hover, :active, :focus{
-    background-color: #1f2022ff;
+    background-color: var(--dark-color);
 }
 
 .loginText{
@@ -79,7 +79,7 @@ h3{
 }
 
 .loginInputs{
-    background-color: #303338ff;
+    background-color: var(--light-color);
     position: absolute;
     left: 20%;
     top: 6.875%;
@@ -91,7 +91,7 @@ h3{
 }
 
 .loginInput{
-    background-color: #2b2d31ff;
+    background-color: var(--darkLight-color);
     height: 50px;
     width: 96%;
     margin-top: 2%;
@@ -114,6 +114,10 @@ h3{
     border-radius: 15px;
 }
 
+.loginTextInput::-ms-reveal{
+    font-: var(--lightLight-color);
+}
+
 .loginInputSeperator{
     height: 10px;
     border-radius: 5px;
@@ -124,7 +128,7 @@ h3{
 }
 
 .createAccountInput{
-    background-color: #2b2d31ff;
+    background-color: var(--darkLight-color);
     height: 50px;
     width: 96%;
     margin-top: 3%;
@@ -229,7 +233,7 @@ body{
 }
 
 .ServerList{
-    background-color: #1f2022ff;
+    background-color: var(--dark-color);
     float: left;
     padding: 0px;
     height: 100vh;
@@ -329,7 +333,7 @@ body{
 } 
 
 .MessageList{
-    background-color: #2b2d31ff;
+    background-color: var(--darkLight-color);
     float: left;
     padding: 0px;
     height: 100vh;
@@ -338,7 +342,7 @@ body{
 }
 
 .MessageThread{
-    background-color: #303338ff;
+    background-color: var(--light-color);
     padding: 0px;
     height: calc(100% - 100px);
     overflow-wrap: break-word;
@@ -360,12 +364,12 @@ body{
     padding: 0px;
     margin: 0px;
     height: 100px;
-    background-color: #303338ff;
+    background-color: var(--light-color);
     width: 100%;
 }
 
 .MessageThreadInput{
-    background-color: #383a40ff;
+    background-color: var(--lightLight-color);
     position: absolute;
     left: 10%;
     top: calc(100% - 75px);
@@ -409,7 +413,7 @@ body{
 }
 
 .Members{
-    background-color: #2b2d31ff;
+    background-color: var(--darkLight-color);
     float: right;
     height: 100vh;
     padding: 0px;
@@ -422,7 +426,7 @@ body{
     bottom: 0px;
     width: 250px;
     height: 60px;
-    background-color: #1f2022ff;
+    background-color: var(--dark-color);
     align-self: baseline;
     align-items: center;
     border-width: 0px;
@@ -431,7 +435,7 @@ body{
 }
 
 .accountInfo:hover{
-    background-color: #303338ff;
+    background-color: var(--light-color);
 }
 
 .accountInfoPFP{
@@ -464,28 +468,28 @@ body{
 ::-webkit-scrollbar {
     width: 6px;
     padding: 10px;
-    background: #303338ff;
+    background: var(--light-color);
 }
 
 ::-webkit-scrollbar-track {
-    background: #2b2d31ff;
+    background: var(--darkLight-color);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #1f2022ff;
+    background: var(--dark-color);
     border-radius: 5px;
     width: 80%;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #1f2022ff;
+    background: var(--dark-color);
 }
 
 .settings{
     display: none;
     height: 100vh;
     width: 100vw;
-    background-color: #2b2d31ff;
+    background-color: var(--darkLight-color);
     margin: 0px;
     position: absolute;
     left: 0px;
@@ -497,7 +501,7 @@ body{
     width: 20vw;
     border-radius: 20px;
     border-width: 0px;
-    background-color: #303338ff;
+    background-color: var(--light-color);
     align-items: center;
     align-self: center;
     position: absolute;
