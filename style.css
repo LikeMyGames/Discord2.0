@@ -1,3 +1,10 @@
+:root{
+    --dark-color: #1f2022ff;
+    --darkLight-color: #2b2d31ff;
+    --light-color: #303338ff;
+    --lightLight-color: #383a40ff;
+}
+
 *{
     box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -51,28 +58,24 @@ h3{
     top: 20vh;
 }
 
-.loginButton{
+.loginPageButton{
     background-color: #00000000;
     height: 100%;
     width: 100%;
     border-radius: 10px;
     border-width: 0px;
     outline-width: 0px;
+    transition: 0.125s;
+}
+
+.loginPageButton:hover, :active, :focus{
+    background-color: #1f2022ff;
 }
 
 .loginText{
     color: #ffffffff;
     margin: 0px;
     font-size: 100%;
-}
-
-.createAccountButton{
-    background-color: #00000000;
-    height: 100%;
-    width: 100%;
-    border-radius: 10px;
-    border-width: 0px;
-    outline-width: 0px;
 }
 
 .loginInputs{

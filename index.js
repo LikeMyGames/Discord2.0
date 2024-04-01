@@ -147,7 +147,7 @@ async function sendMessage(){
 	console.log(new Date().toISOString());
 	let date =  new Date().toUTCString().substring(0,17);
 	let time =  new Date().toUTCString();
-	console.log(time);
+	console.log(time); //need to fix problem with 24 hour roll over
 	time = time.substring(17);
 	console.log(time);
 	messageThread.appendChild(createMessage(user, date, time, input));
