@@ -44,16 +44,111 @@
 		</div>
     </div>
     <div class="main" id="main">
-        <div style="background-color: #1f2022ff;">
-            <img src="images/textIcon.png" style="height: 9px; padding-left: 10px; width: 85px;" title="WebsiteName">
-        </div>
-		<button class="accountInfo" onclick="openSettings()">
-			<img class="accountInfoPFP" src="./images/dmIcon.png">
-			<h2 id="accountInfoUser" class="accountInfoText">
-				This text should not be here
-			</h2>
-		</button>
-		<table style="width: 100%;" cellspacing="0">
+		
+		<div class="container">
+			<div class="topBar" style="background-color: var(--dark-color);">
+				<img src="images/textIcon.png" style="height: 9px; padding-left: 10px; width: 85px;" title="WebsiteName">
+			</div>
+			<div class="ServerList">
+				<div class="serverListItem">
+					<img class="unSeenMessage" id="DMsNotification">
+					<button class="serverButton dmButton" id="DMs" onclick="openDMs()" onmouseout="unHoverServerButton(this.id)" onmouseover="hoverServerButton(this.id)">
+
+					</button>
+				</div>
+				<hr style="width: 35px; margin-right: 22.5px; outline: 0; border-width: 0px; background-color: #323338ff; height: 3px; border-radius: 1.5px;">
+				<div class="customServerList">
+
+				</div>
+				<div class="addServerButtons">
+					<div class="serverListItem">
+						<img class="SeenMessage" id="addServerNotification">
+						<button class="serverButton createServerButton" id="addServer" onclick="createNewServer()">
+	
+						</button>
+					</div>
+					<div class="serverListItem">
+						<img class="SeenMessage" id="exploreServerNotification">
+						<button class="serverButton exploreServersButton" id="exploreServer" onclick="findPublicServer()" onmouseout="unHoverServerButton(this.id)" onmouseover="hoverServerButton(this.id)">
+	
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="MessageList">
+			</div>
+			<div class="MessageThread">
+			</div>
+			<div class="MessageThreadInputBox">
+				<div class="MessageThreadInput">
+					<input class="MessageThreadTextInput" id="MessageInputText" name="MessageInputText" placeholder="message to send" autocomplete="off">
+				</div>
+
+			</div>
+			<div class="Members">
+				<p>
+					h
+				</p>
+			</div>
+			<button class="accountInfo" onclick="openSettings()">
+				<img class="accountInfoPFP" src="./images/dmIcon.png">
+				<h2 id="accountInfoUser" class="accountInfoText">
+					This text should not be here
+				</h2>
+			</button>
+		</div>
+		<!-- <div class="container">
+			<div style="width: 80px;">
+				<div class="ServerList">
+					<div class="serverListItem">
+						<img class="unSeenMessage" id="DMsNotification">
+						<button class="serverButton dmButton" id="DMs" onclick="openDMs()" onmouseout="unHoverServerButton(this.id)" onmouseover="hoverServerButton(this.id)">
+	
+						</button>
+					</div>
+					<hr style="width: 35px; margin-right: 22.5px; outline: 0; border-width: 0px; background-color: #323338ff; height: 3px; border-radius: 1.5px;">
+					<div class="customServerList">
+
+					</div>
+					<div class="addServerButtons">
+						<div class="serverListItem">
+							<img class="SeenMessage" id="addServerNotification">
+							<button class="serverButton createServerButton" id="addServer" onclick="createNewServer()">
+		
+							</button>
+						</div>
+						<div class="serverListItem">
+							<img class="SeenMessage" id="exploreServerNotification">
+							<button class="serverButton exploreServersButton" id="exploreServer" onclick="findPublicServer()" onmouseout="unHoverServerButton(this.id)" onmouseover="hoverServerButton(this.id)">
+		
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="MessageList">
+				</div>
+			</div>
+			<div>
+				<div class="MessageThread">
+				</div>
+				<div class="MessageThreadInputBox">
+					<div class="MessageThreadInput">
+						<input class="MessageThreadTextInput" id="MessageInputText" name="MessageInputText" placeholder="message to send" autocomplete="off">
+					</div>
+
+				</div>
+			</div>
+			<div>
+				<div class="Members">
+					<p>
+						h
+					</p>
+				</div>
+			</div>
+		</div> -->
+		<!-- <table style="width: 100%;" cellspacing="0">
 			<tbody>
 				<tr height="100%">
 					<td width="80px">
@@ -81,7 +176,6 @@
 				
 									</button>
 								</div>
-								<!--<hr style="width: 35px; margin-right: 22.5px; outline: 0; border-width: 0px; background-color: #323338ff; height: 3px; border-radius: 1.5px;">-->
 							</div>
 						</div>
 					</td>
@@ -108,7 +202,7 @@
 					</td>
 				</tr>
 			</tbody>
-		</table>
+		</table> -->
     </div>
 	<div class="settings">
 		<button class="loggoutButton" onclick="logout()">

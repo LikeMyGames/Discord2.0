@@ -5,6 +5,7 @@ if(user === null){
 var activeMessageThread = false;
 console.log(gmtISOToLocal(new Date().toISOString()));
 console.log(gmtToLocal(new Date().toISOString().substring(28, 31)));
+var messageThreadMessages = [];
 
 const messageInput = document.querySelector("#MessageInputText");
 messageInput.addEventListener("keydown", (e) => {
@@ -226,6 +227,7 @@ async function loadDmThread(data, index){
     for(let i = 0; i<data.DMs[index].messages.length; i++){
     	let message = data.DMs[index].messages[i];
     	messageThread.appendChild(createMessage(message.userName, message.date, message.time, message.body));
+		messageThreadMessages
     }
 	activeMessageThread = true;
 }
@@ -277,6 +279,20 @@ function createMessage(user, date, time, body){
 	time = gmtToLocal(time);
 	return elementFromHTML(`
 		<div class="message">
+			<img class="messagePFP" id="message1PFP" style="content: url('images/dmIcon.png');">
+			<div style="display: flex; flex-direction: column; padding-left: 10px; ">
+				<div style="display: flex; overflow: hidden;">
+					<h2 class="messageUsername" id="message1Username">${user}</h2>
+					<h3 class="messageDate" id="message1Date">${date}</h3>
+					<h3 class="messageTime" id="message1Time">${time}</h3>
+				</div>
+				<p class="messageText">${body}</p>
+			</div>
+		</div>
+	`);
+	/*
+	return elementFromHTML(`
+		<div class="message">
 			<table>
 				<tbody>
 					<tr>
@@ -298,6 +314,7 @@ function createMessage(user, date, time, body){
 			</table>
 		</div>
 	`);
+	*/
 }
 
 function elementFromHTML(html){
