@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PeerJS Communication Platform</title>
+  <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+</head>
+<body>
+  <div id="textChat">
+    <h2>Text Chat</h2>
+    <div>
+      <label for="peerIdInput">Enter Peer ID:</label>
+      <input type="text" id="peerIdInput" placeholder="Enter peer ID...">
+      <button onclick="connectToPeer()">Connect</button>
+    </div>
+    <textarea id="chatMessages" rows="10" cols="50" readonly></textarea>
+    <br>
+    <input type="text" id="messageInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <div id="videoChat">
+    <h2>Video Chat</h2>
+    <video id="localVideo" autoplay muted playsinline width="300"></video>
+    <video id="remoteVideo" autoplay playsinline width="300"></video>
+    <br>
+    <button onclick="startVideoCall()">Start Video Call</button>
+    <button onclick="endVideoCall()">End Video Call</button>
+  </div>
+
+  <div id="userInfo">
+    <h2>User Info</h2>
+    <label for="userId">Your ID:</label>
+    <input type="text" id="userId" readonly>
+  </div>
+
+  <script>
+    // Initialize PeerJS
+    const peer = new Peer();
+
+    // Handle errors
+    peer.on('error', (err) => {
+      console.error('PeerJS error:', err);
+    });
+
+    // Display user's ID after connection is open
+    peer.on('open', () => {
+      const userIdInput = document.getElementById('userId');
+      userIdInput.value = peer.id;
+    });
+
+    // Store data connections
+    const dataConnections = {};
+
+    // Connect to a peer for text chat
+    function connectToPeer() {
+      const peerIdInput = document.getElementById('peerIdInput');
+      const peerId = peerIdInput.value;
+      if (peerId) {
+        if (!dataConnections[peerId]) {
+          // If connection doesn't exist, create one
+          const conn = peer.connect(peerId);
+          setupDataConnectionListeners(conn);
+          dataConnections[peerId] = conn;
+        } else {
+          // If connection exists, setup event listeners
+          setupDataConnectionListeners(dataConnections[peerId]);
+        }
+      } else {
+        console.error('Peer ID is required.');
+      }
+    }
+
+    // Setup event listeners for data connection
+    function setupDataConnectionListeners(conn) {
+      conn.on('open', () => {
+        console.log('Connected to peer for text chat.');
+        conn.on('data', (data) => {
+          displayMessage(`Peer: ${data}`);
+        });
+      });
+      conn.on('error', (err) => {
+        console.error('Data connection error:', err);
+      });
+    }
+
+    // Handle text chat
+    const chatMessages = document.getElementById('chatMessages');
+
+    function sendMessage() {
+      const messageInput = document.getElementById('messageInput');
+      const message = messageInput.value;
+      // Display message locally
+      displayMessage(`You: ${message}`);
+      // Send message to connected peer
+      const peerIdInput = document.getElementById('peerIdInput');
+      const peerId = peerIdInput.value;
+      const conn = dataConnections[peerId];
+      if (conn) {
+        conn.send(message);
+      } else {
+        console.error('No active connection to send message.');
+      }
+      messageInput.value = '';
+    }
+
+    function displayMessage(message) {
+      chatMessages.value += message + '\n';
+    }
+
+    // Store media connections
+    const mediaConnections = {};
+
+    // Handle video chat
+    const localVideo = document.getElementById('localVideo');
+    const remoteVideo = document.getElementById('remoteVideo');
+    let localStream;
+
+    async function startVideoCall() {
+      try {
+        // Get local media stream
+        localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        // Display local stream
+        localVideo.srcObject = localStream;
+        // Call remote peers
+        for (const connId in peer.connections) {
+          const conn = peer.connections[connId][0];
+          if (!mediaConnections[conn.peer]) {
+            const call = peer.call(conn.peer, localStream);
+            setupCallListeners(call);
+            mediaConnections[conn.peer] = call;
+          }
+        }
+      } catch (err) {
+        console.error('Error starting video call:', err);
+      }
+    }
+
+    function setupCallListeners(call) {
+      // Answer incoming call
+      call.on('stream', (stream) => {
+        remoteVideo.srcObject = stream;
+      });
+    }
+
+    function endVideoCall() {
+      // Stop local stream
+      localStream.getTracks().forEach(track => track.stop());
+      localVideo.srcObject = null;
+      // Close all calls
+      for (const peerId in mediaConnections) {
+        const call = mediaConnections[peerId];
+        call.close();
+      }
+      // Clear media connections
+      mediaConnections = {};
+    }
+  </script>
+</body>
+</html>

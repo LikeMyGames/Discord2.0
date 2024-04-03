@@ -2,6 +2,7 @@
     "id": "",
     "userName": "baby-yoda",
     "password": "pizza",
+    "pfp": "./images/dmIcon.png",
     "DMs": [
         {
             "userName": "Baby-yoda527",

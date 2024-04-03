@@ -1,7 +1,5 @@
-var user = null;
-if(user === null){
-	openLogin();
-}
+var user = {};
+openLogin();
 var activeMessageThread = false;
 console.log(gmtISOToLocal(new Date().toISOString()));
 console.log(gmtToLocal(new Date().toISOString().substring(28, 31)));
@@ -76,15 +74,15 @@ async function login(){
 			.then(data => {
 				console.log(data.password);
 				if(data.password === pass){
-					user = username;
+					user = {"userName": data.userName, "pfp": data.pfp};
 				}
-				console.log("user = " + user);
+				console.log("user = " + user.userName);
 				let main = document.querySelector(".main");
 				let login = document.querySelector(".login");
 				let accountInfoUsername = document.querySelector("#accountInfoUser");
 				main.style.display = "block";
 				login.style.display = "none";
-				accountInfoUsername.textContent = user;
+				accountInfoUsername.textContent = user.userName;
 
 				return user;
 			})
@@ -99,7 +97,7 @@ async function login(){
 }
 
 async function logout(){
-	user = null;
+	user = {};
 	let settings = document.querySelector(".settings");
 	let login = document.querySelector(".login");
 	settings.style.display = "none";
@@ -153,26 +151,17 @@ async function createAccount(){
 async function sendMessage(){
 	let input = messageInput.value;
 	let messageThread = document.querySelector(".MessageThread");
-	console.log(new Date().toISOString());
 	let date =  new Date().toUTCString().substring(0,17);
 	let time =  new Date().toUTCString();
-	console.log(time); //need to fix problem with 24 hour roll over
+	//need to fix problem with 24 hour roll over
 	time = time.substring(17);
-	console.log(time);
-	messageThread.appendChild(createMessage(user, date, time, input));
+	messageThread.appendChild(createMessage(user.userName, user.pfp, date, time, input));
 	messageInput.value = "";
 	saveToJson();
 }
 
 async function saveToJson(){
-	let thread = document.querySelector(".MessageThread");
-	let htmlToObject = () => {
-
-	}
-	let json = {};
-	for(let i = 0; i<thread.length; i++){
-		htmlToObject(thread[i].innerHTML);
-	}
+	console.log(messageThreadMessages);
 }
 
 function hoverServerButton(id){
@@ -226,15 +215,14 @@ async function loadDmThread(data, index){
     console.log(data.DMs[index]);
     for(let i = 0; i<data.DMs[index].messages.length; i++){
     	let message = data.DMs[index].messages[i];
-    	messageThread.appendChild(createMessage(message.userName, message.date, message.time, message.body));
-		messageThreadMessages
+    	messageThread.appendChild(createMessage(message.userName, message.pfp, message.date, message.time, message.body));
     }
 	activeMessageThread = true;
 }
 
 async function openDmThread(id){
     let index = id.substring(2);
-    fetch(`./users/${user}.json`)
+    fetch(`./users/${user.userName}.json`)
 		.then(res => {
 			if(!res.ok){
 				throw new Error("user file does not exist");
@@ -264,7 +252,7 @@ async function loadDMs(data){
 async function openDMs(){
     let messageList = document.querySelector(".MessageList");
     messageList.innerHTML = '';
-	fetch(`./users/${user}.json`)
+	fetch(`./users/${user.userName}.json`)
 		.then(res => {
 			if(!res.ok){
 				throw new Error("user file does not exist");
@@ -275,7 +263,8 @@ async function openDMs(){
 		.catch(error => console.error(error));
 }
 
-function createMessage(user, date, time, body){
+function createMessage(user, pfp, date, time, body){
+	messageThreadMessages.push({"userName": user, "pfp": pfp, "date": date, "time": time, "body": body});
 	time = gmtToLocal(time);
 	return elementFromHTML(`
 		<div class="message">
