@@ -64,6 +64,7 @@ h3{
 }
 
 .loginBox{
+    display: none;
     background-color: var(--darkLight-color);
     border-color: var(--darkLight-color);
     border-width: 5%;
@@ -85,7 +86,7 @@ h3{
     transition: 0.125s;
 }
 
-.loginPageButton:hover, :active, :focus{
+.loginPageButton:hover, :focus{
     background-color: var(--dark-color);
 }
 
@@ -132,19 +133,69 @@ h3{
 }
 
 .loginTextInput::-ms-reveal{
-    font-: var(--lightLight-color);
+    display: none;
 }
 
 .loginInputSeperator{
     height: 10px;
     border-radius: 5px;
-    background-color: #f0f0f0ff;
+    background-color: var(--dark-color);
+    border: none;
     width: 60%;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
+.createAccountBox{
+    display: block;
+    background-color: var(--darkLight-color);
+    border-color: var(--darkLight-color);
+    border-width: 5%;
+    border-radius: 10px;
+    height: 60vh;
+    width: 40vw;
+    position: absolute;
+    left: 30vw;
+    top: 20vh;
+}
+
+.createAccountInputs{
+    background-color: var(--light-color);
+    position: absolute;
+    left: 20%;
+    top: 6.875%;
+    margin-top: 5%;
+    width: 60%;
+    height: 75%;
+    overflow: auto;
+    border-radius: 10px;
+}
+
 .createAccountInput{
+    background-color: var(--darkLight-color);
+    height: 50px;
+    width: 96%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 10px;
+}
+
+.createAcountTextInput{
+    color: #ffffffff;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+    outline-width: 0px;
+    border-width: 0px;
+    background-color: #00000000;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 15px;
+}
+
+.createAccountButtonFrame{
     background-color: var(--darkLight-color);
     height: 50px;
     width: 96%;
