@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+</head>
+<body>
+    <div>
+        <h1>
+            Text Messaging
+        </h1>
+        <textarea id="textInput" style="width: 100%; height: 40px; font-size: 20px; max-width: 100%; min-height: 40px; min-width: 100%;">
+
+        </textarea>
+        <label for="otherID">Other ID:</label>
+        <input type="text" id="otherID">
+        <label for="peerID">
+            Your ID:
+        </label>
+        <input id="peerID" type="text" style="width: 50%; height: 15px; font-size: 10px;" readonly>
+
+    </div>
+    <script>
+        var peer = new Peer();
+        peer.on('open', (id) => {
+            var peerIdInput = document.querySelector("#peerID");
+            peerIdInput.value = id;
+            console.log(id);
+        });
+
+        peer.connect(document.querySelector("#otherID"));
+
+        const textInput = document.querySelector("#textInput");
+        textInput.addEventListener("keydown", (e) => {
+            if(e === "Enter"){
+                e.preventDefault();
+                sendMessage();
+            }
+        })
+
+
+
+        async function sendMessage(){
+            let message = textInput.value;
+
+        }
+    </script>
+</body>
+</html>
