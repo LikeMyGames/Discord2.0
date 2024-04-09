@@ -445,6 +445,8 @@ body{
     border-style: solid;
     height: 60%;
     width: 80%;
+    max-width: 80%;
+    max-height: 60%;
     outline: 0px;
     overflow-wrap: break-word;
     overflow-x: hidden;
