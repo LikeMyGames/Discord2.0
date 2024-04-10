@@ -1,9 +1,13 @@
+//import { Peer } from "peerjs";
+import {Peer} from "https://esm.sh/peerjs@1.5.2?bundle-deps"
 var user = {};
 openLogin();
 var activeMessageThread = false;
 console.log(gmtISOToLocal(new Date().toISOString()));
 console.log(gmtToLocal(new Date().toISOString().substring(28, 31)));
 var messageThreadMessages = [];
+var peer;
+var conn;
 
 const messageInput = document.querySelector("#MessageInputText");
 messageInput.addEventListener("keydown", (e) => {
@@ -38,12 +42,22 @@ function gmtToLocal(time){
 	return localTime;
 }
 
-function resolveData(data){
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			resolve(data);
-		}, 0.00001);
-	})
+function switchToCreateAccount(){
+	let createAccountBox = document.querySelector("#createAccountBox");
+	let loginBox = document.querySelector("#loginBox");
+	createAccountBox.style.display = "block";
+	console.log(createAccountBox.style.display);
+	loginBox.style.display = "hidden";
+	console.log(loginBox.style.display);
+}
+
+function switchToLogin(){
+	let createAccountBox = document.querySelector(".createAccountBox");
+	let loginBox = document.querySelector(".loginBox");
+	createAccountBox.style.display = "hidden";
+	console.log(createAccountBox.style.display);
+	loginBox.style.display = "block";
+	console.log(loginBox.style.display);
 }
 
 async function openLogin(){
@@ -72,19 +86,31 @@ async function login(){
 				return res.json();
 			})
 			.then(data => {
-				console.log(data.password);
-				if(data.password === pass){
-					user = {"userName": data.userName, "pfp": data.pfp};
+				if(data.password !== pass){
+					alert("Please input correct password.")
 				}
-				console.log("user = " + user.userName);
-				let main = document.querySelector(".main");
-				let login = document.querySelector(".login");
-				let accountInfoUsername = document.querySelector("#accountInfoUser");
-				main.style.display = "block";
-				login.style.display = "none";
-				accountInfoUsername.textContent = user.userName;
-
-				return user;
+				else{
+					user = {"userName": data.userName, "pfp": data.pfp, "id": data.id};
+					console.log("user = " + user.userName);
+					console.log(user.password);
+					console.log(user.id);
+					peer = new Peer(user.id);
+					peer.on('open', (id) => {
+						console.log(id);
+					});
+					var conn;
+					peer.on('connection', (connection) => {
+						conn = connection;
+						openConnection();
+					})
+					let main = document.querySelector(".main");
+					let login = document.querySelector(".login");
+					let accountInfoUsername = document.querySelector("#accountInfoUser");
+					main.style.display = "block";
+					login.style.display = "none";
+					accountInfoUsername.textContent = user.userName;
+					return user;
+				}
 			})
 			.catch(error => {
 				console.error(error);
@@ -94,6 +120,23 @@ async function login(){
 	else{
 		alert("Please enter a username and password to login with");
 	}
+}
+
+function connect(id){
+	conn = peer.connect(id.toString());
+	openConnection();
+}
+
+function openConnection(){
+	conn.on('open', () => {
+		conn.on('data', (data) => {
+			sendMessage()
+		});
+	});
+}
+
+function logMessage(data){
+	textInput.value += data.name.toString() + ": " + data.message.toString();
 }
 
 async function logout(){
@@ -158,6 +201,16 @@ async function sendMessage(){
 	messageThread.appendChild(createMessage(user.userName, user.pfp, date, time, input));
 	messageInput.value = "";
 	saveToJson();
+}
+
+async function sendPeerMessage(date, time, input){
+	conn.send({
+		userName: user.userName,
+		pfp: user.pfp,
+		date: date,
+		time: time,
+		body: input
+	});
 }
 
 async function saveToJson(){
@@ -334,3 +387,5 @@ class User{
 		return;
 	}
 }
+
+

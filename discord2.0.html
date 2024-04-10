@@ -6,14 +6,20 @@
 		<title>Discord 2.0</title>
 		<link rel="icon" type="image/x-icon" href="images/favicon2.ico">
 		<link rel="stylesheet" href="./style.css">
+		<script type="module" src="./script.js"></script>
 	</head>
 	<body>
 		<div class="login" id="login">
-			<div class="loginBox">
+			<div class="loginBox" id="loginBox">
 				<div class="loginInputs">
+					<h1 style="margin-top: 5px; margin-bottom: 5px;">
+						Log In
+					</h1>
+					<h2 style="margin-bottom: 2px;">User Name:</h2>
 					<div class="loginInput">
 						<input type="text" class="loginTextInput" id="userNameInput" name="username" placeholder="user name" autocomplete="on" spellcheck="false">
 					</div>
+					<h2 style="margin-bottom: 2px;">Password:</h2>
 					<div class="loginInput">
 						<input type="password" class="loginTextInput" id="passwordInput" name="password" placeholder="password" autocomplete="on" spellcheck="false">
 					</div>
@@ -29,7 +35,7 @@
 						OR
 					</h2>
 					<div class="createAccountButtonFrame">
-						<button title="createAccountButton" class="loginPageButton" onclick="createAccount()">
+						<button title="createAccountButton" class="loginPageButton" onclick="switchToCreateAccount()">
 							<h1 class="loginText">
 								CREATE ACCOUNT
 							</h1>
@@ -37,16 +43,36 @@
 					</div>
 				</div>
 			</div>
-			<div class="createAccountBox">
-				<p>
-					createAccountBox
-				</p>
+			<div class="createAccountBox" id="createAccountBox">
 				<div class="createAccountInputs">
-					<div class="createAccountInput">
-						<input type="text" class="createAcountTextInput" id="createAccountPassword">
+					<h1 style="margin-top: 5px; margin-bottom: 5px;">
+						Create Account 
+					</h1>
+					<h2 style="margin-bottom: 2px;">User Name:</h2>
+					<div class="loginInput">
+						<input type="text" class="createAccountTextInput" id="createAccountUsername" name="username" placeholder="user name" autocomplete="on" spellcheck="false">
 					</div>
-					<div class="createAccountInput">
-						<input type="password" class="createAcountTextInput" id="createAccountPassword">
+					<h2 style="margin-bottom: 2px;">Password:</h2>
+					<div class="loginInput">
+						<input type="password" class="createAccountTextInput" id="createAccountPassword" name="password" placeholder="password" autocomplete="on" spellcheck="false">
+					</div>
+					<hr class="loginInputSeperator">
+					<div class="createAccountButtonFrame">
+						<button title="createAccountButton" class="loginPageButton" onclick="createAccount()">
+							<h1 class="loginText">
+								CREATE ACCOUNT
+							</h1>
+						</button>
+					</div>
+					<h2>
+						OR
+					</h2>
+					<div class="loginInput">
+						<button title="loginButton" class="loginPageButton" onclick="switchToLogin()">
+							<h1 class="loginText">
+								LOGIN
+							</h1>
+						</button>
 					</div>
 				</div>
 			</div>
@@ -88,7 +114,7 @@
 				</div>
 				<div class="MessageThreadInputBox">
 					<div class="MessageThreadInput">
-						<textarea class="MessageThreadTextInput" id="MessageInputText" name="MessageInputText" placeholder="message to send" autocomplete="off">
+						<input class="MessageThreadTextInput" id="MessageInputText" name="MessageInputText" placeholder="message to send" autocomplete="off">
 					</div>
 	
 				</div>
@@ -112,6 +138,6 @@
 				</h1>
 			</button>
 		</div>
-		<script src="./index.js"></script>
+		<script src="./script.js"></script>
 	</body>
 </html>

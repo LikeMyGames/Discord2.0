@@ -1,5 +1,5 @@
 {
-    "id": "",
+    "id": "0000",
     "userName": "baby-yoda",
     "password": "pizza",
     "pfp": "./images/dmIcon.png",
@@ -7,6 +7,7 @@
         {
             "userName": "Baby-yoda527",
             "pfp": "./images/dmIcon.png",
+            "id": "0001",
             "messages": [
                 {
                     "userName": "Baby-yoda527",
@@ -27,6 +28,7 @@
         {
             "userName": "user2",
             "pfp": "./images/dmIcon.png",
+            "id": "0002",
             "messages": [
                 {
                     "userName": "user2",

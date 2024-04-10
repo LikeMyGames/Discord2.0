@@ -27,6 +27,16 @@ h3{
 .topBar{
     grid-row: 1 / 2;
     grid-column: 1 / 5;
+    display: flex;
+    align-items: flex-start;
+    justify-items: flex-start;
+}
+
+.topImage{
+    height: 9px;
+    padding-left: 10px;
+    width: 85px;
+    content: url("images/textIcon.png");
 }
 
 .mainSection{
@@ -64,16 +74,17 @@ h3{
 }
 
 .loginBox{
-    display: none;
+    display: block;
     background-color: var(--darkLight-color);
     border-color: var(--darkLight-color);
     border-width: 5%;
     border-radius: 10px;
-    height: 60vh;
-    width: 40vw;
+    height: 60%;
+    width: 40%;
     position: absolute;
-    left: 30vw;
-    top: 20vh;
+    left: 30%;
+    top: 20%;
+    transition: 0.5s;
 }
 
 .loginPageButton{
@@ -147,16 +158,17 @@ h3{
 }
 
 .createAccountBox{
-    display: block;
+    display: none;
     background-color: var(--darkLight-color);
     border-color: var(--darkLight-color);
     border-width: 5%;
     border-radius: 10px;
-    height: 60vh;
-    width: 40vw;
+    height: 60%;
+    width: 40%;
     position: absolute;
-    left: 30vw;
-    top: 20vh;
+    left: 100%;
+    top: 20%;
+    transition: 0.5s;
 }
 
 .createAccountInputs{
@@ -182,7 +194,7 @@ h3{
     border-radius: 10px;
 }
 
-.createAcountTextInput{
+.createAccountTextInput{
     color: #ffffffff;
     margin: 0px;
     height: 100%;
@@ -435,6 +447,7 @@ body{
     width: 95%;
     justify-content: flex-start;
     padding-left: 20px;
+    padding-right: 40px;
     align-items: center;
 }
 
@@ -444,8 +457,10 @@ body{
     border-color: white;
     border-style: solid;
     height: 60%;
-    width: 80%;
-    max-width: 80%;
+    width: 100%;
+    max-width: 100%;
+    max-height: 60%;
+    min-width: 100%;
     max-height: 60%;
     outline: 0px;
     overflow-wrap: break-word;
