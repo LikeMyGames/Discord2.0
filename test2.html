@@ -57,6 +57,7 @@
         }
 
         function openConnection(){
+            console.log(conn.label);
             conn.on('open', () => {
                 conn.on('data', (data) => {
                     logMessage(data);
