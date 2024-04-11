@@ -14,18 +14,22 @@
         <textarea id="textInput" style="width: 95%; height: 40px; font-size: 20px; max-width: 100%; min-height: 40px; min-width: 95%;" title="textInput" autocomplete="off" readonly>
 
         </textarea>
+        <input id="messageInput" title="messageInput" autocomplete="off">
+        <button onclick="sendMessage()">send message</button>
+        <br>
+        <br>
         <label for="otherID">Other ID:</label>
         <input type="text" id="otherID" autocomplete="off">
         <button onclick="connect()">connect to other peer</button>
+        <br>
         <label for="peerID">
             Your ID:
         </label>
         <input id="peerID" type="text" style="width: 50%; height: 15px; font-size: 15px;" readonly autocomplete="off">
-        <button onclick="sendMessage()">send message</button>
+        <br>
         <label for="yourName">Your Name:</label>
         <input id="yourName" autocomplete="off">
         <button onclick="setName()">set name</button>
-        <input id="messageInput" title="messageInput" autocomplete="off">
     </div>
     <script>
         const textInput = document.querySelector("#textInput");
