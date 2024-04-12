@@ -6,7 +6,12 @@
 		<title>Discord 2.0</title>
 		<link rel="icon" type="image/x-icon" href="images/favicon2.ico">
 		<link rel="stylesheet" href="./style.css">
-		<script type="module" src="./script.js"></script>
+		<script type="module">
+			import * as script from "./script.mjs"
+			function login(){
+				script.login();
+			}
+		</script>
 	</head>
 	<body>
 		<div class="login" id="login">
@@ -38,6 +43,16 @@
 						<button title="createAccountButton" class="loginPageButton" onclick="switchToCreateAccount()">
 							<h1 class="loginText">
 								CREATE ACCOUNT
+							</h1>
+						</button>
+					</div>
+					<h2>
+						OR
+					</h2>
+					<div class="createAccountButtonFrame">
+						<button title="createAccountButton" class="loginPageButton" onclick="useWithoutAccout()">
+							<h1 class="loginText">
+								Use Without Account
 							</h1>
 						</button>
 					</div>
@@ -138,6 +153,5 @@
 				</h1>
 			</button>
 		</div>
-		<script src="./script.js"></script>
 	</body>
 </html>

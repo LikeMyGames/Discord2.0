@@ -1,3 +1,5 @@
+//need to make peer js import compatible with html and browsers
+//import {Peer} from "./node_modules/peerjs/dist/peerjs.min.js";
 //import { Peer } from "peerjs";
 import {Peer} from "https://esm.sh/peerjs@1.5.2?bundle-deps"
 var user = {};
@@ -27,7 +29,7 @@ passwordInput.addEventListener("keydown", (e) => {
 	}
 });
 
-async function gmtISOToLocal(time){
+function gmtISOToLocal(time){
 	let localTime = new Date().toString().substring(28,31);
 	let gmtTime = time.substring(11, 16);
 	localTime = parseInt(gmtTime) + parseInt(localTime);
@@ -42,7 +44,7 @@ function gmtToLocal(time){
 	return localTime;
 }
 
-function switchToCreateAccount(){
+export async function switchToCreateAccount(){
 	let createAccountBox = document.querySelector("#createAccountBox");
 	let loginBox = document.querySelector("#loginBox");
 	createAccountBox.style.display = "block";
@@ -51,7 +53,7 @@ function switchToCreateAccount(){
 	console.log(loginBox.style.display);
 }
 
-function switchToLogin(){
+export function switchToLogin(){
 	let createAccountBox = document.querySelector(".createAccountBox");
 	let loginBox = document.querySelector(".loginBox");
 	createAccountBox.style.display = "hidden";
@@ -60,21 +62,27 @@ function switchToLogin(){
 	console.log(loginBox.style.display);
 }
 
-async function openLogin(){
+export async function openLogin(){
 	let main = document.querySelector(".main");
 	let login = document.querySelector(".login");
 	main.style.display = "none";
 	login.style.display = "block";
 }
 
-async function openSettings(){
+export async function openSettings(){
 	let main = document.querySelector(".main");
 	let settings = document.querySelector(".settings");
 	main.style.display = "none";
 	settings.style.display = "block";
 }
 
-async function login(){
+export async function useWithoutAccount(){
+
+}
+
+
+//need to fix peer js import into file
+export async function login(){
 	let username = document.querySelector("#userNameInput").value;
 	let pass = document.querySelector("#passwordInput").value;
 	if(!(username === "" || pass === "")){
@@ -139,7 +147,7 @@ function logMessage(data){
 	textInput.value += data.name.toString() + ": " + data.message.toString();
 }
 
-async function logout(){
+export async function logout(){
 	user = {};
 	let settings = document.querySelector(".settings");
 	let login = document.querySelector(".login");
@@ -163,7 +171,7 @@ async function logout(){
 	}
 }
 
-async function createAccount(){
+export async function createAccount(){
 	let username = document.querySelector("#userNameInput").value;
 	let pass = document.querySelector("#passwordInput").value;
 	if(!(username === "" || pass === "")){
@@ -191,7 +199,7 @@ async function createAccount(){
 	}
 }
 
-async function sendMessage(){
+export async function sendMessage(){
 	let input = messageInput.value;
 	let messageThread = document.querySelector(".MessageThread");
 	let date =  new Date().toUTCString().substring(0,17);
@@ -203,7 +211,7 @@ async function sendMessage(){
 	saveToJson();
 }
 
-async function sendPeerMessage(date, time, input){
+export async function sendPeerMessage(date, time, input){
 	conn.send({
 		userName: user.userName,
 		pfp: user.pfp,
@@ -217,7 +225,8 @@ async function saveToJson(){
 	console.log(messageThreadMessages);
 }
 
-function hoverServerButton(id){
+module.export = async function hoverServerButton(id){
+	console.log("hovering");
 	var element = document.getElementById(id + "Notification");
 	if(element.className === "unSeenMessage"){
 		element.className = "unSeenMessageHovered";
@@ -250,7 +259,8 @@ function download(data, filename, type) {
 	alert(file);
 }
 	
-function unHoverServerButton(id){
+export async function unHoverServerButton(id){
+	console.log("unhovering");
 	var element = document.getElementById(id + "Notification");
 	if(element.className === "unSeenMessageHovered"){
 		element.className = "unSeenMessage";
@@ -273,7 +283,7 @@ async function loadDmThread(data, index){
 	activeMessageThread = true;
 }
 
-async function openDmThread(id){
+export async function openDmThread(id){
     let index = id.substring(2);
     fetch(`./users/${user.userName}.json`)
 		.then(res => {
@@ -302,7 +312,7 @@ async function loadDMs(data){
     }
 };
 
-async function openDMs(){
+export async function openDMs(){
     let messageList = document.querySelector(".MessageList");
     messageList.innerHTML = '';
 	fetch(`./users/${user.userName}.json`)
