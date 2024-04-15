@@ -242,16 +242,20 @@ async function createAccount(){
 		if(!(username.includes("<") || username.includes(">") || username.includes(":") || username.includes("\"") || username.includes("/") || username.includes("\\") || username.includes("|") || username.includes("?") || username.includes("*")) && !(pass.includes("<") || pass.includes(">") || pass.includes(":") || pass.includes("\"") || pass.includes("/") || pass.includes("\\") || pass.includes("|") || pass.includes("?") || pass.includes("*"))){
 			fetch(`./users/${username}.json`, {method: "HEAD"})
 				.then(res => {
-					if(!res.ok){
-						fetch(`./users/${username}`, {method: "PUT"})
-							.then(res => {
-								console.log(res);
-							})
-					}	
+					if(res.ok){
+						alert("An account with this username already exists. Please choose a different username");
+					}
 				})
 				.catch(error => {
-					console.warn(error);
-					alert("An account with this username already exists. Please choose a different username");
+					fetch(`./users/${username}.json`, {method: 'PUT', headers: {'Content-Type': 'application/json'},body: })
+						.then(res => {
+							if(!res.ok){
+								throw new Error(`HTTP Error ${res.status}`);
+							}
+						})
+						.catch(err => {
+							console.error(err);
+						})
 				});
 		}
 		else{
