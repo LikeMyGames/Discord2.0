@@ -10,6 +10,8 @@ console.log(gmtToLocal(new Date().toISOString().substring(28, 31)));
 var messageThreadMessages = [];
 var peer;
 var conn;
+var inputMute = false;
+var outputMute = false;
 
 const messageInput = document.querySelector("#MessageInputText");
 messageInput.addEventListener("keydown", (e) => {
@@ -26,6 +28,14 @@ passwordInput.addEventListener("keydown", (e) => {
 	if(e.code === "Enter"){
 		e.preventDefault();
 		login();
+	}
+});
+
+const userNameInput = document.querySelector("#userNameInput");
+userNameInput.addEventListener("keydown", (e) => {
+	if(e.code === "Enter"){
+		e.preventDefault();
+		passwordInput.focus();
 	}
 });
 
@@ -65,15 +75,43 @@ function switchToLogin(){
 async function openLogin(){
 	let main = document.querySelector(".main");
 	let login = document.querySelector(".login");
-	main.style.display = "none";
-	login.style.display = "block";
+	main.style.zIndex = "-1";
+	login.style.zIndex = "1";
 }
 
 async function openSettings(){
 	let main = document.querySelector(".main");
 	let settings = document.querySelector(".settings");
-	main.style.display = "none";
-	settings.style.display = "block";
+	main.style.zIndex = "-1";
+	settings.style.zIndex = "1";
+	let firstSettingsButton = document.querySelector(".myAccountSettingsButton");
+	//openSettingsContent("myAccount");
+}
+
+async function openSettingsContent(id){
+	let settingsContent = document.querySelector(".settingsContent");
+	switch(id){
+		case "myAccount":
+			settingsContent.innerHTML.trim(`
+				<div style="display: flex; align-items: flex-start; ">
+					<h1>My Account</h1>
+					<div style="border-radius: 20px;">
+						<div style="width: 100%; height: 60px; background-color: lime" />
+						<div style="display: flex;">
+							<img src="user.pfp">
+
+						</div>
+					</div>
+				</div>
+			`)
+	}
+}
+
+async function closeSettings(){
+	let main = document.querySelector(".main");
+	let settings = document.querySelector(".settings");
+	main.style.zIndex = "1";
+	settings.style.zIndex = "-1";
 }
 
 async function useWithoutAccount(){
@@ -114,8 +152,8 @@ async function login(){
 					let main = document.querySelector(".main");
 					let login = document.querySelector(".login");
 					let accountInfoUsername = document.querySelector("#accountInfoUser");
-					main.style.display = "block";
-					login.style.display = "none";
+					main.style.zIndex = "1";
+					login.style.zIndex = "-2";
 					accountInfoUsername.textContent = user.userName;
 					return user;
 				}
@@ -151,8 +189,10 @@ async function logout(){
 	user = {};
 	let settings = document.querySelector(".settings");
 	let login = document.querySelector(".login");
-	settings.style.display = "none";
-	login.style.display = "block";
+	let main = document.querySelector(".main");
+	settings.style.zIndex = "-2"
+	login.style.zIndex = "1";
+	main.style.zIndex = "-1";
 	let username = document.querySelector("#userNameInput");
 	let pass = document.querySelector("#passwordInput");
 	username.value = "";
@@ -168,6 +208,30 @@ async function logout(){
 	let messages = document.querySelector(".MessageThread");
 	while(messages.hasChildNodes()){
 		messages.removeChild(messages.firstChild);
+	}
+}
+
+async function toggleInputMute(){
+	let inputIcon = document.querySelector("#toggleInputMuteIcon");
+	if(inputMute){
+		inputIcon.innerHTML = "mic";
+		inputMute = !inputMute;
+	}
+	else{
+		inputIcon.innerHTML = "mic_off";
+		inputMute = !inputMute;
+	}
+}
+
+async function toggleOutputMute(){
+	let outputIcon = document.querySelector("#toggleOutputMuteIcon");
+	if(outputMute){
+		outputIcon.innerHTML = "headset_mic";
+		outputMute = !outputMute;
+	}
+	else{
+		outputIcon.innerHTML = "headset_off";
+		outputMute = !outputMute;
 	}
 }
 
