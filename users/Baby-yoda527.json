@@ -1,7 +1,8 @@
 {
-    "id": "",
+    "id": "0001",
     "userName": "Baby-yoda527",
     "password": "burger",
+    "pfp": "./images/dmIcon.png",
     "DMs": [
         {
             "userName": "baby-yoda",

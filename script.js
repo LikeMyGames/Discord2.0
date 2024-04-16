@@ -39,6 +39,22 @@ userNameInput.addEventListener("keydown", (e) => {
 	}
 });
 
+const createAccountPassInput = document.querySelector("#createAccountPassword");
+createAccountPassInput.addEventListener("keydown", (e) => {
+	if(e.code === "Enter"){
+		e.preventDefault();
+		createAccount();
+	}
+});
+
+const createAccountUserInput = document.querySelector("#createAccountUsername");
+createAccountUserInput.addEventListener("keydown", (e) => {
+	if(e.code === "Enter"){
+		e.preventDefault();
+		createAccountPassInput.focus();
+	}
+});
+
 function gmtISOToLocal(time){
 	let localTime = new Date().toString().substring(28,31);
 	let gmtTime = time.substring(11, 16);
@@ -57,19 +73,15 @@ function gmtToLocal(time){
 async function switchToCreateAccount(){
 	let createAccountBox = document.querySelector("#createAccountBox");
 	let loginBox = document.querySelector("#loginBox");
-	createAccountBox.style.display = "block";
-	console.log(createAccountBox.style.display);
-	loginBox.style.display = "hidden";
-	console.log(loginBox.style.display);
+	createAccountBox.style.left = "30%";
+	loginBox.style.left = "-50%";
 }
 
 function switchToLogin(){
 	let createAccountBox = document.querySelector(".createAccountBox");
 	let loginBox = document.querySelector(".loginBox");
-	createAccountBox.style.display = "hidden";
-	console.log(createAccountBox.style.display);
-	loginBox.style.display = "block";
-	console.log(loginBox.style.display);
+	loginBox.style.left = "30%";
+	createAccountBox.style.left = "100%";
 }
 
 async function openLogin(){
@@ -236,26 +248,38 @@ async function toggleOutputMute(){
 }
 
 async function createAccount(){
-	let username = document.querySelector("#userNameInput").value;
-	let pass = document.querySelector("#passwordInput").value;
+	let username = document.querySelector("#createAccountUsername").value;
+	let pass = document.querySelector("#createAccountPassword").value;
 	if(!(username === "" || pass === "")){
 		if(!(username.includes("<") || username.includes(">") || username.includes(":") || username.includes("\"") || username.includes("/") || username.includes("\\") || username.includes("|") || username.includes("?") || username.includes("*")) && !(pass.includes("<") || pass.includes(">") || pass.includes(":") || pass.includes("\"") || pass.includes("/") || pass.includes("\\") || pass.includes("|") || pass.includes("?") || pass.includes("*"))){
 			fetch(`./users/${username}.json`, {method: "HEAD"})
 				.then(res => {
 					if(res.ok){
 						alert("An account with this username already exists. Please choose a different username");
+						console.log("this account exists already");
 					}
-				})
-				.catch(error => {
-					fetch(`./users/${username}.json`, {method: 'PUT', headers: {'Content-Type': 'application/json'},body: })
+					else {
+						console.log("this account does not exist");
+						fetch(`./users/${username}.json`, {method: 'POST', headers: {'Content-Type': 'application/json'},body: {
+							id: `${username}#${generateRandHex(4)}`,
+    						userName: username,
+    						password: pass,
+    						pfp: "./images/dmIcon.png"
+						}})
 						.then(res => {
 							if(!res.ok){
+								console.log("cannot create account");
 								throw new Error(`HTTP Error ${res.status}`);
 							}
+							return res.json();
+						})
+						.then(data => {
+							console.log(data);
 						})
 						.catch(err => {
 							console.error(err);
-						})
+						});
+					}
 				});
 		}
 		else{
@@ -265,6 +289,15 @@ async function createAccount(){
 	else{
 		alert("Please enter a username and password to create an account with");
 	}
+}
+
+function generateRandHex(size){
+	let result = [];
+	let hexRef = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+	for (let n = 0; n < size; n++) {
+		result.push(hexRef[Math.floor(Math.random() * 16)]);
+	}
+	return result.join('');
 }
 
 async function sendMessage(){

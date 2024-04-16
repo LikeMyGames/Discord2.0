@@ -74,6 +74,7 @@ h3{
 }
 
 .loginBox{
+    z-index: 1;
     display: block;
     background-color: var(--darkLight-color);
     border-color: var(--darkLight-color);
@@ -158,7 +159,8 @@ h3{
 }
 
 .createAccountBox{
-    display: none;
+    z-index: 1;
+    display: block;
     background-color: var(--darkLight-color);
     border-color: var(--darkLight-color);
     border-width: 5%;
@@ -205,6 +207,14 @@ h3{
     text-align: center;
     font-size: 15px;
     border-radius: 15px;
+}
+
+.createAccountTextInput::-ms-reveal{
+    display: none;
+}
+
+.createAccountTextInput:-webkit-autofill{
+    -webkit-text-fill-color: black;
 }
 
 .createAccountButtonFrame{
