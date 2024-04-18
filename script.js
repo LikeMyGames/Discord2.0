@@ -3,7 +3,7 @@
 //import { Peer } from "peerjs";
 //import {Peer} from "https://esm.sh/peerjs@1.5.2?bundle-deps"
 var user = {};
-openLogin();
+openWelcome();
 var activeMessageThread = false;
 console.log(gmtISOToLocal(new Date().toISOString()));
 console.log(gmtToLocal(new Date().toISOString().substring(28, 31)));
@@ -73,15 +73,24 @@ function gmtToLocal(time){
 async function switchToCreateAccount(){
 	let createAccountBox = document.querySelector("#createAccountBox");
 	let loginBox = document.querySelector("#loginBox");
-	createAccountBox.style.left = "30%";
-	loginBox.style.left = "-50%";
+	createAccountBox.style.zIndex = "1";
+	loginBox.style.zIndex = "-1";
 }
 
 function switchToLogin(){
 	let createAccountBox = document.querySelector(".createAccountBox");
 	let loginBox = document.querySelector(".loginBox");
-	loginBox.style.left = "30%";
-	createAccountBox.style.left = "100%";
+	loginBox.style.zIndex = "1";
+	createAccountBox.style.zIndex = "-1";
+}
+
+async function openWelcome(){
+	let welcome = document.querySelector(".welcome");
+	let login = document.querySelector(".login");
+	let main = document.querySelector(".main");
+	login.style.zIndex = "-1";
+	main.style.zIndex = "-2",
+	welcome.style.zIndex = "1";
 }
 
 async function openLogin(){

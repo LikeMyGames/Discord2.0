@@ -11,10 +11,33 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 	</head>
 	<body>
+		<div class="welcome">
+			<div class="welcomeBox">
+				<div class="welcomeTopBar">
+					<h1 class="welcomeTopBarText">
+						Welcome!
+					</h1>
+				</div>
+				<div style="background-color: red; height: 1fr;width: 100%;">
+					hello
+				</div>
+				<div class="useOptions">
+					<button class="loginRedirect">
+						login
+					</button>
+					<button class="createAccountRedirect">
+						create account
+					</button>
+					<button class="useWithoutAccountRedirect">
+						use without account
+					</button>
+				</div>
+			</div>
+		</div>
 		<div class="login" id="login">
 			<div class="loginBox" id="loginBox">
 				<div class="loginInputs">
-					<h1 style="margin-top: 5px; margin-bottom: 5px;">
+					<h1 style="margin: 0px">
 						Log In
 					</h1>
 					<h2 style="margin-bottom: 2px;">User Name:</h2>
@@ -36,7 +59,7 @@
 					<h2>
 						OR
 					</h2>
-					<div class="createAccountButtonFrame">
+					<div class="loginInput">
 						<button title="createAccountButton" class="loginPageButton" onclick="switchToCreateAccount()">
 							<h1 class="loginText">
 								CREATE ACCOUNT
@@ -46,7 +69,7 @@
 					<h2>
 						OR
 					</h2>
-					<div class="createAccountButtonFrame">
+					<div class="loginInput">
 						<button title="createAccountButton" class="loginPageButton" onclick="useWithoutAccout()">
 							<h1 class="loginText">
 								Use Without Account
@@ -55,10 +78,9 @@
 					</div>
 				</div>
 			</div>
-			<!--
 			<div class="createAccountBox" id="createAccountBox">
-				<div class="createAccountInputs">
-					<h1 style="margin-top: 5px; margin-bottom: 5px;">
+				<div class="loginInputs">
+					<h1 style="margin: 0px">
 						Create Account 
 					</h1>
 					<h2 style="margin-bottom: 2px;">User Name:</h2>
@@ -70,7 +92,7 @@
 						<input type="password" class="createAccountTextInput" id="createAccountPassword" name="password" placeholder="password" autocomplete="off" spellcheck="false">
 					</div>
 					<hr class="loginInputSeperator">
-					<div class="createAccountButtonFrame">
+					<div class="loginInput">
 						<button title="createAccountButton" class="loginPageButton" onclick="createAccount()">
 							<h1 class="loginText">
 								CREATE ACCOUNT
@@ -89,7 +111,6 @@
 					</div>
 				</div>
 			</div>
-		-->
 		</div>
 		<div class="main" id="main">
 			<div class="container">
