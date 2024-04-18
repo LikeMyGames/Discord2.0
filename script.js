@@ -307,9 +307,20 @@ async function sendMessage(){
 	let time =  new Date().toUTCString();
 	//need to fix problem with 24 hour roll over
 	time = time.substring(17);
-	messageThread.appendChild(createMessage(user.userName, user.pfp, date, time, input));
+	conn.send({
+		username: user.userName,
+		pfp: user.pfp,
+		date: date,
+		time: time,
+		body: input
+	});
+	showMessage(user.userName, user.pfp, date, time, input);
 	messageInput.value = "";
 	saveToJson();
+}
+
+async function showMessage(userName, pfp, date, time, input){
+	messageThread.appendChild(createMessage(userName, pfp, date, time, input));
 }
 
 async function sendPeerMessage(date, time, input){
