@@ -88,9 +88,11 @@ async function openWelcome(){
 	let welcome = document.querySelector(".welcome");
 	let login = document.querySelector(".login");
 	let main = document.querySelector(".main");
+	let settings = document.querySelector(".settings");
 	login.style.zIndex = "-1";
 	main.style.zIndex = "-2",
 	welcome.style.zIndex = "1";
+	settings.style.zIndex = "0"
 }
 
 async function openLogin(){
@@ -98,6 +100,7 @@ async function openLogin(){
 	let login = document.querySelector(".login");
 	main.style.zIndex = "-1";
 	login.style.zIndex = "1";
+	switchToLogin();
 }
 
 async function openCreateAccount(){
@@ -213,12 +216,7 @@ function logMessage(data){
 
 async function logout(){
 	user = {};
-	let settings = document.querySelector(".settings");
-	let login = document.querySelector(".login");
-	let main = document.querySelector(".main");
-	settings.style.zIndex = "-2"
-	login.style.zIndex = "1";
-	main.style.zIndex = "-1";
+	openWelcome();
 	let username = document.querySelector("#userNameInput");
 	let pass = document.querySelector("#passwordInput");
 	username.value = "";
@@ -321,6 +319,7 @@ async function sendMessage(){
 	let time =  new Date().toUTCString();
 	//need to fix problem with 24 hour roll over
 	time = time.substring(17);
+	/*
 	conn.send({
 		username: user.userName,
 		pfp: user.pfp,
@@ -328,12 +327,13 @@ async function sendMessage(){
 		time: time,
 		body: input
 	});
-	showMessage(user.userName, user.pfp, date, time, input);
+	*/
+	showMessage(messageThread, user.userName, user.pfp, date, time, input);
 	messageInput.value = "";
 	saveToJson();
 }
 
-async function showMessage(userName, pfp, date, time, input){
+async function showMessage(messageThread, userName, pfp, date, time, input){
 	messageThread.appendChild(createMessage(userName, pfp, date, time, input));
 }
 
@@ -352,7 +352,6 @@ async function saveToJson(){
 }
 
 async function hoverServerButton(id){
-	console.log("hovering");
 	var element = document.getElementById(id + "Notification");
 	if(element.className === "unSeenMessage"){
 		element.className = "unSeenMessageHovered";
@@ -386,7 +385,6 @@ function download(data, filename, type) {
 }
 	
 async function unHoverServerButton(id){
-	console.log("unhovering");
 	var element = document.getElementById(id + "Notification");
 	if(element.className === "unSeenMessageHovered"){
 		element.className = "unSeenMessage";

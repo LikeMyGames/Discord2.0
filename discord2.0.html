@@ -25,6 +25,7 @@
 					<p>
 						This is my Discord clone. If you want to look at the source code for the javascript, html, or css, you can go to this link <a href="https://github.com/LikeMyGames/Discord2.0">https://github.com/LikeMyGames/Discord2.0</a>
 						This Discord clone is built using plain HTML 5, plain Javascript, and plain CSS. The text and video system are powered by the PeerJS library. <a href="https://peerjs.com/">https://peerjs.com/</a>
+						All of the icons that are used in the project except for the ones that have image files are from <a href="https://fonts.google.com/icons">https://fonts.google.com/icons</a>
 					</p>
 					<br>
 					<p>
@@ -84,24 +85,22 @@
 						<input type="password" class="loginTextInput" id="passwordInput" name="password" placeholder="password" autocomplete="on" spellcheck="false">
 					</div>
 					<hr class="loginInputSeperator">
-					<div style="display: flex; width: 95%; height: 100px;">
-						<div class="loginInput">
-							<button title="loginButton" class="loginPageButton" onclick="login()">
-								<h1 class="loginText">
-									LOGIN
-								</h1>
-							</button>
-						</div>
-						<h2>
-							or
-						</h2>
-						<div class="loginInput">
-							<button title="createAccountButton" class="loginPageButton" onclick="switchToCreateAccount()">
-								<h1 class="loginText">
-									Go Back
-								</h1>
-							</button>
-						</div>
+					<div class="loginInput">
+						<button title="loginButton" class="loginPageButton" onclick="login()">
+							<h1 class="loginText">
+								LOGIN
+							</h1>
+						</button>
+					</div>
+					<h2>
+						or
+					</h2>
+					<div class="loginInput">
+						<button title="createAccountButton" class="loginPageButton" onclick="openWelcome()">
+							<h1 class="loginText">
+								GO BACK
+							</h1>
+						</button>
 					</div>
 				</div>
 			</div>
@@ -130,9 +129,9 @@
 						OR
 					</h2>
 					<div class="loginInput">
-						<button title="loginButton" class="loginPageButton" onclick="switchToLogin()">
+						<button title="loginButton" class="loginPageButton" onclick="openWelcome()">
 							<h1 class="loginText">
-								LOGIN
+								GO BACK
 							</h1>
 						</button>
 					</div>
