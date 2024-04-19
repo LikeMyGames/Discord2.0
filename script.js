@@ -100,6 +100,11 @@ async function openLogin(){
 	login.style.zIndex = "1";
 }
 
+async function openCreateAccount(){
+	openLogin();
+	switchToCreateAccount();
+}
+
 async function openSettings(){
 	let main = document.querySelector(".main");
 	let settings = document.querySelector(".settings");

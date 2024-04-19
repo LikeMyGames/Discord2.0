@@ -20,22 +20,51 @@
 				</div>
 				<div class="welcomeText">
 					<h2>
-						Discord 2.0 / Datcord
+						Discord 2.0
 					</h2>
-
-
+					<p>
+						This is my Discord clone. If you want to look at the source code for the javascript, html, or css, you can go to this link <a href="https://github.com/LikeMyGames/Discord2.0">https://github.com/LikeMyGames/Discord2.0</a>
+						This Discord clone is built using plain HTML 5, plain Javascript, and plain CSS. The text and video system are powered by the PeerJS library. <a href="https://peerjs.com/">https://peerjs.com/</a>
+					</p>
+					<br>
+					<p>
+						To use this application who can either create an account, use an existing account, or use without an accout.
+					</p>
+					<br>
+					<p>
+						If you create an account, it sends a put request to my custom built server, Discord2.0 API. <br>//Currently this feature is not working. Coming soon hopefully.
+					</p>
+					<br>
+					<p>
+						If you already have an account in the API, all you have to do is input the user name and password assosiated with the account.
+						Any DM conversations that you had already started will be loaded and any servers will be loaded as well.
+						All previous messages in DM conversations will be loaded when the DM conversation is clickes on in the list.
+					</p>
+					<br>
+					<p>
+						If you want to use this app without an account, you can. But without an account, you can only have text, audio, or video chats if you have their id.
+						The id is usually the user's username with a hashtag and a randomly generated 4 digit hexadecimal number.
+						While not using an account, you cannot participate in servers.
+						Furthermore, none of your DM conversations will be saved at all.
+					</p>
+					<br>
+					<P>
+						//SERVERS ARE NOT IMPLEMENTED YET <br>
+						All servers are there own "users" with their own ids.
+						Each user referenced in the API has the id of each server that they are in.
+					</P>
 					<p style="text-overflow: ellipsis; text-wrap: balance;">
 					</p>
 				</div>
 				<div class="useOptions">
-					<button id="loginRedirect" class="useOption">
-						login
+					<button id="loginRedirect" class="useOption" onclick="openLogin()">
+						Login
 					</button>
-					<button id="createAccountRedirect" class="useOption">
-						create account
+					<button id="createAccountRedirect" class="useOption" onclick="openCreateAccount()">
+						Create Account
 					</button>
 					<button id="useWithoutAccountRedirect" class="useOption">
-						use without account
+						Use Without Account
 					</button>
 				</div>
 			</div>
@@ -55,32 +84,24 @@
 						<input type="password" class="loginTextInput" id="passwordInput" name="password" placeholder="password" autocomplete="on" spellcheck="false">
 					</div>
 					<hr class="loginInputSeperator">
-					<div class="loginInput">
-						<button title="loginButton" class="loginPageButton" onclick="login()">
-							<h1 class="loginText">
-								LOGIN
-							</h1>
-						</button>
-					</div>
-					<h2>
-						OR
-					</h2>
-					<div class="loginInput">
-						<button title="createAccountButton" class="loginPageButton" onclick="switchToCreateAccount()">
-							<h1 class="loginText">
-								CREATE ACCOUNT
-							</h1>
-						</button>
-					</div>
-					<h2>
-						OR
-					</h2>
-					<div class="loginInput">
-						<button title="createAccountButton" class="loginPageButton" onclick="useWithoutAccout()">
-							<h1 class="loginText">
-								Use Without Account
-							</h1>
-						</button>
+					<div style="display: flex; width: 95%; height: 100px;">
+						<div class="loginInput">
+							<button title="loginButton" class="loginPageButton" onclick="login()">
+								<h1 class="loginText">
+									LOGIN
+								</h1>
+							</button>
+						</div>
+						<h2>
+							or
+						</h2>
+						<div class="loginInput">
+							<button title="createAccountButton" class="loginPageButton" onclick="switchToCreateAccount()">
+								<h1 class="loginText">
+									Go Back
+								</h1>
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
