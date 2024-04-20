@@ -8,7 +8,14 @@
 *{
     box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    overflow:hidden;
+}
+
+html, body{
+    background-color: var(--darkLight-color);
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
 }
 
 h1{
@@ -449,11 +456,6 @@ p{
     width: 8px;
     margin-top: 25px;
     transition: 0.2s;
-}
-
-body{
-    background-color: var(--darkLight-color);
-    overflow: hidden;
 }
 
 .ServerList{
