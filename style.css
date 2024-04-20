@@ -12,9 +12,9 @@
 
 html, body{
     background-color: var(--darkLight-color);
-    overflow: hidden;
+    overflow: none;
     width: 100%;
-    height: 100%;
+    height: 100dvh;
     margin: 0px;
 }
 
