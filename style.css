@@ -937,7 +937,7 @@ body{
     }
 
     .loginInputs{
-        justify-content: center;
+        justify-content: flex-start;
         width: 80%;
         height: 80%;
     }

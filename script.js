@@ -521,5 +521,3 @@ class User{
 		return;
 	}
 }
-
-
