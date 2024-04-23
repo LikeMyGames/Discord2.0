@@ -1000,7 +1000,20 @@ p{
 
 @media screen and (max-height: 1100px){
     .welcomeBox{
-        height: 100%;
+        height: 90%;
+    }
+
+    .loginBox{
+        height: 90%;
+    }
+
+    .loginInputs{
+        height: 90%;
+        width: 90%;
+    }
+
+    #createAccountInputs h1{
+        font-size: 60px;
     }
 }
 
@@ -1015,15 +1028,14 @@ p{
         height: 97.25%;
     }
 
-    .createAccountBox{
-        width: 95%;
-        height: 97.25%;
-    }
-
     .loginInputs{
         justify-content: flex-start;
         width: 90%;
         height: 95%;
+    }
+
+    .createAccountInputs h1{
+        height: 30px;
     }
 
     .loginInputs h1{

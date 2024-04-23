@@ -71,33 +71,37 @@ function gmtToLocal(time){
 }
 
 async function switchToCreateAccount(){
-	let createAccountBox = document.querySelector("#createAccountBox");
-	let loginBox = document.querySelector("#loginBox");
+	let createAccountBox = document.querySelector("#createAccount");
+	let loginBox = document.querySelector("#login");
 	createAccountBox.style.zIndex = "1";
 	loginBox.style.zIndex = "-1";
 }
 
 function switchToLogin(){
-	let createAccountBox = document.querySelector(".createAccountBox");
-	let loginBox = document.querySelector(".loginBox");
+	let createAccountBox = document.querySelector("#createAccount");
+	let loginBox = document.querySelector("#login");
 	loginBox.style.zIndex = "1";
 	createAccountBox.style.zIndex = "-1";
 }
 
 async function openWelcome(){
 	let welcome = document.querySelector(".welcome");
-	let login = document.querySelector(".login");
+	let createAccount = document.querySelector("#createAccount");
+	let login = document.querySelector("#login");
 	let main = document.querySelector(".main");
 	let settings = document.querySelector(".settings");
-	login.style.zIndex = "-1";
+	login.style.zIndex = "0";
+	createAccount.style.zIndex = "0";
 	main.style.zIndex = "-2",
 	welcome.style.zIndex = "1";
-	settings.style.zIndex = "0"
+	settings.style.zIndex = "-1";
 }
 
 async function openLogin(){
 	let main = document.querySelector(".main");
-	let login = document.querySelector(".login");
+	let login = document.querySelector("#login");
+	let welcome = document.querySelector(".welcome");
+	welcome.style.zIndex = "-1";
 	main.style.zIndex = "-1";
 	login.style.zIndex = "1";
 	switchToLogin();
