@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link rel="stylesheet" href="./css/styleDark.css">
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="theme-color" content="#2b2d31ff" />
 		<title>Discord 2.0</title>
 		<link rel="icon" type="image/x-icon" href="images/favicon2.ico">
-		<link rel="stylesheet" href="./style.css">
 		<script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -224,9 +224,9 @@
 								My Account
 							</h2>
 						</button>
-						<button id="profiles" class="settingsMenuItem" onclick="changeSettingsContent(this.id)">
+						<button id="profile" class="settingsMenuItem" onclick="changeSettingsContent(this.id)">
 							<h2 class="settingsMenuItemText">
-								Profiles
+								Profile
 							</h2>
 						</button>
 						<hr class="settingsMenuItemGroupSeperator">
@@ -273,7 +273,7 @@
 						<hr class="settingsMenuItemGroupSeperator">
 					</div>
 					<div class="settingsMenuItemGroup">
-						<button class="settingsMenuItem" onclick="logout()">
+						<button class="settingsMenuItem" title="logout" onclick="logout()">
 							<h2 class="settingsMenuItemText">
 								Log Out
 							</h2>

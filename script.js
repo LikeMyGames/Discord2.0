@@ -2,6 +2,7 @@
 //import {Peer} from "./node_modules/peerjs/dist/peerjs.min.js";
 //import { Peer } from "peerjs";
 //import {Peer} from "https://esm.sh/peerjs@1.5.2?bundle-deps"
+console.log(document.head.innerHTML);
 var user = {};
 openWelcome();
 var activeMessageThread = false;
@@ -154,26 +155,7 @@ async function openSettings(){
 	main.style.zIndex = "-1";
 	settings.style.zIndex = "1";
 	let firstSettingsButton = document.querySelector(".myAccountSettingsButton");
-	//openSettingsContent("myAccount");
-}
-
-async function openSettingsContent(id){
-	let settingsContent = document.querySelector(".settingsContent");
-	switch(id){
-		case "myAccount":
-			settingsContent.innerHTML.trim(`
-				<div style="display: flex; align-items: flex-start; ">
-					<h1>My Account</h1>
-					<div style="border-radius: 20px;">
-						<div style="width: 100%; height: 60px; background-color: lime" />
-						<div style="display: flex;">
-							<img src="user.pfp">
-
-						</div>
-					</div>
-				</div>
-			`)
-	}
+	changeSettingsContent("myAccount");
 }
 
 async function closeSettings(){
@@ -220,10 +202,14 @@ async function login(){
 						openConnection();
 					})
 					let main = document.querySelector(".main");
-					let login = document.querySelector(".login");
+					let login = document.querySelector("#login");
+					let createAccount = document.querySelector("#createAccount");
 					let accountInfoUsername = document.querySelector("#accountInfoUser");
+					let settings = document.querySelector(".settings");
 					main.style.zIndex = "1";
-					login.style.zIndex = "-2";
+					login.style.zIndex = "-1";
+					createAccount.style.zIndex = "-1";
+					settings.style.zIndex = "-2";
 					accountInfoUsername.textContent = user.userName;
 					return user;
 				}
@@ -493,10 +479,12 @@ async function openDMs(){
 
 async function changeSettingsContent(id){
 	let settingsContent = document.querySelector(".mainSettingsContent");
+	console.log(id);
+	id = id.toString();
 	switch(id){
 		case "myAccount":
 			settingsContent.innerHTML = `
-			<h1>My Account</h1>
+			<h1 style="margin-top: 0px;">My Account</h1>
 			<div class="accountInfoViewer">
 				<div class="accountInfoViewerColorBar">
 				</div>
@@ -509,23 +497,76 @@ async function changeSettingsContent(id){
 					</div>
 				</div>
 			</div>
-			`
-		case "profiles":
-
+			`;
+			console.log(settingsContent.innerHTML);
+			break;
+		case "profile":
+			settingsContent.innerHTML = `
+			<h1 style="margin-top: 0px;">Profile</h1>
+			`;
+			console.log(settingsContent.innerHTML);
+			break;
 		case "appearance":
-
+			settingsContent.innerHTML = `
+			<h1 style="margin-top: 0px;">Appearance</h1>
+			<br>
+			<h2>Preview</h2>
+			<br>
+			<br>
+			<h2>Theme</h2>
+			<div style="display: flex; align-items: center; justify-content: flex-start;">
+				<div style="border: 3px solid #616effff; background-color: white; height: 75px; width: 75px; border-radius: 50px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+					<span style="font-size: 50px; color: black;" class="material-symbols-rounded">light_mode</span>
+				</div>
+				<div style="border: 3px solid #616effff; background-color: var(--dark-color); height: 75px; width: 75px; border-radius: 50px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+					<span style="font-size: 60px; color: var(--lightLight-color);" class="material-symbols-rounded">dark_mode</span>
+				</div>
+			</dvi>
+			`;
+			console.log(settingsContent.innerHTML);
+			break;
 		case "accessibility":
-
+			settingsContent.innerHTML = `
+			<h1 style="margin-top: 0px;">Accessibility</h1>
+			`;
+			console.log(settingsContent.innerHTML);
+			break;
 		case "voice&video":
-
+			settingsContent.innerHTML = `
+			<h1 style="margin-top: 0px;">Voice & Video</h1>
+			`;
+			console.log(settingsContent.innerHTML);
+			break;
 		case "chat":
-
+			settingsContent.innerHTML = `
+			<h1 style="margin-top: 0px;">Chat</h1>
+			`;
+			console.log(settingsContent.innerHTML);
+			break;
 		case "keybinds":
-
+			settingsContent.innerHTML = `
+			<h1 style="margin-top: 0px;">Keybinds</h1>
+			`;
+			console.log(settingsContent.innerHTML);
+			break;
 		case "language":
-
+			settingsContent.innerHTML = `
+			<h1 style="margin-top: 0px;">Language</h1>
+			`;
+			console.log(settingsContent.innerHTML);
+			break;
 		case "advanced":
-			
+			settingsContent.innerHTML = `
+			<h1 style="margin-top: 0px;">Advanced</h1>
+			`;
+			console.log(settingsContent.innerHTML);
+			break;
+		default:
+			settingsContent.innerHTML = `
+			<h1 style="margin-top: 0px;">This Should Not Be Here</h1>
+			`;
+			console.log(settingsContent.innerHTML);
+			break;
 	}
 }
 

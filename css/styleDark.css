@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100../900;1,100../900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300../800;1,300../800&display=swap');
 
 :root{
     --dark-color: #1f2022ff;
@@ -223,7 +223,7 @@ p{
     height: 9px;
     padding-left: 10px;
     width: 85px;
-    content: url("images/textIcon.png");
+    content: url("../.images/textIcon.png");
 }
 
 .mainSection{
@@ -238,7 +238,6 @@ p{
     top: 0px;
     width: 100vw;
     height: 100vh;
-    height: 1px;
     overflow: hidden;
 }
 
@@ -489,7 +488,7 @@ p{
 
 .unSeenMessage{
     float: left;
-    content: url(images/unSeenMessage.png);
+    content: url("../images/unSeenMessage.png");
     height: 8px;
     width: 8px;
     margin-top: 27.5px;
@@ -498,7 +497,7 @@ p{
 
 .unSeenMessageHovered{
     float: left;
-    content: url(images/unSeenMessageHovered.png);
+    content: url("../images/unSeenMessageHovered.png");
     height: 24px;
     width: 8px;
     margin-top: 20px;
@@ -507,7 +506,7 @@ p{
 
 .SeenMessage{
     float: left;
-    content: url(images/unSeenMessage.png);
+    content: url("../images/unSeenMessage.png");
     height: 0px;
     width: 0px;
     margin-top: 30px;
@@ -516,7 +515,7 @@ p{
 
 .SeenMessageHovered{
     float: left;
-    content: url(images/unSeenMessageHovered.png);
+    content: url("../images/unSeenMessageHovered.png");
     height: 24px;
     width: 8px;
     margin-top: 25px;
@@ -561,11 +560,11 @@ p{
 }
 
 .dmButton{
-    background-image: url(images/dmIcon.png);
+    background-image: url("../images/dmIcon.png");
 }
 
 .dmButton:hover{
-    background-image: url(images/dmHoveredIcon.png);
+    background-image: url("../images/dmHoveredIcon.png");
 }
 
 .DmThread{
@@ -608,19 +607,19 @@ p{
 }
 
 .createServerButton{
-    background-image: url(images/createServerIcon.png);
+    background-image: url("../images/createServerIcon.png");
 }
 
 .createServerButton:hover{
-    background-image: url(images/createServerHoveredIcon.png);
+    background-image: url("../images/createServerHoveredIcon.png");
 }
 
 .exploreServersButton{
-    background-image: url(images/exploreServersIcon.png);
+    background-image: url("../images/exploreServersIcon.png");
 }
 
 .exploreServersButton:hover{
-    background-image: url(images/exploreServersHoveredIcon.png);
+    background-image: url("../images/exploreServersHoveredIcon.png");
 } 
 
 .MessageList{
@@ -890,6 +889,7 @@ p{
     font-size: 12px;
     margin-left: 5px;
     margin-bottom: 5px;
+    font-weight: 700;
 }
 
 .settingsMenuItem:hover{
@@ -903,6 +903,7 @@ p{
 .settingsMenuItemText{
     font-weight: 600;
     color: rgb(207, 207, 207);
+    font-size: 16px;
 }
 
 .settingsMenuItemGroup{
