@@ -219,12 +219,12 @@
 						<h3 class="settingsMenuItemTitle">
 							USER SETTINGS
 						</h3>
-						<button id="myAccount" class="settingsMenuItem">
+						<button id="myAccount" class="settingsMenuItem" onclick="changeSettingsContent(this.id)">
 							<h2 class="settingsMenuItemText">
 								My Account
 							</h2>
 						</button>
-						<button class="settingsMenuItem">
+						<button id="profiles" class="settingsMenuItem" onclick="changeSettingsContent(this.id)">
 							<h2 class="settingsMenuItemText">
 								Profiles
 							</h2>
@@ -235,37 +235,37 @@
 						<h3 class="settingsMenuItemTitle">
 							APP SETTINGS
 						</h3>
-						<button class="settingsMenuItem">
+						<button id="appearance" class="settingsMenuItem" onclick="changeSettingsContent(this.id)">
 							<h2 class="settingsMenuItemText">
 								Appearance
 							</h2>
 						</button>
-						<button class="settingsMenuItem">
+						<button id="accessibility" class="settingsMenuItem" onclick="changeSettingsContent(this.id)">
 							<h2 class="settingsMenuItemText">
 								Accessibility
 							</h2>
 						</button>
-						<button class="settingsMenuItem">
+						<button id="voice&video" class="settingsMenuItem" onclick="changeSettingsContent(this.id)">
 							<h2 class="settingsMenuItemText">
 								Voice & Video
 							</h2>
 						</button>
-						<button class="settingsMenuItem">
+						<button id="chat" class="settingsMenuItem" onclick="changeSettingsContent(this.id)">
 							<h2 class="settingsMenuItemText">
 								Chat
 							</h2>
 						</button>
-						<button class="settingsMenuItem">
+						<button id="keybinds" class="settingsMenuItem" onclick="changeSettingsContent(this.id)">
 							<h2 class="settingsMenuItemText">
 								Keybinds
 							</h2>
 						</button>
-						<button class="settingsMenuItem">
+						<button id="language" class="settingsMenuItem" onclick="changeSettingsContent(this.id)">
 							<h2 class="settingsMenuItemText">
 								Language
 							</h2>
 						</button>
-						<button class="settingsMenuItem">
+						<button id="advanced" class="settingsMenuItem" onclick="changeSettingsContent(this.id)">
 							<h2 class="settingsMenuItemText">
 								Advanced
 							</h2>
@@ -284,19 +284,7 @@
 			</div>
 			<div class="settingsContent">
 				<div class="mainSettingsContent">
-					<h1>My Account</h1>
-					<div class="accountInfoViewer">
-						<div class="accountInfoViewerColorBar">
-						</div>
-						<div class="AccountInfo">
-							<div class="genericInfoBar">
-								<img class="pfp" src="./images/dmIcon.png">
-								<h2>
-									UserName
-								</h2>
-							</div>
-						</div>
-					</div>
+					this shouldn't be here
 				</div>
 				<button class="settingsCloseButton" onclick="closeSettings()">
 					<span id="settingsCloseIcon" class="material-symbols-outlined">cancel</span>

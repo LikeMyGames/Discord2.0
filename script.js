@@ -180,7 +180,8 @@ async function closeSettings(){
 	let main = document.querySelector(".main");
 	let settings = document.querySelector(".settings");
 	main.style.zIndex = "1";
-	settings.style.zIndex = "-1";
+	settings.style.zIndex = "-2";
+	console.log("test");
 }
 
 async function useWithoutAccount(){
@@ -488,6 +489,44 @@ async function openDMs(){
 		})
 		.then(data => loadDMs(data))
 		.catch(error => console.error(error));
+}
+
+async function changeSettingsContent(id){
+	let settingsContent = document.querySelector(".mainSettingsContent");
+	switch(id){
+		case "myAccount":
+			settingsContent.innerHTML = `
+			<h1>My Account</h1>
+			<div class="accountInfoViewer">
+				<div class="accountInfoViewerColorBar">
+				</div>
+				<div class="AccountInfo">
+					<div class="genericInfoBar">
+						<img class="pfp" src="./images/dmIcon.png">
+						<h2>
+							UserName
+						</h2>
+					</div>
+				</div>
+			</div>
+			`
+		case "profiles":
+
+		case "appearance":
+
+		case "accessibility":
+
+		case "voice&video":
+
+		case "chat":
+
+		case "keybinds":
+
+		case "language":
+
+		case "advanced":
+			
+	}
 }
 
 function createMessage(user, pfp, date, time, body){
