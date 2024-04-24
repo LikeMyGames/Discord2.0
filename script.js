@@ -66,7 +66,7 @@ function toggleFullscreen(){
 
 // Function to open fullscreen
 function openFullscreen() {
-	let elem = document.querySelector("body");
+	let elem = document.documentElement;
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
     } else if (elem.webkitRequestFullscreen) {
