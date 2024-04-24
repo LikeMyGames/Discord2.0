@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 :root{
     --dark-color: #1f2022ff;
     --darkLight-color: #2b2d31ff;
@@ -7,7 +10,7 @@
 
 *{
     box-sizing: border-box;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 html, body{
@@ -28,16 +31,24 @@ body {
 
 h1{
     color: #ffffffff;
+    font-weight: 800;
 }
 
 h2{
     color: #ffffffff;
     font-size: 15px;
+    font-weight: 700;
 }
 
 h3{
     color: #868c94ff;
     font-size: 10px;
+    font-weight: 600;
+}
+
+p{
+    color: white;
+    font-weight: 500;
 }
 
 .welcome{
@@ -114,7 +125,45 @@ h3{
     font-size: 85px;
 }
 
+.welcomeFullscreen, .welcomeFullscreen:hover, .welcomeFullscreen:active, .welcomeFullscreen:focus{
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00000000;
+}
 
+.welcomeFullscreenButton, .welcomeFullscreenButton:hover, .welcomeFullscreenButton:active, .welcomeFullscreenButton:focus{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00000000;
+    border: none;
+}
+
+#welcomeFullscreenIcon, #welcomeFullscreenIcon:focus{
+    color: white;
+    font-size: 70px;
+    transition: .25s;
+    background-color: #00000000;
+}
+
+.welcomeFullscreenButton #welcomeFullscreenIcon:hover{
+    transition: .125s;
+    font-size: 75px;
+    background-color: #00000000;
+}
+
+.welcomeFullscreenButton #welcomeFullscreenIcon:active{
+    font-size: 65px;
+    background-color: #00000000;
+}
 
 .useOptions{
     align-self: center;
@@ -716,7 +765,7 @@ p{
     padding-left: 0px;
     width: 150px;
     font-size: 14px;
-    font-weight: 100;
+    font-weight: 400;
     align-self: flex-start;
 }
 
@@ -851,7 +900,7 @@ p{
 }
 
 .settingsMenuItemText{
-    font-weight: 500;
+    font-weight: 600;
     color: rgb(207, 207, 207);
 }
 
@@ -894,7 +943,7 @@ p{
     color: rgb(207, 207, 207);
     font-size: 13px;
     margin: 0px;
-    font-weight: 300;
+    font-weight: 900;
 }
 
 .accountInfoViewer{
@@ -1089,6 +1138,25 @@ p{
     .loginActionGroup h2{
         font-size: 30px;
         margin: 10px;
+    }
+
+    .welcomeFullscreen, .welcomeFullscreen:hover, .welcomeFullscreen:active, .welcomeFullscreen:focus{
+        top: 3px;
+        right: 3px;
+        height: 45px;
+        width: 45px;
+    }
+    
+    #welcomeFullscreenIcon, #welcomeFullscreenIcon:focus{
+        font-size: 40px;
+    }
+    
+    .welcomeFullscreenButton #welcomeFullscreenIcon:hover{
+        font-size: 45px;
+    }
+    
+    .welcomeFullscreenButton #welcomeFullscreenIcon:active{
+        font-size: 35px;
     }
 
 }

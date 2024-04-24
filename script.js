@@ -5,13 +5,12 @@
 var user = {};
 openWelcome();
 var activeMessageThread = false;
-console.log(gmtISOToLocal(new Date().toISOString()));
-console.log(gmtToLocal(new Date().toISOString().substring(28, 31)));
 var messageThreadMessages = [];
 var peer;
 var conn;
 var inputMute = false;
 var outputMute = false;
+var fullscreened = false;
 
 const messageInput = document.querySelector("#MessageInputText");
 messageInput.addEventListener("keydown", (e) => {
@@ -54,6 +53,43 @@ createAccountUserInput.addEventListener("keydown", (e) => {
 		createAccountPassInput.focus();
 	}
 });
+
+function toggleFullscreen(){
+	if(fullscreened){
+		closeFullscreen();
+	}
+	else{
+		openFullscreen();
+	}
+	fullscreened = !fullscreened;
+}
+
+// Function to open fullscreen
+function openFullscreen() {
+	let elem = document.querySelector("body");
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+        // Safari
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+        // IE11
+        elem.msRequestFullscreen();
+    }
+}
+
+// Function to close fullscreen
+function closeFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        // Safari
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+        // IE11
+        document.msExitFullscreen();
+    }
+}
 
 function gmtISOToLocal(time){
 	let localTime = new Date().toString().substring(28,31);
