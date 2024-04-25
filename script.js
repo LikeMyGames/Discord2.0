@@ -12,6 +12,7 @@ var conn;
 var inputMute = false;
 var outputMute = false;
 var fullscreened = false;
+var displayMode = "normal";
 
 const messageInput = document.querySelector("#MessageInputText");
 messageInput.addEventListener("keydown", (e) => {
@@ -513,60 +514,102 @@ async function changeSettingsContent(id){
 			<h2>Preview</h2>
 			<br>
 			<br>
-			<h2>Theme</h2>
-			<div style="display: flex; align-items: center; justify-content: flex-start;">
-				<div style="border: 3px solid #616effff; background-color: white; height: 75px; width: 75px; border-radius: 50px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
-					<span style="font-size: 50px; color: black;" class="material-symbols-rounded">light_mode</span>
-				</div>
-				<div style="border: 3px solid #616effff; background-color: var(--dark-color); height: 75px; width: 75px; border-radius: 50px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
-					<span style="font-size: 60px; color: var(--lightLight-color);" class="material-symbols-rounded">dark_mode</span>
-				</div>
-			</dvi>
+			<h2 class="settingsContentGroupTitle">THEME</h2>
+			<div class="themes">
+				<button class="themeOption lightMode" onclick="console.log(this.is)" title="Light">
+					<span id="lightModeIcon" class="material-symbols-rounded">light_mode</span>
+				</button>
+				<button class="themeOption darkMode" onclick="console.log(this.is)" title="Dark">
+					<span id="darkModeIcon" class="material-symbols-rounded">dark_mode</span>
+				</button>
+			</div>
+			<br>
+			<br>
+			<h2 class="settingsContentGroupSubTitle">Color</h2>
+			<h3>Coming soon hopefully</h3>
+			<hr class="settingsContentGroupSeperator">
+			<h2 class="settingsContentGroupSubTitle">In-app Icon</h2>
+			<h3>Coming soon hopefully</h3>
+			<br>
+			<hr class="settingsContentGroupSeperator">
+			<br>
+			<h2 class="settingsContentGroupTitle">MESSAGE DISPLAY</h2>
+			<h3>This doesn't work yet, but it looks cool</h3>
+			<button id="normal" class="messageMode" onclick="switchMessageDisplayType(this.id)">
+				<span class="material-symbols-outlined" id="messageModeSelectorIcon">radio_button_checked</span>
+				<h2 class="messageModeSelectorText">Cozy: Modern, beautiful, and easy on you eyes (for the most part).</h2>
+			</button>
+			<button id="compact" class="messageMode"  onclick="switchMessageDisplayType(this.id)">
+				<span class="material-symbols-outlined" id="messageModeSelectorIcon">radio_button_unchecked</span>
+				<h2 class="messageModeSelectorText">Compact: Fit more messages on screen at one time.  #IRC (I hope I can get this to work)</h2>
+			</button>
+			<hr class="settingsContentGroupSeperator">
 			`;
-			console.log(settingsContent.innerHTML);
 			break;
 		case "accessibility":
 			settingsContent.innerHTML = `
 			<h1 style="margin-top: 0px;">Accessibility</h1>
 			`;
-			console.log(settingsContent.innerHTML);
 			break;
 		case "voice&video":
 			settingsContent.innerHTML = `
 			<h1 style="margin-top: 0px;">Voice & Video</h1>
 			`;
-			console.log(settingsContent.innerHTML);
 			break;
 		case "chat":
 			settingsContent.innerHTML = `
 			<h1 style="margin-top: 0px;">Chat</h1>
 			`;
-			console.log(settingsContent.innerHTML);
 			break;
 		case "keybinds":
 			settingsContent.innerHTML = `
 			<h1 style="margin-top: 0px;">Keybinds</h1>
 			`;
-			console.log(settingsContent.innerHTML);
 			break;
 		case "language":
 			settingsContent.innerHTML = `
 			<h1 style="margin-top: 0px;">Language</h1>
 			`;
-			console.log(settingsContent.innerHTML);
 			break;
 		case "advanced":
 			settingsContent.innerHTML = `
 			<h1 style="margin-top: 0px;">Advanced</h1>
 			`;
-			console.log(settingsContent.innerHTML);
 			break;
 		default:
 			settingsContent.innerHTML = `
 			<h1 style="margin-top: 0px;">This Should Not Be Here</h1>
 			`;
-			console.log(settingsContent.innerHTML);
 			break;
+	}
+}
+
+function switchMessageDisplayType(id){
+	if(id === "normal"){
+		if(displayMode === "normal"){
+			console.log("display mode is already on normal");
+		}
+		else{
+			console.log("switching to normal display mode");
+			let normalDisplayIcon = document.querySelector("button#normal.messageMode span");
+			normalDisplayIcon.innerHTML = "radio_button_checked";
+			let compactDisplayIcon = document.querySelector("button#compact.messageMode span");
+			compactDisplayIcon.innerHTML = "radio_button_unchecked";
+			displayMode = "normal";
+		}
+	}
+	else if(id === "compact"){
+		if(displayMode === "compact"){
+			console.log("display mode is already on compact");
+		}
+		else{
+			console.log("switching to compact display mode");
+			let normalDisplayIcon = document.querySelector("button#normal.messageMode span");
+			normalDisplayIcon.innerHTML = "radio_button_unchecked";
+			let compactDisplayIcon = document.querySelector("button#compact.messageMode span");
+			compactDisplayIcon.innerHTML = "radio_button_checked";
+			displayMode = "compact";
+		}
 	}
 }
 
