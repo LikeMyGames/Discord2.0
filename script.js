@@ -534,14 +534,14 @@ async function changeSettingsContent(id){
 			<hr class="settingsContentGroupSeperator">
 			<br>
 			<h2 class="settingsContentGroupTitle">MESSAGE DISPLAY</h2>
-			<h3>This doesn't work yet, but it looks cool</h3>
+			<h3>This doesn't work yet, but it looks cool  (I really hope that I can get this to work)</h3>
 			<button id="normal" class="messageMode" onclick="switchMessageDisplayType(this.id)">
 				<span class="material-symbols-outlined" id="messageModeSelectorIcon">radio_button_checked</span>
 				<h2 class="messageModeSelectorText">Cozy: Modern, beautiful, and easy on you eyes (for the most part).</h2>
 			</button>
 			<button id="compact" class="messageMode"  onclick="switchMessageDisplayType(this.id)">
 				<span class="material-symbols-outlined" id="messageModeSelectorIcon">radio_button_unchecked</span>
-				<h2 class="messageModeSelectorText">Compact: Fit more messages on screen at one time.  #IRC (I hope I can get this to work)</h2>
+				<h2 class="messageModeSelectorText">Compact: Fit more messages on screen at one time.  #IRC</h2>
 			</button>
 			<hr class="settingsContentGroupSeperator">
 			`;
