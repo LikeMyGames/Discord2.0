@@ -164,7 +164,6 @@ async function closeSettings(){
 	let settings = document.querySelector(".settings");
 	main.style.zIndex = "1";
 	settings.style.zIndex = "-2";
-	console.log("test");
 }
 
 async function useWithoutAccount(){
@@ -516,12 +515,16 @@ async function changeSettingsContent(id){
 			<br>
 			<h2 class="settingsContentGroupTitle">THEME</h2>
 			<div class="themes">
-				<button class="themeOption lightMode" onclick="console.log(this.is)" title="Light">
-					<span id="lightModeIcon" class="material-symbols-rounded">light_mode</span>
-				</button>
-				<button class="themeOption darkMode" onclick="console.log(this.is)" title="Dark">
-					<span id="darkModeIcon" class="material-symbols-rounded">dark_mode</span>
-				</button>
+				<div>
+					<button id="light" class="themeOption lightMode" onclick="changeTheme(this.id)" title="Light">
+						<span id="lightModeIcon" class="material-symbols-rounded">light_mode</span>
+					</button>
+				</div>
+				<div>
+					<button id="dark" class="themeOption darkMode selectedColorTheme" onclick="changeTheme(this.id)" title="Dark">
+						<span id="darkModeIcon" class="material-symbols-rounded">dark_mode</span>
+					</button>
+				</div>
 			</div>
 			<br>
 			<br>
@@ -610,6 +613,31 @@ function switchMessageDisplayType(id){
 			compactDisplayIcon.innerHTML = "radio_button_checked";
 			displayMode = "compact";
 		}
+	}
+}
+
+async function changeTheme(id){
+	let root = document.querySelector(':root');
+	let elem = document.querySelector(`#${id}`);
+	console.log(id);
+	switch(id){
+		case "light":
+			root.style.setProperty("--dark-color", "#CACACAFF");
+			root.style.setProperty("--darkLight-color", "#F5F5F5FF");
+			root.style.setProperty("--light-color", "lightgrey");
+			root.style.setProperty("--lightLight-color", "white");
+			console.log(elem.classList.contains("selectedColorTheme"));
+			if(!elem.classList.contains("selectedColorTheme")){
+				elem.classList.add("selectedColorTheme");
+			}
+		case "dark":
+			root.style.setProperty("--dark-color", "#1f2022ff");
+			root.style.setProperty("--darkLight-color", "#2b2d31ff");
+			root.style.setProperty("--light-color", "#303338ff");
+			root.style.setProperty("--lightLight-color", "#383a40ff");
+			if(elem.classList.contains("selectedColorTheme")){
+				elem.classList.add("selectedColorTheme");
+			}
 	}
 }
 
