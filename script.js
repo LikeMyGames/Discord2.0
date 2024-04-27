@@ -626,18 +626,19 @@ async function changeTheme(id){
 			root.style.setProperty("--darkLight-color", "#F5F5F5FF");
 			root.style.setProperty("--light-color", "lightgrey");
 			root.style.setProperty("--lightLight-color", "white");
-			console.log(elem.classList.contains("selectedColorTheme"));
-			if(!elem.classList.contains("selectedColorTheme")){
-				elem.classList.add("selectedColorTheme");
+			for (let elem of document.getElementsByClassName('selectedColorTheme')) {
+				elem.classList.remove('selectedColorTheme');
 			}
+			elem.classList.add("selectedColorTheme");
 		case "dark":
 			root.style.setProperty("--dark-color", "#1f2022ff");
 			root.style.setProperty("--darkLight-color", "#2b2d31ff");
 			root.style.setProperty("--light-color", "#303338ff");
 			root.style.setProperty("--lightLight-color", "#383a40ff");
-			if(elem.classList.contains("selectedColorTheme")){
-				elem.classList.add("selectedColorTheme");
+			for (let elem of document.getElementsByClassName('selectedColorTheme')) {
+			    elem.classList.remove('selectedColorTheme');
 			}
+			elem.classList.add("selectedColorTheme");
 	}
 }
 
