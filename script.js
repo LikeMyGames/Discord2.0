@@ -511,6 +511,9 @@ async function changeSettingsContent(id){
 			<h1 style="margin-top: 0px;">Appearance</h1>
 			<br>
 			<h2>Preview</h2>
+			<div class="settingsAppearancePreview">
+				
+			</div>
 			<br>
 			<br>
 			<h2 class="settingsContentGroupTitle">THEME</h2>
@@ -548,6 +551,10 @@ async function changeSettingsContent(id){
 			</button>
 			<hr class="settingsContentGroupSeperator">
 			`;
+			let preview = document.querySelector(".settingsAppearancePreview");
+			showPreviewMessage(preview, user.userName, user.pfp, "1/1/2024", new Date().toUTCString().substring(17), "this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test");
+			showPreviewMessage(preview, user.userName, user.pfp, "1/1/2024", new Date().toUTCString().substring(17), "this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test");
+			showPreviewMessage(preview, user.userName, user.pfp, "1/1/2024", new Date().toUTCString().substring(17), "this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test");
 			break;
 		case "accessibility":
 			settingsContent.innerHTML = `
@@ -617,28 +624,32 @@ function switchMessageDisplayType(id){
 }
 
 async function changeTheme(id){
-	let root = document.querySelector(':root');
+	let root = document.documentElement;
 	let elem = document.querySelector(`#${id}`);
 	console.log(id);
 	switch(id){
 		case "light":
 			root.style.setProperty("--dark-color", "#CACACAFF");
 			root.style.setProperty("--darkLight-color", "#F5F5F5FF");
-			root.style.setProperty("--light-color", "lightgrey");
-			root.style.setProperty("--lightLight-color", "white");
+			root.style.setProperty("--light-color", "white");
+			root.style.setProperty("--lightLight-color", "lightgrey");
+			root.style.setProperty("--text-color", "black");
 			for (let elem of document.getElementsByClassName('selectedColorTheme')) {
 				elem.classList.remove('selectedColorTheme');
 			}
 			elem.classList.add("selectedColorTheme");
+			break;
 		case "dark":
 			root.style.setProperty("--dark-color", "#1f2022ff");
 			root.style.setProperty("--darkLight-color", "#2b2d31ff");
 			root.style.setProperty("--light-color", "#303338ff");
 			root.style.setProperty("--lightLight-color", "#383a40ff");
+			root.style.setProperty("--text-color", "white");
 			for (let elem of document.getElementsByClassName('selectedColorTheme')) {
 			    elem.classList.remove('selectedColorTheme');
 			}
 			elem.classList.add("selectedColorTheme");
+			break;
 	}
 }
 
@@ -683,6 +694,27 @@ function createMessage(user, pfp, date, time, body){
 		</div>
 	`);
 	*/
+}
+
+function createPreviewMessage(user, pfp, date, time, body){
+	time = gmtToLocal(time);
+	return elementFromHTML(`
+		<div class="message">
+			<img class="messagePFP" id="message1PFP" style="content: url('images/dmIcon.png');">
+			<div style="display: flex; flex-direction: column; padding-left: 10px; ">
+				<div style="display: flex; overflow: hidden;">
+					<h2 class="messageUsername" id="message1Username">${user}</h2>
+					<h3 class="messageDate" id="message1Date">${date}</h3>
+					<h3 class="messageTime" id="message1Time">${time}</h3>
+				</div>
+				<p class="messageText">${body}</p>
+			</div>
+		</div>
+	`);
+}
+
+function showPreviewMessage(previewDisplay, user, pfp, date, time, body){
+	previewDisplay.append(createPreviewMessage(user, pfp, date, time, body));
 }
 
 function elementFromHTML(html){
