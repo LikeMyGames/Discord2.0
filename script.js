@@ -3,6 +3,15 @@
 //import { Peer } from "peerjs";
 //import {Peer} from "https://esm.sh/peerjs@1.5.2?bundle-deps"
 console.log(document.head.innerHTML);
+if(localStorage.getItem("user") != null && localStorage.getItem("pass") != null){
+	let userInput = document.querySelector("#userNameInput");
+	let passInput = document.querySelector("#passwordInput");
+	userInput.value = localStorage.getItem("user");
+	passInput.value = localStorage.getItem("pass");
+	login();
+}
+if(localStorage.getItem("theme") != null)
+	changeTheme(localStorage.getItem("theme"));
 var user = {};
 openWelcome();
 var activeMessageThread = false;
@@ -170,11 +179,12 @@ async function useWithoutAccount(){
 
 }
 
-
 //need to fix peer js import into file
 async function login(){
 	let username = document.querySelector("#userNameInput").value;
 	let pass = document.querySelector("#passwordInput").value;
+	localStorage.setItem("user", username);
+	localStorage.setItem("pass", pass);
 	if(!(username === "" || pass === "")){
 		fetch(`./users/${username}.json`)
 			.then(res => {
@@ -498,13 +508,11 @@ async function changeSettingsContent(id){
 				</div>
 			</div>
 			`;
-			console.log(settingsContent.innerHTML);
 			break;
 		case "profile":
 			settingsContent.innerHTML = `
 			<h1 style="margin-top: 0px;">Profile</h1>
 			`;
-			console.log(settingsContent.innerHTML);
 			break;
 		case "appearance":
 			settingsContent.innerHTML = `
@@ -525,9 +533,19 @@ async function changeSettingsContent(id){
 				</div>
 				<div>
 					<button id="dark" class="themeOption darkMode selectedColorTheme" onclick="changeTheme(this.id)" title="Dark">
-						<span id="darkModeIcon" class="material-symbols-rounded">dark_mode</span>
+						<span id="darkModeIcon" class="material-symbols-rounded">
+							dark_mode
+						</span>
 					</button>
 				</div>
+				<div>
+					<button id="add" class="themeOption darkMode" onclick="createCustomTheme()" title="Add Theme">
+						<span id="darkModeIcon" class="material-symbols-rounded">add</span>
+					</button>
+				</div>
+			</div>
+			<div class="customTheme">
+
 			</div>
 			<br>
 			<br>
@@ -555,6 +573,7 @@ async function changeSettingsContent(id){
 			showPreviewMessage(preview, user.userName, user.pfp, "1/1/2024", new Date().toUTCString().substring(17), "this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test");
 			showPreviewMessage(preview, user.userName, user.pfp, "1/1/2024", new Date().toUTCString().substring(17), "this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test");
 			showPreviewMessage(preview, user.userName, user.pfp, "1/1/2024", new Date().toUTCString().substring(17), "this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test this is a test");
+			changeTheme(localStorage.getItem("theme"));
 			break;
 		case "accessibility":
 			settingsContent.innerHTML = `
@@ -624,6 +643,9 @@ function switchMessageDisplayType(id){
 }
 
 async function changeTheme(id){
+	if(id == null){
+		return;
+	}
 	let root = document.documentElement;
 	let elem = document.querySelector(`#${id}`);
 	console.log(id);
@@ -638,6 +660,7 @@ async function changeTheme(id){
 				elem.classList.remove('selectedColorTheme');
 			}
 			elem.classList.add("selectedColorTheme");
+			localStorage.setItem("theme", "light");
 			break;
 		case "dark":
 			root.style.setProperty("--dark-color", "#1f2022ff");
@@ -649,6 +672,10 @@ async function changeTheme(id){
 			    elem.classList.remove('selectedColorTheme');
 			}
 			elem.classList.add("selectedColorTheme");
+			localStorage.setItem("theme", "dark");
+			break;
+		default:
+			changeTheme("dark");
 			break;
 	}
 }
@@ -715,6 +742,40 @@ function createPreviewMessage(user, pfp, date, time, body){
 
 function showPreviewMessage(previewDisplay, user, pfp, date, time, body){
 	previewDisplay.append(createPreviewMessage(user, pfp, date, time, body));
+}
+
+async function createCustomTheme(){
+	let options = openThemeColorPicker();
+}
+
+async function addCustomTheme(options){
+	let themes = document.querySelector(".customThemes");
+	themes.append(elementFromHTML(`
+		<button id="dark" class="themeOption darkMode customTheme selectedColorTheme" onclick="changeTheme(this.id)" title="Dark">
+			<span id="darkModeIcon" class="material-symbols-rounded icon">
+				dark_mode
+				<span id="before" class="material-symbols-rounded" onclick="console.log(id)">more_horiz</span> 
+			</span>
+		</button>
+	`));
+}
+
+async function openThemeColorPicker(){
+	let body = document.querySelector("body");
+	body.append(elementFromHTML(`
+		<div class="editTheme" >
+			<div class="editThemeBox" >
+				<div class="editThemeTitle">
+					<input type="text" class="editThemeTitleText" id="themeTitle" readonly="on">
+				</div>
+				<buttton class="editThemeSaveButton" >
+					<h2 class="editThemeSaveButtonText" >
+						Save
+					</h2>
+				</button>
+			</div>
+		</div>
+	`));
 }
 
 function elementFromHTML(html){

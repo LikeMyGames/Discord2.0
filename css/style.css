@@ -492,7 +492,8 @@ p{
 }
 
 .messageText{
-    font-size: 15px
+    font-size: 15px;
+    color: var(--text-color);
 }
 
 .unSeenMessage{
@@ -1091,19 +1092,34 @@ p{
     content: "check";
     color: white;
     position: absolute;
-    left: calc(100% - 13px);
-    bottom: calc(100% - 13px);
+    right: -7px;
+    top: -7px;
     background-color: #616effff;
     font-size: 18px;
     font-weight: 600;
     height: 20px;
     width: 20px;
-    
     border-radius: 100px;
 }
 
-.selectedColorTheme:after span{
-    content: "check";
+.customTheme span#before{
+    display: none;
+}
+
+.customTheme:hover span#before{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    position: absolute;
+    left: -7px;
+    top: -7px;
+    background-color: #616effff;
+    font-size: 18px;
+    font-weight: 600;
+    height: 20px;
+    width: 20px;
+    border-radius: 100px;
 }
 
 #darkModeIcon{
@@ -1126,6 +1142,65 @@ p{
     height: 200px;
     border-radius: 25px;
     overflow: hidden;
+}
+
+.editTheme{
+    display: flex;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.editThemeBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-color);
+    height: 60vh;
+    width: 60vw;
+    border-radius: 50px;
+}
+
+.editThemeSaveButton{
+    justify-self:right;
+    align-self: flex-end;
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #616effff;
+    border-radius: 20px;
+}
+
+.editThemeSaveButtonText{
+    margin: 0px;
+    font-size: 50px;
+    color: var(--text-color);
+}
+
+.editThemeTitle{
+    align-self: flex-start;
+    justify-self: center;
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.editThemeTitleText, .editThemeTitleText:focus, .editThemeTitleText:active, .editThemeTitleText:hover{
+    background-color: #00000000;
+    border: none;
+    font-size: 40px;
+    margin: 20px;
 }
 
 @media screen and (max-width: 1180px), (max-height: 820px), (max-width: 820px), (max-height: 1180px){
