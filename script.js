@@ -12,6 +12,9 @@ if(localStorage.getItem("user") != null && localStorage.getItem("pass") != null)
 }
 if(localStorage.getItem("theme") != null)
 	changeTheme(localStorage.getItem("theme"));
+if(localStorage.getItem("customThemes") == null){
+	localStorage.setItem("customThemes", []);
+}
 var user = {};
 openWelcome();
 var activeMessageThread = false;
@@ -539,7 +542,7 @@ async function changeSettingsContent(id){
 					</button>
 				</div>
 				<div>
-					<button id="add" class="themeOption darkMode" onclick="createCustomTheme()" title="Add Theme">
+					<button id="add" class="themeOption darkMode" onclick="openThemeColorPicker()" title="Add Theme">
 						<span id="darkModeIcon" class="material-symbols-rounded">add</span>
 					</button>
 				</div>
@@ -661,7 +664,7 @@ async function changeTheme(id){
 			}
 			elem.classList.add("selectedColorTheme");
 			localStorage.setItem("theme", "light");
-			break;
+			return;
 		case "dark":
 			root.style.setProperty("--dark-color", "#1f2022ff");
 			root.style.setProperty("--darkLight-color", "#2b2d31ff");
@@ -673,10 +676,12 @@ async function changeTheme(id){
 			}
 			elem.classList.add("selectedColorTheme");
 			localStorage.setItem("theme", "dark");
-			break;
+			return;
 		default:
+			let customThemes = localStorage.getItem("customThemes");
+			console.log(customThemes)
 			changeTheme("dark");
-			break;
+			return;
 	}
 }
 
@@ -744,35 +749,51 @@ function showPreviewMessage(previewDisplay, user, pfp, date, time, body){
 	previewDisplay.append(createPreviewMessage(user, pfp, date, time, body));
 }
 
-async function createCustomTheme(){
-	let options = openThemeColorPicker();
-}
-
-async function addCustomTheme(options){
-	let themes = document.querySelector(".customThemes");
+async function addCustomTheme(){
+	let dark = document.querySelector(".colorPicker#darkPicker").value;
+	let darkLight = document.querySelector(".colorPicker#darkPicker").value;
+	let light = document.querySelector(".colorPicker#darkPicker").value;
+	let lightLight = document.querySelector(".colorPicker#darkPicker").value;
+	let text = document.querySelector(".colorPicker#textPicker").value;
+	let title = document.querySelector(".editThemeTitleText#themeTitle").value;
+	let colorPickers = document.querySelector(".editTheme");
+	console.log("adding " + title)
+	let themes = document.querySelector(".customTheme");
 	themes.append(elementFromHTML(`
-		<button id="dark" class="themeOption darkMode customTheme selectedColorTheme" onclick="changeTheme(this.id)" title="Dark">
-			<span id="darkModeIcon" class="material-symbols-rounded icon">
+		<button id="dark" class="themeOption darkMode customTheme selectedColorTheme" onclick="changeTheme(this.id)" title="${title}">
+			<span id="customThemeIcon" class="material-symbols-rounded icon">
 				dark_mode
 				<span id="before" class="material-symbols-rounded" onclick="console.log(id)">more_horiz</span> 
 			</span>
 		</button>
 	`));
+	localStorage.getItem("customThemes").push({});
+	colorPickers.remove();
 }
 
 async function openThemeColorPicker(){
 	let body = document.querySelector("body");
 	body.append(elementFromHTML(`
-		<div class="editTheme" >
-			<div class="editThemeBox" >
+		<div class="editTheme">
+			<div class="editThemeBox">
 				<div class="editThemeTitle">
-					<input type="text" class="editThemeTitleText" id="themeTitle" readonly="on">
+					<input type="text" class="editThemeTitleText" id="themeTitle" value="Untitled">
 				</div>
-				<buttton class="editThemeSaveButton" >
-					<h2 class="editThemeSaveButtonText" >
+				<button class="editThemeSaveButton" onclick="addCustomTheme()">
+					<h2 class="editThemeSaveButtonText">
 						Save
 					</h2>
 				</button>
+				<input class="colorPicker" type="color" value="#1f2022" id="darkPicker">
+				<input class="colorPicker" type="color" value="#2b2d31" id="darkLightPicker">
+				<input class="colorPicker" type="color" value="#303338" id="lightPicker">
+				<input class="colorPicker" type="color" value="#383a40" id="lightLightPicker">
+				<h2 style="grid-row: 2 / 3; grid-column: 1 / 2; justify-self: center; align-self: flex-start; margin-top: 210px; font-size: 30px;">Darkest</h2>
+				<h2 style="grid-row: 2 / 3; grid-column: 2 / 3; justify-self: center; align-self: flex-start; margin-top: 210px; font-size: 30px;">Dark</h2>
+				<h2 style="grid-row: 2 / 3; grid-column: 3 / 4; justify-self: center; align-self: flex-start; margin-top: 210px; font-size: 30px;">Light</h2>
+				<h2 style="grid-row: 2 / 3; grid-column: 4 / 5; justify-self: center; align-self: flex-start; margin-top: 210px; font-size: 30px;">Lightest</h2>
+				<input class="colorPicker" type="color" value="#ffffff" id="textPicker">
+				<h2 style="grid-row: 2 / 3; grid-column: 1 / 2; justify-self: center; align-self: flex-end;  margin-bottom: 5px; font-size: 30px;">Text Color</h2>
 			</div>
 		</div>
 	`));
