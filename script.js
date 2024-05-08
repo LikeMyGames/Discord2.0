@@ -25,6 +25,7 @@ var inputMute = false;
 var outputMute = false;
 var fullscreened = false;
 var displayMode = "normal";
+var mode = "normal";
 
 const messageInput = document.querySelector("#MessageInputText");
 messageInput.addEventListener("keydown", (e) => {
@@ -179,7 +180,42 @@ async function closeSettings(){
 }
 
 async function useWithoutAccount(){
+	user = {"userName": 'Anonymous', "pfp": './images/dmIcon.png', "id": generateRandHex(4)}
+	console.log(user);
+	let welcome = document.querySelector(".welcome");
+	let main = document.querySelector(".main");
+	welcome.style.zIndex = "-1";
+	main.style.zIndex = "1";
+	mode = "noAccount";
+	let accountInfoUsername = document.querySelector("#accountInfoUser");
+	accountInfoUsername.textContent = user.userName;
+	let messageList = document.querySelector(".MessageList");
+	messageList.appendChild(elementFromHTML(`
+	<button class="addDMButton" onclick="addDMChat()">
+		<span class="material-symbols-rounded">add</span>
+	</button>
+	`))
+}
 
+async function addDMChat(){
+	let body = document.querySelector("body")
+	body.appendChild(elementFromHTML(`
+		<div style="z-index: 2; display: flex; justify-content: center; align-items: center; position: absolute; left: 0vw; top: 0vh; width: 100vw; height: 100vh; backdrop-filter: blur(10px);" >
+			<div style="background-color: var(--darkLight-color); display: flex; justify-content: center; align-items: center; border-radius: 50px; height: 40vh; width: 50vw; border: solid var(--dark-color) 10px;">
+				<label style="color: white;" for="idInput">ID: </label>
+				<input id="idInput" type="text" name="idInput">
+			</div>
+		</div>
+	`))
+	let idInput = document.querySelector("#idInput")
+	idInput.addEventListener("keydown", (e) => {
+		if(e.code === "Enter"){
+			e.preventDefault();
+			if(activeMessageThread){
+				let messageList = document.querySelector(".messageList")
+			}
+		}
+	})
 }
 
 //need to fix peer js import into file

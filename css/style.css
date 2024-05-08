@@ -638,6 +638,25 @@ p{
     grid-column: 2 / 3;
 }
 
+.addDMButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    font-weight: 800;
+    font-size: 25px;
+    width: 90%;
+    height: 5%;
+    margin: 5%;
+    background-color: var(--light-color);
+    border: solid var(--dark-color) 5px;
+    border-radius: 10px;
+}
+
+.addDMButton span{
+    font-size: 65px; 
+}
+
 .MessageThread{
     background-color: var(--light-color);
     overflow-wrap: break-word;
