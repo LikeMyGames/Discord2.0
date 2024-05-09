@@ -180,7 +180,9 @@ async function closeSettings(){
 }
 
 async function useWithoutAccount(){
-	user = {"userName": 'Anonymous', "pfp": './images/dmIcon.png', "id": generateRandHex(4)}
+	let id = generateRandHex(4);
+	peer = new Peer(id)
+	user = {"userName": 'Anonymous', "pfp": './images/dmIcon.png', "id": id}
 	console.log(user);
 	let welcome = document.querySelector(".welcome");
 	let main = document.querySelector(".main");
@@ -200,22 +202,37 @@ async function useWithoutAccount(){
 async function addDMChat(){
 	let body = document.querySelector("body")
 	body.appendChild(elementFromHTML(`
-		<div style="z-index: 2; display: flex; justify-content: center; align-items: center; position: absolute; left: 0vw; top: 0vh; width: 100vw; height: 100vh; backdrop-filter: blur(10px);" >
+		<div id="addDmWindow" style="z-index: 2; display: flex; justify-content: center; align-items: center; position: absolute; left: 0vw; top: 0vh; width: 100vw; height: 100vh; backdrop-filter: blur(10px);" >
 			<div style="background-color: var(--darkLight-color); display: flex; justify-content: center; align-items: center; border-radius: 50px; height: 40vh; width: 50vw; border: solid var(--dark-color) 10px;">
-				<label style="color: white;" for="idInput">ID: </label>
-				<input id="idInput" type="text" name="idInput">
+				<label id="idInput" style="color: white;" for="idInput">ID: </label>
+				<input id="idInput" type="text" name="idInput" autocomplete="off">
 			</div>
 		</div>
 	`))
-	let idInput = document.querySelector("#idInput")
+	let idInput = document.querySelector("input#idInput")
 	idInput.addEventListener("keydown", (e) => {
 		if(e.code === "Enter"){
 			e.preventDefault();
-			if(activeMessageThread){
-				let messageList = document.querySelector(".messageList")
+			let input = idInput.value.toLowerCase();
+			if(input.length != 4){
+				alert("Input an ID that is in hexideciaml format and is 4 characters long");
+				return;
 			}
+			let messageList = document.querySelector(".MessageList");
+			let addDmWindow = document.querySelector("#addDmWindow");
+			addDmWindow.remove();
+			messageList.appendChild(elementFromHTML(`
+				<button class="DmThread" id="DM1" onclick="openDmFromID(${input})">
+					<img src="./images/dmIcon.png" class="DmPFP">
+					<h2 class="DmUserName">${input}</h2>
+				</button>
+			`))
 		}
 	})
+}
+
+async function openDmFromID(id){
+	console.log(id)
 }
 
 //need to fix peer js import into file

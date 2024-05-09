@@ -657,6 +657,25 @@ p{
     font-size: 65px; 
 }
 
+#idInput{
+    color: var(--text-color);
+    background-color: #00000000;
+    border: none;
+    font-size: 50px;
+    margin: 10px;
+}
+
+input#idInput, input#idInput:hover, input#idInput:focus, input#idInput:active{
+    font-size: 35px;
+    border: solid var(--dark-color) 10px;
+    border-radius: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    outline: none;
+}
+
 .MessageThread{
     background-color: var(--light-color);
     overflow-wrap: break-word;
