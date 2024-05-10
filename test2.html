@@ -64,6 +64,7 @@
             console.log(conn.label);
             conn.on('open', () => {
                 conn.on('data', (data) => {
+                    console.log(data + "sent")
                     logMessage(data);
                 })
             })

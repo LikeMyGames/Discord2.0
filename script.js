@@ -22,7 +22,7 @@ openWelcome();
 var activeMessageThread = false;
 var messageThreadMessages = [];
 var peer;
-var conn = [];
+var conn;
 var inputMute = false;
 var outputMute = false;
 var fullscreened = false;
@@ -188,15 +188,19 @@ async function useWithoutAccount(){
 	peer.on('open', (id) => {
 		alert("peer created with an id of " + id);
 	})
-	user = {"userName": 'Anonymous', "pfp": './images/dmIcon.png', "id": id}
-	console.log(user);
+	peer.on('connection', (connection) => {
+		conn = connection;
+		openConnection();
+		console.log(id + " recieving peer connection")
+	})
+	user = {userName: `Untitled (ID: ${id})`, pfp: './images/dmIcon.png', id: id}
 	let welcome = document.querySelector(".welcome");
 	let main = document.querySelector(".main");
 	welcome.style.zIndex = "-1";
 	main.style.zIndex = "1";
 	mode = "noAccount";
 	let accountInfoUsername = document.querySelector("#accountInfoUser");
-	accountInfoUsername.textContent = `Anonymous (ID: ${user.id})`;
+	accountInfoUsername.textContent = user.userName;
 	let messageList = document.querySelector(".MessageList");
 	messageList.appendChild(elementFromHTML(`
 	<button class="addDMButton" onclick="addDMChat()">
@@ -219,6 +223,7 @@ async function addDMChat(){
 	idInput.addEventListener("keydown", (e) => {
 		if(e.code === "Enter"){
 			e.preventDefault();
+
 			let input = idInput.value.toLowerCase();
 			if(input.length != 4){
 				alert("Input an ID that is in hexideciaml format and is 4 characters long");
@@ -227,39 +232,48 @@ async function addDMChat(){
 			let messageList = document.querySelector(".MessageList");
 			let addDmWindow = document.querySelector("#addDmWindow");
 			addDmWindow.remove();
-			messageList.appendChild(elementFromHTML(`
-				<button class="DmThread" id="DM1" onclick="openDmFromID(${input})">
+			if(messageList.querySelector(`#DM${input}`) == null){
+				messageList.appendChild(elementFromHTML(`
+				<button class="DmThread" id="DM${input}" onclick="openDmFromID('${input}')">
 					<img src="./images/dmIcon.png" class="DmPFP">
 					<h2 class="DmUserName">${input}</h2>
 				</button>
-			`))
+				`))
+			}
 		}
 	})
 }
 
 async function openDmFromID(id){
-	conn[id] = peer.connect(id);
-	activeMessageThread = true;
+	console.log(id + " in openDmFromID()")
+	conn = peer.connect(`${id}`);
 	curPeerId = id;
-	conn[id].on('open', () => {
-		conn.send('ID:' + id);
-	})
-	alert(conn[id])
+	openConnection();
+	console.log("sending id");
 }
 
-peer.on('connection', (conn) => {
-	conn.on('data', (data) => {
-	  	// Will print 'hi!'
-		alert(data);
-	  	if(data.toString().substring(0,3) == 'ID:'){
-			alert(data);
-			addDMChat()
-			let idinput = document.querySelector("input#idInput");
-			idinput.value = data.toString().substring(3);
-			idinput.dispatchEvent(new KeyboardEvent("keydown", { key: 'Enter', code: 'Enter', which: 13, keyCode: 13}));
-	  	}
-	});
-  });
+async function openConnection(){
+	console.log(conn.label + " in openConnection()");
+    conn.on('open', function(){
+		console.log("opening connection")
+        conn.on('data', function(data){
+			console.log(data)
+			if(data.message.substring(0,3) == 'ID:'){
+				console.log(data.message)
+				addDMChat()
+				let idinput = document.querySelector("input#idInput");
+				idinput.value = data.message.toString().substring(4);
+				idinput.dispatchEvent(new KeyboardEvent("keydown", { key: 'Enter', code: 'Enter', which: 13, keyCode: 13}));
+				return;
+			}
+            showMessage(document.querySelector(".MessageThread"), data.userName, data.pfp, data.date, data.time, data.message);
+        });
+		conn.send({
+			message: 'ID: '+user.id
+		})
+		activeMessageThread = true;
+    });
+}	
 
 //need to fix peer js import into file
 async function login(){
@@ -319,14 +333,6 @@ async function login(){
 function connect(id){
 	conn = peer.connect(id.toString());
 	openConnection();
-}
-
-function openConnection(){
-	conn.on('open', () => {
-		conn.on('data', (data) => {
-			sendMessage()
-		});
-	});
 }
 
 function logMessage(data){
@@ -432,24 +438,21 @@ function generateRandHex(size){
 }
 
 async function sendMessage(){
-	let input = messageInput.value;
 	let messageThread = document.querySelector(".MessageThread");
+	let input = messageInput.value;
 	let date =  new Date().toUTCString().substring(0,17);
 	let time =  new Date().toUTCString();
 	//need to fix problem with 24 hour roll over
 	time = time.substring(17);
-	/*
 	conn.send({
-		username: user.userName,
+		userName: user.userName,
 		pfp: user.pfp,
 		date: date,
 		time: time,
-		body: input
+		message: input
 	});
-	*/
-	showMessage(messageThread, user.userName, user.pfp, date, time, input);
 	messageInput.value = "";
-	saveToJson();
+	showMessage(messageThread, user.userName, user.pfp, date, time, input);
 }
 
 async function showMessage(messageThread, userName, pfp, date, time, input){
