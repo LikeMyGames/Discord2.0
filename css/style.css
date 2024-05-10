@@ -654,7 +654,7 @@ p{
 }
 
 .addDMButton span{
-    font-size: 65px; 
+    font-size: 65%; 
 }
 
 #idInput{
@@ -667,6 +667,7 @@ p{
 
 input#idInput, input#idInput:hover, input#idInput:focus, input#idInput:active{
     font-size: 35px;
+    width: 60%;
     border: solid var(--dark-color) 10px;
     border-radius: 30px;
     padding-left: 30px;

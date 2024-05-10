@@ -3,6 +3,7 @@
 //import { Peer } from "peerjs";
 //import {Peer} from "https://esm.sh/peerjs@1.5.2?bundle-deps"
 console.log(document.head.innerHTML);
+/*
 if(localStorage.getItem("user") != null && localStorage.getItem("pass") != null){
 	let userInput = document.querySelector("#userNameInput");
 	let passInput = document.querySelector("#passwordInput");
@@ -10,6 +11,7 @@ if(localStorage.getItem("user") != null && localStorage.getItem("pass") != null)
 	passInput.value = localStorage.getItem("pass");
 	login();
 }
+*/
 if(localStorage.getItem("theme") != null)
 	changeTheme(localStorage.getItem("theme"));
 if(localStorage.getItem("customThemes") == null){
@@ -20,12 +22,13 @@ openWelcome();
 var activeMessageThread = false;
 var messageThreadMessages = [];
 var peer;
-var conn;
+var conn = [];
 var inputMute = false;
 var outputMute = false;
 var fullscreened = false;
 var displayMode = "normal";
 var mode = "normal";
+var curPeerId = null;
 
 const messageInput = document.querySelector("#MessageInputText");
 messageInput.addEventListener("keydown", (e) => {
@@ -182,6 +185,9 @@ async function closeSettings(){
 async function useWithoutAccount(){
 	let id = generateRandHex(4);
 	peer = new Peer(id)
+	peer.on('open', (id) => {
+		alert("peer created with an id of " + id);
+	})
 	user = {"userName": 'Anonymous', "pfp": './images/dmIcon.png', "id": id}
 	console.log(user);
 	let welcome = document.querySelector(".welcome");
@@ -190,7 +196,7 @@ async function useWithoutAccount(){
 	main.style.zIndex = "1";
 	mode = "noAccount";
 	let accountInfoUsername = document.querySelector("#accountInfoUser");
-	accountInfoUsername.textContent = user.userName;
+	accountInfoUsername.textContent = `Anonymous (ID: ${user.id})`;
 	let messageList = document.querySelector(".MessageList");
 	messageList.appendChild(elementFromHTML(`
 	<button class="addDMButton" onclick="addDMChat()">
@@ -232,8 +238,28 @@ async function addDMChat(){
 }
 
 async function openDmFromID(id){
-	console.log(id)
+	conn[id] = peer.connect(id);
+	activeMessageThread = true;
+	curPeerId = id;
+	conn[id].on('open', () => {
+		conn.send('ID:' + id);
+	})
+	alert(conn[id])
 }
+
+peer.on('connection', (conn) => {
+	conn.on('data', (data) => {
+	  	// Will print 'hi!'
+		alert(data);
+	  	if(data.toString().substring(0,3) == 'ID:'){
+			alert(data);
+			addDMChat()
+			let idinput = document.querySelector("input#idInput");
+			idinput.value = data.toString().substring(3);
+			idinput.dispatchEvent(new KeyboardEvent("keydown", { key: 'Enter', code: 'Enter', which: 13, keyCode: 13}));
+	  	}
+	});
+  });
 
 //need to fix peer js import into file
 async function login(){
