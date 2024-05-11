@@ -23,6 +23,7 @@ html, body{
 }
 
 body {
+    background-color: var(--darkLight-color);
     position: fixed;
     left: 0px;
     top: 0px;
