@@ -252,7 +252,7 @@ async function openDmFromID(id){
 	console.log("sending id");
 }
 
-async function openConnection(){
+function openConnection(){
 	console.log(conn.label + " in openConnection()");
     conn.on('open', function(){
 		console.log("opening connection")
