@@ -1393,6 +1393,10 @@ input.colorPicker#textPicker {
 }
 
 @media screen and (max-width: 550px), (max-height: 667px), (max-width: 667px), (max-height: 550px){
+    body{
+        background-color: var(--darkLight-color);
+    }
+
     .welcome, .login, .main, .login{
         padding-bottom: env(safe-area-inset-bottom);
     }
