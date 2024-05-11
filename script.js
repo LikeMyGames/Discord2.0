@@ -119,8 +119,14 @@ function gmtISOToLocal(time){
 
 function gmtToLocal(time){
 	let localTime = new Date().toString().substring(28, 31);
+	console.log(localTime)
 	localTime = parseInt(time.toString()) + parseInt(localTime.toString());
+	console.log(localTime)
+	if(localTime < 0){
+		localTime = 24 + localTime;
+	}
 	localTime += time.substring(2,5);
+	console.log(localTime)
 	return localTime;
 }
 
@@ -530,6 +536,9 @@ async function loadDmThread(data, index){
 }
 
 async function openDmThread(id){
+	if(mode === "noAccount"){
+		return;
+	}
     let index = id.substring(2);
     fetch(`./users/${user.userName}.json`)
 		.then(res => {
@@ -545,6 +554,9 @@ async function openDmThread(id){
 }
 
 async function loadDMs(data){
+	if(mode === "noAccount"){
+		return;
+	}
     let messageList = document.querySelector(".MessageList");
     //console.log(data.DMs.length);
     for(let i = 0; i<data.DMs.length; i++){
@@ -559,6 +571,9 @@ async function loadDMs(data){
 };
 
 async function openDMs(){
+	if(mode === "noAccount"){
+		return;
+	}
     let messageList = document.querySelector(".MessageList");
     messageList.innerHTML = '';
 	fetch(`./users/${user.userName}.json`)
