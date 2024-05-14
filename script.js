@@ -207,8 +207,8 @@ async function useWithoutAccount(){
 	mode = "noAccount";
 	let accountInfoUsername = document.querySelector("#accountInfoUser");
 	accountInfoUsername.textContent = user.userName;
-	let messageList = document.querySelector(".MessageList");
-	messageList.appendChild(elementFromHTML(`
+	let mainWindow = document.querySelector(".container");
+	mainWindow.appendChild(elementFromHTML(`
 	<button class="addDMButton" onclick="addDMChat()">
 		<span class="material-symbols-rounded">add</span>
 	</button>
