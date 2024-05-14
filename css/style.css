@@ -682,12 +682,39 @@ p{
     font-size: 2rem;
 }
 
+.addDMWindow{
+	z-index: 2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	left: 0vw;
+	top: 0vh;
+	width: 100vw;
+	height: 100vh;
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+}
+
+.addDMBox{
+	background-color: var(--darkLight-color);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50px;
+	height: 40vh;
+	width: 50vw;
+	border: solid var(--dark-color) 10px;
+}
+
 #idInput{
     color: var(--text-color);
     background-color: #00000000;
     border: none;
     font-size: 50px;
     margin: 10px;
+	font-weight: 800;
 }
 
 input#idInput, input#idInput:hover, input#idInput:focus, input#idInput:active{
@@ -695,11 +722,22 @@ input#idInput, input#idInput:hover, input#idInput:focus, input#idInput:active{
     width: 60%;
     border: solid var(--dark-color) 10px;
     border-radius: 30px;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
     outline: none;
+}
+
+button#idInput{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: solid var(--dark-color) 10px;
+	background-color: #616effff;
+	height: 100px;
+	width: 200px;
+	padding: 10px;
+	border-radius: 40px;
+	margin: 0px;
+	margin-top: 10px;
 }
 
 .MessageThread{
@@ -1484,10 +1522,6 @@ input.colorPicker#textPicker {
 		padding-left: 5px;
 	}
 
-    .Members{
-
-    }
-
     .accountInfo{
 		grid-row: 6 / 7;
 		grid-column: 1 / 2;
@@ -1532,6 +1566,11 @@ input.colorPicker#textPicker {
 		margin-right: 10px;
 		justify-self: flex-start;
     }
+
+	.addDMBox{
+		height: 40%;
+		width: 90%;
+	}
 }
 
 @media screen and (max-width: 550px), (max-height: 667px), (max-width: 667px), (max-height: 550px){

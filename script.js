@@ -218,10 +218,13 @@ async function useWithoutAccount(){
 async function addDMChat(){
 	let body = document.querySelector("body")
 	body.appendChild(elementFromHTML(`
-		<div id="addDmWindow" style="z-index: 2; display: flex; justify-content: center; align-items: center; position: absolute; left: 0vw; top: 0vh; width: 100vw; height: 100vh; backdrop-filter: blur(10px);" >
-			<div style="background-color: var(--darkLight-color); display: flex; justify-content: center; align-items: center; border-radius: 50px; height: 40vh; width: 50vw; border: solid var(--dark-color) 10px;">
-				<label id="idInput" style="color: white;" for="idInput">ID: </label>
-				<input id="idInput" type="text" name="idInput" autocomplete="off">
+		<div id="addDmWindow" class="addDMWindow" >
+			<div class="addDMBox" >
+				<div style="display: flex; justify-content: center; align-items: center;">
+					<label id="idInput" style="color: white;" for="idInput">ID: </label>
+					<input id="idInput" type="text" name="idInput" autocomplete="off">
+				</div>
+				<button id="idInput">Enter</button>
 			</div>
 		</div>
 	`))
