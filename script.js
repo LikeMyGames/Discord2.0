@@ -224,7 +224,12 @@ async function addDMChat(){
 					<label id="idInput" style="color: white;" for="idInput">ID: </label>
 					<input id="idInput" type="text" name="idInput" autocomplete="off">
 				</div>
-				<button id="idInput">Enter</button>
+				<div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+					<button id="idInput" onclick="
+					let idinput = document.querySelector('input#idInput');
+					idinput.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', code: 'Enter', which: 13, keyCode: 13}));" >Enter</button>
+					<button id="idInput" onclick="document.querySelector('.addDMWindow').remove()" >Back</button>
+				</div>
 			</div>
 		</div>
 	`))
