@@ -28,7 +28,7 @@ var outputMute = false;
 var fullscreened = false;
 var displayMode = "normal";
 var mode = "normal";
-var curPeerId = null;
+var curPeer = {};
 
 const messageInput = document.querySelector("#MessageInputText");
 messageInput.addEventListener("keydown", (e) => {
@@ -207,11 +207,17 @@ async function useWithoutAccount(){
 	mode = "noAccount";
 	let accountInfoUsername = document.querySelector("#accountInfoUser");
 	accountInfoUsername.textContent = user.userName;
+	addAddDmChatButton();
+}
+
+async function addAddDmChatButton(){
 	let mainWindow = document.querySelector(".container");
 	mainWindow.appendChild(elementFromHTML(`
-	<button class="addDMButton" onclick="addDMChat()">
-		<span class="material-symbols-rounded">add</span>
-	</button>
+	<div class="addDmButtonBox">
+		<button class="addDMButton" onclick="addDMChat()">
+			<span class="material-symbols-rounded">add</span>
+		</button>
+	</div>
 	`))
 }
 
@@ -261,7 +267,7 @@ async function addDMChat(){
 async function openDmFromID(id){
 	console.log(id + " in openDmFromID()")
 	conn = peer.connect(`${id}`);
-	curPeerId = id;
+	curPeer.id = id;
 	openConnection();
 	console.log("sending id");
 }
@@ -271,19 +277,28 @@ function openConnection(){
     conn.on('open', function(){
 		console.log("opening connection")
         conn.on('data', function(data){
-			console.log(data)
-			if(data.message.substring(0,3) == 'ID:'){
-				console.log(data.message)
+			if(data.setup != undefined){
 				addDMChat()
 				let idinput = document.querySelector("input#idInput");
-				idinput.value = data.message.toString().substring(4);
+				idinput.value = `${data.id}`;
 				idinput.dispatchEvent(new KeyboardEvent("keydown", { key: 'Enter', code: 'Enter', which: 13, keyCode: 13}));
+				document.querySelector(`button.DmThread#DM${data.id} h2`).textContent = data.username;
+				let messageThreadTitle = document.querySelector(".messageThreadTitle")
+				messageThreadTitle.innerHTML = `
+					<img class="topBarImage" src="./images/dmIcon.png" >
+					<h3 class="topBarUserName" >${data.username}</h3>
+				`;
 				return;
+			}
+			if(curPeer.username != data.username){
+				document.querySelector(`button.DmThread#DM${data.id} h2`).textContent = data.username;
 			}
             showMessage(document.querySelector(".MessageThread"), data.userName, data.pfp, data.date, data.time, data.message);
         });
 		conn.send({
-			message: 'ID: '+user.id
+			setup: true,
+			id: user.id,
+			username: user.userName
 		})
 		activeMessageThread = true;
     });
