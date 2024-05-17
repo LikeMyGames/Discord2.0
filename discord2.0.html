@@ -159,7 +159,7 @@
 				<div class="ServerList">
 					<div class="serverListItem">
 						<img class="unSeenMessage" id="DMsNotification">
-						<button class="serverButton dmButton" id="DMs" onclick="openDMs()" onmouseout="unHoverServerButton(this.id)" onmouseover="hoverServerButton(this.id)">
+						<button type="button" class="serverButton dmButton" id="DMs" onclick="openDMs()" onmouseout="unHoverServerButton(this.id)" onmouseover="hoverServerButton(this.id)">
 	
 						</button>
 					</div>
@@ -169,13 +169,13 @@
 					</div>
 					<div class="serverListItem">
 						<img class="SeenMessage" id="addServerNotification">
-						<button class="serverButton createServerButton" id="addServer" onclick="createNewServer()">
+						<button type="button" class="serverButton createServerButton" id="addServer" onclick="createNewServer()">
 		
 						</button>
 					</div>
 					<div class="serverListItem">
 						<img class="SeenMessage" id="exploreServerNotification">
-						<button class="serverButton exploreServersButton" id="exploreServer" onclick="findPublicServer()" onmouseout="unHoverServerButton(this.id)" onmouseover="hoverServerButton(this.id)">
+						<button type="button" class="serverButton exploreServersButton" id="exploreServer" onclick="findPublicServer()" onmouseout="unHoverServerButton(this.id)" onmouseover="hoverServerButton(this.id)">
 		
 						</button>
 					</div>
@@ -200,13 +200,13 @@
 					<h2 id="accountInfoUser" class="accountInfoText">
 						This text should not be here
 					</h2>
-					<button id="toggleInputMute" class="openSettingsButton" onclick="toggleInputMute()">
+					<button type="button" id="toggleInputMute" class="openSettingsButton" onclick="toggleInputMute()">
 						<span id="toggleInputMuteIcon" class="material-symbols-rounded">mic</span>
 					</button>
-					<button id="toggleOutputMute"class="openSettingsButton" onclick="toggleOutputMute()">
+					<button type="button" id="toggleOutputMute"class="openSettingsButton" onclick="toggleOutputMute()">
 						<span id="toggleOutputMuteIcon" class="material-symbols-rounded">headset_mic</span>
 					</button>
-					<button id="openSettings" class="openSettingsButton" onclick="openSettings()">
+					<button type="button" id="openSettings" class="openSettingsButton" onclick="openSettings()">
 						<span id="openSettingsIcon" class="material-symbols-rounded">settings</span>
 					</button>
 				</div>
@@ -215,9 +215,11 @@
 
 					</div>
 					<div class="chatActionOptions">
-						<button class="chatAction" ><span class="chatActionIcon material-symbols-rounded">call</span></button>
-						<button class="chatAction" ><span class="chatActionIcon material-symbols-rounded">video_chat</span></button>
-						<button class="chatAction" ><span class="chatActionIcon material-symbols-rounded">person_add</span></button>
+						<button type="button" class="chatAction" title="Start Audio Call"><span class="chatActionIcon material-symbols-rounded">call</span></button>
+						<button type="button" class="chatAction" title="Start Video Call"><span class="chatActionIcon material-symbols-rounded">video_chat</span></button>
+						<button type="button" class="chatAction" title="Add Person to Chat"><span class="chatActionIcon material-symbols-rounded">person_add</span></button>
+						<button type="button" class="chatAction" title="Toggle Peer Data"><span class="chatActionIcon material-symbols-rounded">account_circle</span></button>
+						<button type="button" class="chatAction" title="Toggle Peer Data" onclick="toggleFullscreen()"><span class="chatActionIcon material-symbols-rounded">fullscreen</span></button>
 					</div>
 				</div>
 			</div>
