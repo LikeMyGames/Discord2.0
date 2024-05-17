@@ -243,7 +243,7 @@ async function addDMChat(){
 	idInput.addEventListener("keydown", (e) => {
 		if(e.code === "Enter"){
 			e.preventDefault();
-
+			console.log(idInput.value);
 			let input = idInput.value.toLowerCase();
 			if(input.length != 4){
 				alert("Input an ID that is in hexideciaml format and is 4 characters long");
