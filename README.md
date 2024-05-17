@@ -6,7 +6,7 @@ This is a personal project for AP Computer Science A. This is supposed to functi
 
 ## Tech Stuff
 ### Peer.JS
-The communication system in this project uses Peer.JS which is a free and user-friendly wrapper for WebRTC. If Peer.JS didn't exist and I had to try and use WebRTC, this project might not have been completed in time. Peer.JS provides a simple way of connecting from one peer to another (peer-to-peer or p2p). Peer.JS takes an ID, and as long as a person has another peer's ID, they can connect to them. This made it extremely easy to create a connection system. Peer.JS either creates a constructor or it can be provided one (the option used in this project for the most part). Eventually, Peer.JS will provide a way to make audio and video calls possible using this website. These features though, are not yet implemented, but hopefully I can get to it soon.
+The communication system in this project uses Peer.JS which is a free and user-friendly wrapper for WebRTC. If Peer.JS didn't exist and I had to try and use WebRTC, this project might not have been completed in time. Peer.JS provides a simple way of connecting from one peer to another (peer-to-peer or p2p). Peer.JS takes an ID, and as long as a person has another peer's ID, they can connect to them. This made it extremely easy to create a connection system. Peer.JS either creates a constructor or it can be provided one (the option used in this project for the most part). Eventually, Peer.JS will provide a way to make audio and video calls possible using this website. These features though, are not yet implemented, but hopefully I can get to it soon.    
 &n;
 ### Google Material Symbols
 This system/service/font library is used throughout this entire project. Mostly every icon seen in this project is from the Google Material Symbols library. This library made it very simple and easy to import and use nice-looking icons with many visual options. The import of this library using HTML and CSS was also very easy and the use in those two languages made it extremely easy to edit in JS just by changing the text content or content of an element.
@@ -15,16 +15,16 @@ This system/service/font library is used throughout this entire project. Mostly 
 
 ## Website Instruction for Use
 ### Use Without Account
-This is currently the only option on the welcome screen that works. This generates a random ID that gets both alerted to the user and by default, is part of the user name, which by default is "Untitled (ID ${id})".
+This is currently the only option on the welcome screen that works. This generates a random ID that gets both alerted to the user and by default, is part of the user name, which by default is "Untitled (ID ${id})".    
 &n;
 ### Use Without Account
-NOT IMPLEMENTED
+NOT IMPLEMENTED    
 &n;
 ### Create Account
-NOT IMPLEMENTED
+NOT IMPLEMENTED    
 &n;
 ### Content to Another User
-To connect to another user, all you need is their ID. At the top of the bar second from the left in desktop mode, and second from the top in mobile mode, there should be a button with a plus button on it. Click or tap this plus button and a screen with an input labeled id and 2 button should pop up. On desktop, just type the other peer's ID into the input and press enter. On mobile, type the other peer's ID into the input and press the enter button. Both of these actions will end up with the same result, a button either to the right of or below the add button (below on desktop and to the right of on mobile). This button should have the ID of the peer you are trying to connect to. If you click on this button, a connection will be attempted to be opened between the two peers. To connect to another peer make sure that you have their exact ID (letter case does not matter) and that they are still active on the website. If all of these conditions are satisfied, a connection should be achieved. You will know that you have connected because the name on the button will change to the username of the other peer. The main message input will now be enabled, and if you type something into it and press enter (on desktop, return on mobile) the message will be sent to the other person.
+To connect to another user, all you need is their ID. At the top of the bar second from the left in desktop mode, and second from the top in mobile mode, there should be a button with a plus button on it. Click or tap this plus button and a screen with an input labeled id and 2 button should pop up. On desktop, just type the other peer's ID into the input and press enter. On mobile, type the other peer's ID into the input and press the enter button. Both of these actions will end up with the same result, a button either to the right of or below the add button (below on desktop and to the right of on mobile). This button should have the ID of the peer you are trying to connect to. If you click on this button, a connection will be attempted to be opened between the two peers. To connect to another peer make sure that you have their exact ID (letter case does not matter) and that they are still active on the website. If all of these conditions are satisfied, a connection should be achieved. You will know that you have connected because the name on the button will change to the username of the other peer. The main message input will now be enabled, and if you type something into it and press enter (on desktop, return on mobile) the message will be sent to the other person.    
 &n;
 ### Editing Setting
 Currently, only the appearance settings are the ones that are semi-built out. You can change the color theme by clicking on one of the two existing options (dark or light [you are evil if you use light]). There is a partially built custom color picker, but it doesn't fully work yet, coming soon.
