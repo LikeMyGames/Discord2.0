@@ -656,7 +656,6 @@ p{
     grid-column: 2 / 3;
     overflow-x: hidden;
     overflow-y: auto;
-	z-index: 1;
 }
 
 .addDmButtonBox{
@@ -1531,7 +1530,7 @@ input.colorPicker#textPicker {
 	.main, .welcome, .login, .settings{
 		min-height: -webkit-fill-available;
 		min-height: 100dvh;
-		background-color: var(--dark-color);
+		background-color: var(--darkLight-color);
 	}
 
     .container{
@@ -1598,6 +1597,7 @@ input.colorPicker#textPicker {
         filter: drop-shadow(0px 1px 1px black);
         overflow-y: hidden;
         overflow-x: auto;
+		z-index: 1;
     }
 
     .MessageThread{
@@ -1622,6 +1622,7 @@ input.colorPicker#textPicker {
 		height: 100%;
 		width: 100%;
 		gap: 0px;
+		z-index: 10;
     }
 
 	.accountInfoPFP{
@@ -1662,8 +1663,9 @@ input.colorPicker#textPicker {
         grid-column: 1 / 2;
         display: flex;
         justify-content: flex-start;
-        background-color: #00000000;
+        background-color: var(--darkLight-color);
 		z-index: 0;
+		filter: none;
     }
 
     .addDMButton{
