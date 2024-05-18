@@ -1724,7 +1724,7 @@ input.colorPicker#textPicker {
 	}
 }
 
-/* @media screen and (max-width: 550px), (max-height: 667px), (max-width: 667px), (max-height: 550px){
+@media screen and (max-width: 550px), (max-height: 667px), (max-width: 667px), (max-height: 550px){
     body{
         background-color: var(--darkLight-color);
     }
@@ -1834,10 +1834,10 @@ input.colorPicker#textPicker {
         font-size: 35px;
     }
 
-} */
+}
 
-/* @media screen and (max-width: 500px), (max-height: 1000px){
+@media screen and (max-width: 500px), (max-height: 1000px){
     .useOption{
         font-size: 100%;
     }
-} */
+}
