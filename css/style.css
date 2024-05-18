@@ -1527,10 +1527,10 @@ input.colorPicker#textPicker {
 }
 
 @media screen and (max-aspect-ratio: 1 / 1), (max-width: 1000px) {
-	.main, .welcome, .login, .settings{
+	html, body, .main, .welcome, .login, .settings{
 		min-height: -webkit-fill-available;
 		min-height: 100dvh;
-		background-color: var(--darkLight-color);
+		background-color: var(--light-color);
 	}
 
     .container{
