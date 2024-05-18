@@ -16,7 +16,7 @@
 
 html, body{
     background-color: var(--darkLight-color);
-    overflow: none;
+    overflow: -moz-hidden-unscrollable;
     width: 100vw;
     height: 100vh;
     margin: 0px;
@@ -249,6 +249,7 @@ button{
     width: 100vw;
     height: 100dvh;
     overflow: hidden;
+	background-color: var(--darkLight-color)
 }
 
 .login{
@@ -606,6 +607,7 @@ p{
 	display: flex;
     align-items: center;
     transition: 0.125s;
+	border: none;
 }
 
 .DmThread:hover{
@@ -649,12 +651,12 @@ p{
 } 
 
 .MessageList{
-    background-color: var(--darkLight-color);
     padding-bottom: 100px;
     grid-row: 3 / 5;
     grid-column: 2 / 3;
     overflow-x: hidden;
     overflow-y: auto;
+	z-index: 1;
 }
 
 .addDmButtonBox{
@@ -705,8 +707,8 @@ p{
 	top: 0vh;
 	width: 100vw;
 	height: 100vh;
-	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
 }
 
 .addDMBox{
@@ -1525,10 +1527,10 @@ input.colorPicker#textPicker {
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-aspect-ratio: 1 / 1), (max-width: 1000px) {
     .container{
         grid-template-columns: 100dvw;
-        grid-template-rows:  9px 70px 65px 1fr 100px 70px;
+        grid-template-rows:  9px 70px 65px 100px 1fr 65px 70px;
     }
 
     .topBar{
@@ -1585,7 +1587,7 @@ input.colorPicker#textPicker {
 		align-items: center;
         padding: 0px;
         height: 100%;
-		padding-left: 120px;
+		margin-left: 120px;
 		padding-right: 10px;
         filter: drop-shadow(0px 1px 1px black);
         overflow-y: hidden;
@@ -1593,12 +1595,12 @@ input.colorPicker#textPicker {
     }
 
     .MessageThread{
-		grid-row: 4 / 5;
+		grid-row: 5 / 6;
 		grid-column: 1 / 2;
     }
 
     .MessageThreadInputBox{
-		grid-row: 5 / 6;
+		grid-row: 6 / 7;
 		grid-column: 1 / 2;
 		padding-top: 30px;
 		padding-bottom: 30px;
@@ -1609,7 +1611,7 @@ input.colorPicker#textPicker {
 		grid-template-columns: 10px 1fr repeat(10vw, 4);
         grid-template-rows: 70px;
 		align-items: center;
-		grid-row: 6 / 7;
+		grid-row: 7 / 8;
 		grid-column: 1 / 2;
 		height: 100%;
 		width: 100%;
@@ -1625,7 +1627,7 @@ input.colorPicker#textPicker {
 
 	.accountInfoText{
         grid-row: 1 / 2;
-		font-size: 6vw;
+		font-size: max(1.5rem, 4vw);
         width: auto;
 		margin: 2vw;
         margin-left: 0px;
@@ -1657,6 +1659,7 @@ input.colorPicker#textPicker {
         display: flex;
         justify-content: flex-start;
         background-color: #00000000;
+		z-index: 0;
     }
 
     .addDMButton{
@@ -1665,12 +1668,51 @@ input.colorPicker#textPicker {
         width: 100px;
 		margin-left: 10px;
 		margin-right: 10px;
-		
     }
 
 	.addDMBox{
 		height: 40%;
 		width: 90%;
+	}
+
+	.topMessageBar{
+		grid-row: 4 / 5;
+		grid-column: 1 / 2;
+		height: 100%;
+		width: 100%;
+		grid-template-columns: 100%;
+		grid-template-rows: repeat(2, 50px)
+	}
+
+	.messageThreadTitle{
+		grid-row: 2 / 3;
+		grid-column: 1 / 2;
+		height: 100%;
+		width: 100%;
+		justify-self: center;
+		align-self: center;
+		padding: 5px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.topBarUserName{
+		font-size: 200%;
+		margin: 0px;
+	}
+
+	.chatActionOptions{
+		grid-row: 1 / 2;
+		grid-column: 1 / 2;
+		justify-self: center;
+		align-self: center;
+		justify-content: center;
+		align-items: center;
+		padding: 0px;
+	}
+
+	.chatAction{
+		font-size: 1rem;
 	}
 }
 

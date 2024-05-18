@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Discord 2.0</title>
 		<meta charset="UTF-8">
+		<title>Discord 2.0</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="#2b2d31">
+		<meta name="mobile-web-app-capable" content="yes">
 
-		<meta name="theme-color" content="#2b2d31" ><!-- media="(prefers-color-scheme: dark)"-->
+		<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2b2d31" >
 		<link rel="icon" type="image/x-icon" href="images/favicon2.ico">
 		<script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
 		<link rel="stylesheet" href="./css/style.css">
@@ -215,11 +216,13 @@
 
 					</div>
 					<div class="chatActionOptions">
-						<button type="button" class="chatAction" title="Start Audio Call"><span class="chatActionIcon material-symbols-rounded">call</span></button>
-						<button type="button" class="chatAction" title="Start Video Call"><span class="chatActionIcon material-symbols-rounded">video_chat</span></button>
+						<!--
+						<button type="button" class="chatAction" title="Start Audio Call" onclick="startMediaStrem('audio')" ><span class="chatActionIcon material-symbols-rounded">call</span></button>
+						<button type="button" class="chatAction" title="Start Video Call" onclick="startMediaStrem('video')" ><span class="chatActionIcon material-symbols-rounded">video_chat</span></button>
 						<button type="button" class="chatAction" title="Add Person to Chat"><span class="chatActionIcon material-symbols-rounded">person_add</span></button>
-						<button type="button" class="chatAction" title="Toggle Peer Data"><span class="chatActionIcon material-symbols-rounded">account_circle</span></button>
-						<button type="button" class="chatAction" title="Toggle Peer Data" onclick="toggleFullscreen()"><span class="chatActionIcon material-symbols-rounded">fullscreen</span></button>
+						<button type="button" class="chatAction" title="Toggle Peer Data" ><span class="chatActionIcon material-symbols-rounded">account_circle</span></button>
+						-->
+						<button type="button" class="chatAction" title="Toggle Fullscreen" onclick="toggleFullscreen()" ><span class="chatActionIcon material-symbols-rounded">fullscreen</span></button>
 					</div>
 				</div>
 			</div>

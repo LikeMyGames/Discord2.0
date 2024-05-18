@@ -23,6 +23,7 @@ var activeMessageThread = false;
 var messageThreadMessages = [];
 var peer;
 var conn;
+var mediaConn;
 var inputMute = false;
 var outputMute = false;
 var fullscreened = false;
@@ -190,7 +191,7 @@ async function closeSettings(){
 
 async function useWithoutAccount(){
 	let id = generateRandHex(4);
-	peer = new Peer(id)
+	peer = new Peer(id, {debug: 3})
 	peer.on('open', (id) => {
 		alert("peer created with an id of " + id);
 	})
@@ -481,6 +482,7 @@ async function sendMessage(){
 		message: input
 	});
 	messageInput.value = "";
+	messageInput.blur();
 	showMessage(messageThread, user.userName, user.pfp, date, time, input);
 }
 
