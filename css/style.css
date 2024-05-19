@@ -113,7 +113,10 @@ button{
 }
 
 .welcomeText a, .welcomeText a:link, .welcomeText a:visited{
-    color: #005EEA;
+    color: #616effff;
+	text-decoration: none;
+	font-weight: 500;
+	font-family: fantasy, 'Open-sans', sans-serif;
 }
 
 .welcomeTopBar{
