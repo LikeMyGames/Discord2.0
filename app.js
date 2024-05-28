@@ -1,38 +1,23 @@
 //importing needed things
 import express from 'express'
 //import * as db from './db.js';
-import mongoose, { get } from "mongoose";
+import mongoose from "mongoose";
 import User from "../models/user.js";
 
 
-export function onRequest(context) {
-	//starting neccessary things (server, and mangoose connection)
-	console.log('server is starting')
-	//var app = express();
-	//var server = app.listen(3000, (port) => {
-	    console.log(`Server started on localhost:3000`)
-	//});
-	mongoose.connect("mongodb+srv://camilldominic:8SFmCg8WZASHlnkC@datcorddb.4s29eat.mongodb.net/Discord2?retryWrites=true&w=majority&appName=DatcordDB")
-
-	let res = new Response();
-
-	if(context.url.includes('/users', 0)){
-		getAllUsers(context.request, res)
-	}
-	else if(context.url.includes('/user'))
-
-
-    return res;
-}
-
-
-
+//starting neccessary things (server, and mangoose connection)
+console.log('server is starting')
+var app = express();
+var server = app.listen(3000, (port) => {
+    console.log(`Server started on localhost:3000`)
+});
+mongoose.connect("mongodb+srv://camilldominic:8SFmCg8WZASHlnkC@datcorddb.4s29eat.mongodb.net/Discord2?retryWrites=true&w=majority&appName=DatcordDB")
 
 //http actions and uri's
-//app.get('/users', getAllUsers)
-//app.get('/user/:user/:pass', getUser);
-//app.get('/addUser/:user/:pass', addUser);
-//app.post('/user/:user/:pass', addUser);
+app.get('/users', getAllUsers)
+app.get('/user/:user/:pass', getUser);
+app.get('/addUser/:user/:pass', addUser);
+app.post('/user/:user/:pass', addUser);
 
 //http action functions
 async function getAllUsers(req, res){
