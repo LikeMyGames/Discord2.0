@@ -23,13 +23,27 @@ var activeMessageThread = false;
 var messageThreadMessages = [];
 var peer;
 var conn;
-var mediaConn;
+var call;
 var inputMute = false;
 var outputMute = false;
 var fullscreened = false;
 var displayMode = "normal";
 var mode = "normal";
 var curPeer = {};
+
+navigator.mediaDevices.getUserMedia(constraints)
+	.then(function(stream) {
+	mediaStream = stream;
+	})
+	.catch(function(err) {
+		/* Handle the error */
+		alert(err);
+	});
+
+
+// var mediaStream = navigator.mediaDevices.getUserMedia({audio: true, video: true}).then((stream) => {
+
+// });
 
 const messageInput = document.querySelector("#MessageInputText");
 messageInput.addEventListener("keydown", (e) => {
@@ -199,6 +213,11 @@ async function useWithoutAccount(){
 		conn = connection;
 		openConnection();
 		console.log(id + " recieving peer connection")
+	})
+	peer.on('call', (incoming_call) => {
+		incoming_call.answer(navigator.mediaDevices.getUserMedia({audio: true, video: true}));
+		alert('call starting')
+		openCall();
 	})
 	user = {userName: `Untitled (ID: ${id})`, pfp: './images/dmIcon.png', id: id}
 	let welcome = document.querySelector(".welcome");
@@ -488,6 +507,36 @@ async function sendMessage(){
 
 async function showMessage(messageThread, userName, pfp, date, time, input){
 	messageThread.appendChild(createMessage(userName, pfp, date, time, input));
+}
+
+async function startCall(mode){
+	if(conn == null || undefined){
+		alert('cannot start audio or video call without an active chat')
+		return;
+	}
+	alert(conn.peer);
+	alert('trying to start call')
+	call = peer.call(conn.peer, navigator.mediaDevices.getUserMedia({audio: true, video: true}));
+	alert('testing')
+	openCall();
+}
+
+async function openCall(){
+	alert('opening call')
+	let body = document.querySelector('body');
+	alert(body)
+	body.appendChild(elementFromHTML(`
+	<video class="stream" style="position: absolute; left: 0px; top: 0px; height: 50vh; width: 50vw;">
+		<source src=${stream}>
+	</video>`
+	));
+	let video = document.querySelector('video.stream');
+	alert(video)
+	call.on('stream', (stream) => {
+		video.src = window.URL.createObjectURL(stream) || stream;
+		video.setAttribute('autoplay', true);
+		video.play();
+	});
 }
 
 async function sendPeerMessage(date, time, input){
