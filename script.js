@@ -30,15 +30,17 @@ var fullscreened = false;
 var displayMode = "normal";
 var mode = "normal";
 var curPeer = {};
+var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.moxGetUserMedia;
 
-navigator.mediaDevices.getUserMedia(constraints)
-	.then(function(stream) {
-	mediaStream = stream;
-	})
-	.catch(function(err) {
-		/* Handle the error */
-		alert(err);
-	});
+
+// navigator.mediaDevices.getUserMedia(constraints)
+// 	.then(function(stream) {
+// 	mediaStream = stream;
+// 	})
+// 	.catch(function(err) {
+// 		/* Handle the error */
+// 		alert(err);
+// 	});
 
 
 // var mediaStream = navigator.mediaDevices.getUserMedia({audio: true, video: true}).then((stream) => {
@@ -205,7 +207,7 @@ async function closeSettings(){
 
 async function useWithoutAccount(){
 	let id = generateRandHex(4);
-	peer = new Peer(id, {debug: 3})
+	peer = new Peer(id, {debug: 2})
 	peer.on('open', (id) => {
 		alert("peer created with an id of " + id);
 	})
@@ -214,11 +216,16 @@ async function useWithoutAccount(){
 		openConnection();
 		console.log(id + " recieving peer connection")
 	})
-	peer.on('call', (incoming_call) => {
-		incoming_call.answer(navigator.mediaDevices.getUserMedia({audio: true, video: true}));
-		alert('call starting')
-		openCall();
-	})
+	peer.on('call', function(call) {
+			getUserMedia({video: true, audio: true}, function(stream) {
+    			call.answer(stream); // Answer the call with an A/V stream.
+    			call.on('stream', function(remoteStream) {
+					openCall();
+    			});
+				}, function(err) {
+					console.log('Failed to get local stream' ,err);
+			});
+		});
 	user = {userName: `Untitled (ID: ${id})`, pfp: './images/dmIcon.png', id: id}
 	let welcome = document.querySelector(".welcome");
 	let main = document.querySelector(".main");
@@ -308,6 +315,8 @@ function openConnection(){
 					<img class="topBarImage" src="./images/dmIcon.png" >
 					<h3 class="topBarUserName" >${data.username}</h3>
 				`;
+				let messageInput = document.querySelector('input.MessageThreadTextInput');
+				messageInput.placeholder = `Message @${data.username}`
 				return;
 			}
 			if(curPeer.username != data.username){
@@ -514,29 +523,33 @@ async function startCall(mode){
 		alert('cannot start audio or video call without an active chat')
 		return;
 	}
-	alert(conn.peer);
-	alert('trying to start call')
-	call = peer.call(conn.peer, navigator.mediaDevices.getUserMedia({audio: true, video: true}));
-	alert('testing')
-	openCall();
+
+	getUserMedia({video: true, audio: true}, function(stream) {
+		var call = peer.call('2', stream);
+		call.on('stream', function(remoteStream) {
+			openCall();
+		});
+		  }, function(err) {
+			console.log('Failed to get local stream' ,err);
+	});
+
+	// alert(conn.peer);
+	// alert('trying to start call')
+	// call = peer.call(conn.peer, navigator.mediaDevices.getUserMedia({audio: true, video: true}));
+	// console.log(call)
+	// openCall();
 }
 
 async function openCall(){
 	alert('opening call')
 	let body = document.querySelector('body');
-	alert(body)
+	console.log(body)
 	body.appendChild(elementFromHTML(`
-	<video class="stream" style="position: absolute; left: 0px; top: 0px; height: 50vh; width: 50vw;">
-		<source src=${stream}>
+	<video class="stream" style="position: absolute; left: 0px; top: 0px; height: 50vh; width: 50vw;" autoplay>
 	</video>`
 	));
 	let video = document.querySelector('video.stream');
-	alert(video)
-	call.on('stream', (stream) => {
-		video.src = window.URL.createObjectURL(stream) || stream;
-		video.setAttribute('autoplay', true);
-		video.play();
-	});
+	video.srcObject = remoteStream;
 }
 
 async function sendPeerMessage(date, time, input){

@@ -14,8 +14,7 @@
   "dependencies": {
     "express": "^4.19.2",
     "mongodb": "^6.6.2",
-    "mongoose": "^8.4.0",
-    "peerjs": "^1.5.2"
+    "mongoose": "^8.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
