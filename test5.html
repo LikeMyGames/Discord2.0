@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+	<script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+</head>
+<body>
+    <input type="text" id="idInput" placeholder="id">
+	<button class="createRoom" onclick="createRoom()">Create Room</button>
+	<button class="joinRoom" onclick="joinRoom()">Join Room</button>
+    <video src="" id="you"></video>
+    <video src="" id="other"></video>
+
+    <script>
+        var room_id;
+        var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+		var local_stream;
+		var peer = null;
+		var currentPeer = null
+
+		async function createRoom(){
+			let room = document.querySelector("#idInput").value;
+			if(room == "" || room == " "){
+				alert('input room id');
+				return;
+			}
+			room_id = room;
+			alert(room_id)
+			peer = new Peer(room_id)
+			alert(peer)
+			peer.on('open', (id) => {
+				alert(id)
+				console.log("Peer Room ID: ", id)
+        		getUserMedia({ video: true, audio: true }, (stream) => {
+            		console.log(stream);
+            		local_stream = stream;
+            		setLocalStream(local_stream)
+        		}, (err) => {
+            		console.log(err)
+        		})
+				alert('waiting for other peer to join')
+			})
+			peer.on('call', (call) => {
+        		call.answer(local_stream);
+        		call.on('stream', (stream) => {
+        		    console.log("got call");
+        		    console.log(stream);
+        		    setRemoteStream(stream)
+        		})
+        		currentPeer = call;
+    		})
+		}
+
+		function joinRoom() {
+		    console.log("Joining Room")
+		    let room = document.getElementById("room-input").value;
+		    if (room == " " || room == "") {
+		        alert("Please enter room number")
+		        return;
+		    }
+		    room_id = room;
+		    peer = new Peer()
+		    peer.on('open', (id) => {
+		        console.log("Connected room with Id: " + id)
+
+		        getUserMedia({ video: true, audio: false }, (stream) => {
+		            local_stream = stream;
+		            setLocalStream(local_stream)
+		            alert("Joining peer")
+		            let call = peer.call(room_id, stream)
+		            call.on('stream', (stream) => {
+		                setRemoteStream(stream);
+
+		            })
+		            currentPeer = call;
+		        }, (err) => {
+		            console.log(err)
+		        })
+
+		    })
+		}
+
+		function setLocalStream(stream) {
+			alert('setting local stream')
+    		document.getElementById("#other").hidden = false;
+    		let video = document.getElementById("#other");
+    		video.srcObject = stream;
+    		video.muted = true;
+    		video.play();
+		}
+
+		function setRemoteStream(stream) {
+			alert('setting remote stream')
+		    document.getElementById("#other").hidden = false;
+		    let video = document.getElementById("#other");
+		    video.srcObject = stream;
+		    video.play();
+	}
+    </script>
+</body>
+</html>

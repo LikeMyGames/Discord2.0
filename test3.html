@@ -7,21 +7,20 @@
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
 </head>
 <body>
-    <video autoplay></video>
+    <video id="you" autoplay></video>
+	<video id="other" autoplay></video>
     <script>
         const hash = location.hash;
-        const id = hash.split('#')[1]
+        var room_id = hash.split('#')[1]
         console.log(id);
+		var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+		var local_stream;
+		var screenStream;
+		var peer = null;
+		var currentPeer = null
 
-        var peer = new Peer(id, {
-			host: '/',
-			port: '3001',
-		});
+        peer = new Peer(room_id);
 		console.log(peer.id);
-
-		var videoElement = document.querySelector('video');
-
-        var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.moxGetUserMedia;
 
 		peer.on('call', function(call) {
 			getUserMedia({video: true, audio: false}, function(stream) {
