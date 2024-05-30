@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p class="user">user</p>
+    <p class="pass">pass</p>
+
+    <script>
+        var user = document.querySelector('.user')
+        var pass = document.querySelector('.pass')
+
+        alert('fetching ...')
+
+        fetch('https://datcord-api.onrender.com/user/pinkpompom/poppy')
+            .then(res => {
+                alert(res)
+                if(!res.ok){
+                    alert('did not work')
+                    throw new Error('did not work');
+                }
+                res.json();
+            })
+            .then(data => {
+                alert('it worked')
+                user.textContent = data.user;
+                pass.textContent = data.pass;
+            })
+            .catch(err => {
+                alert('it did not work')
+                alert(err);
+                console.error(err);
+            })
+    </script>
+</body>
+</html>
