@@ -15,20 +15,20 @@
 
         console.log('fetching ...');
 
-        fetch('https://datcord-api.onrender.com/user/baby-yoda/pizza')
+        fetch('https://datcord-api.onrender.com/users')
             .then(res => {
                 if(!res.ok){
                     console.log('it did not worked');
                     throw new Error('did not work');
                 }
-                console.log(res);
+				console.log(res);
                 res.json();
             })
             .then(data => {
                 console.log('it worked');
                 console.log(data)
-                user.textContent = data.username;
-                pass.textContent = data.password;
+                // user.textContent = data.username;
+                // pass.textContent = data.password;
             })
             .catch(err => {
                 console.log('it did not worked');
