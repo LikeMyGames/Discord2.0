@@ -13,25 +13,25 @@
         var user = document.querySelector('.user')
         var pass = document.querySelector('.pass')
 
-        alert('fetching ...')
+        console.log('fetching ...');
 
-        fetch('https://datcord-api.onrender.com/user/pinkpompom/poppy')
+        fetch('https://datcord-api.onrender.com/user/baby-yoda/pizza')
             .then(res => {
-                alert(res)
                 if(!res.ok){
-                    alert('did not work')
+                    console.log('it did not worked');
                     throw new Error('did not work');
                 }
+                console.log(res);
                 res.json();
             })
             .then(data => {
-                alert('it worked')
-                user.textContent = data.user;
-                pass.textContent = data.pass;
+                console.log('it worked');
+                console.log(data)
+                user.textContent = data.username;
+                pass.textContent = data.password;
             })
             .catch(err => {
-                alert('it did not work')
-                alert(err);
+                console.log('it did not worked');
                 console.error(err);
             })
     </script>
