@@ -1,5 +1,8 @@
 # Discord2.0 / Datcord
 
+## Important
+If you want to clone or fork or do anything that requires 
+
 ## Summary
 This is a personal project for AP Computer Science A. This is supposed to function as a somewhat clone of Discord. Some directions on how to use things are listed below. This project uses many different free services and languages to function. The main languages used to make this project are HTML, CSS, and Javascript. The languages all work together to make the site structure, look, and actions work how I want them to. This project uses vanilla Javascript (no React or other framework) meaning that I had to learn an entirely new scripting language. Most of the things that I needed to know for this project, I already knew due to the AP Comp Sci class, but Javascript-specific things like syntax, semicolon structure, and other built-in browser features I learned using Stack Overflow. Stack Overflow along with MDN and Peer.JS docs were pivotal and vital pieces to the functionality of this project. Without any of those documentations, I wouldn't have been able to do the things I did for this project. Some of the services I used for this project at the moment include but might not be limited to, Peer.JS and Google Material Symbols (Google fonts, but icons). These services allowed me to have both a functional and visually pleasing experience for the user.
 
