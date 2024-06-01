@@ -22,7 +22,7 @@
                     throw new Error('did not work');
                 }
 				console.log(res);
-                res.json();
+                return res.json();
             })
             .then(data => {
                 console.log('it worked');
@@ -31,7 +31,7 @@
                 // pass.textContent = data.password;
             })
             .catch(err => {
-                console.log('it did not worked');
+                console.log('it did not work');
                 console.error(err);
             })
     </script>

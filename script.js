@@ -336,11 +336,11 @@ function openConnection(){
 //need to fix peer js import into file
 async function login(){
 	let username = document.querySelector("#userNameInput").value;
-	let pass = document.querySelector("#passwordInput").value;
+	let password = document.querySelector("#passwordInput").value;
 	localStorage.setItem("user", username);
-	localStorage.setItem("pass", pass);
-	if(!(username === "" || pass === "")){
-		fetch(`./users/${username}.json`)
+	localStorage.setItem("pass", password);
+	if(!(username === "" || password === "")){
+		fetch(`https://datcord-api.onrender.com/user/${username}/${password}`)
 			.then(res => {
 				if(!res.ok){
 					throw new Error();
@@ -348,35 +348,36 @@ async function login(){
 				return res.json();
 			})
 			.then(data => {
-				if(data.password !== pass){
-					alert("Please input correct password.")
-				}
-				else{
-					user = {"userName": data.userName, "pfp": data.pfp, "id": data.id};
-					console.log("user = " + user.userName);
-					console.log(user.password);
-					console.log(user.id);
-					peer = new Peer(user.id);
-					peer.on('open', (id) => {
-						console.log(id);
-					});
-					var conn;
-					peer.on('connection', (connection) => {
-						conn = connection;
-						openConnection();
-					})
-					let main = document.querySelector(".main");
-					let login = document.querySelector("#login");
-					let createAccount = document.querySelector("#createAccount");
-					let accountInfoUsername = document.querySelector("#accountInfoUser");
-					let settings = document.querySelector(".settings");
-					main.style.zIndex = "1";
-					login.style.zIndex = "-1";
-					createAccount.style.zIndex = "-1";
-					settings.style.zIndex = "-2";
-					accountInfoUsername.textContent = user.userName;
-					return user;
-				}
+				console.log(data);
+				// if(data.password !== pass){
+				// 	alert("Please input correct password.")
+				// }
+				// else{
+				// 	user = {"userName": data.userName, "pfp": data.pfp, "id": data.id};
+				// 	console.log("user = " + user.userName);
+				// 	console.log(user.password);
+				// 	console.log(user.id);
+				// 	peer = new Peer(user.id);
+				// 	peer.on('open', (id) => {
+				// 		console.log(id);
+				// 	});
+				// 	var conn;
+				// 	peer.on('connection', (connection) => {
+				// 		conn = connection;
+				// 		openConnection();
+				// 	})
+				// 	let main = document.querySelector(".main");
+				// 	let login = document.querySelector("#login");
+				// 	let createAccount = document.querySelector("#createAccount");
+				// 	let accountInfoUsername = document.querySelector("#accountInfoUser");
+				// 	let settings = document.querySelector(".settings");
+				// 	main.style.zIndex = "1";
+				// 	login.style.zIndex = "-1";
+				// 	createAccount.style.zIndex = "-1";
+				// 	settings.style.zIndex = "-2";
+				// 	accountInfoUsername.textContent = user.userName;
+				// 	return user;
+				// }
 			})
 			.catch(error => {
 				console.error(error);
