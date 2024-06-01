@@ -217,15 +217,15 @@ async function useWithoutAccount(){
 		console.log(id + " recieving peer connection")
 	})
 	peer.on('call', function(call) {
-			getUserMedia({video: true, audio: true}, function(stream) {
-    			call.answer(stream); // Answer the call with an A/V stream.
-    			call.on('stream', function(remoteStream) {
-					openCall();
-    			});
-				}, function(err) {
-					console.log('Failed to get local stream' ,err);
-			});
+		getUserMedia({video: true, audio: true}, function(stream) {
+    		call.answer(stream); // Answer the call with an A/V stream.
+    		call.on('stream', function(remoteStream) {
+				openCall();
+    		});
+			}, function(err) {
+				console.log('Failed to get local stream' ,err);
 		});
+	});
 	user = {userName: `Untitled (ID: ${id})`, pfp: './images/dmIcon.png', id: id}
 	let welcome = document.querySelector(".welcome");
 	let main = document.querySelector(".main");
@@ -349,35 +349,35 @@ async function login(){
 			})
 			.then(data => {
 				console.log(data);
-				// if(data.password !== pass){
-				// 	alert("Please input correct password.")
-				// }
-				// else{
-				// 	user = {"userName": data.userName, "pfp": data.pfp, "id": data.id};
-				// 	console.log("user = " + user.userName);
-				// 	console.log(user.password);
-				// 	console.log(user.id);
-				// 	peer = new Peer(user.id);
-				// 	peer.on('open', (id) => {
-				// 		console.log(id);
-				// 	});
-				// 	var conn;
-				// 	peer.on('connection', (connection) => {
-				// 		conn = connection;
-				// 		openConnection();
-				// 	})
-				// 	let main = document.querySelector(".main");
-				// 	let login = document.querySelector("#login");
-				// 	let createAccount = document.querySelector("#createAccount");
-				// 	let accountInfoUsername = document.querySelector("#accountInfoUser");
-				// 	let settings = document.querySelector(".settings");
-				// 	main.style.zIndex = "1";
-				// 	login.style.zIndex = "-1";
-				// 	createAccount.style.zIndex = "-1";
-				// 	settings.style.zIndex = "-2";
-				// 	accountInfoUsername.textContent = user.userName;
-				// 	return user;
-				// }
+				let id = data.peerID;
+				user = {userName: data.username, password: data.password, pfp: data.pfp, id: data.id}
+				peer = new Peer(id, {debug: 2})
+				peer.on('open', (id) => {
+					alert("peer created with an id of " + id);
+				})
+				peer.on('connection', (connection) => {
+					conn = connection;
+					openConnection();
+					console.log(id + " recieving peer connection")
+				})
+				peer.on('call', function(call) {
+					getUserMedia({video: true, audio: true}, function(stream) {
+    					call.answer(stream); // Answer the call with an A/V stream.
+    					call.on('stream', function(remoteStream) {
+							openCall();
+    					});
+						}, function(err) {
+							console.log('Failed to get local stream' ,err);
+					});
+				});
+				let welcome = document.querySelector(".welcome");
+				let main = document.querySelector(".main");
+				welcome.style.zIndex = "-1";
+				main.style.zIndex = "1";
+				mode = "noAccount";
+				let accountInfoUsername = document.querySelector("#accountInfoUser");
+				accountInfoUsername.textContent = user.userName;
+				addAddDmChatButton();
 			})
 			.catch(error => {
 				console.error(error);
@@ -445,38 +445,50 @@ async function toggleOutputMute(){
 
 async function createAccount(){
 	let username = document.querySelector("#createAccountUsername").value;
-	let pass = document.querySelector("#createAccountPassword").value;
-	if(!(username === "" || pass === "")){
+	let password = document.querySelector("#createAccountPassword").value;
+	if(!(username === "" || password === "")){
 		if(!(username.includes("<") || username.includes(">") || username.includes(":") || username.includes("\"") || username.includes("/") || username.includes("\\") || username.includes("|") || username.includes("?") || username.includes("*")) && !(pass.includes("<") || pass.includes(">") || pass.includes(":") || pass.includes("\"") || pass.includes("/") || pass.includes("\\") || pass.includes("|") || pass.includes("?") || pass.includes("*"))){
-			fetch(`./users/${username}.json`, {method: "HEAD"})
+			fetch(`https://datcord-api.onrender.com/user/${username}/${password}`, {method: "POST"})
 				.then(res => {
-					if(res.ok){
-						alert("An account with this username already exists. Please choose a different username");
-						console.log("this account exists already");
-					}
-					else {
-						console.log("this account does not exist");
-						fetch(`./users/${username}.json`, {method: 'POST', headers: {'Content-Type': 'application/json'},body: {
-							id: `${username}#${generateRandHex(4)}`,
-    						userName: username,
-    						password: pass,
-    						pfp: "./images/dmIcon.png"
-						}})
-						.then(res => {
-							if(!res.ok){
-								console.log("cannot create account");
-								throw new Error(`HTTP Error ${res.status}`);
-							}
-							return res.json();
-						})
-						.then(data => {
-							console.log(data);
-						})
-						.catch(err => {
-							console.error(err);
+					if(!res.ok)
+						throw new Error();
+					return res.json();
+				})
+				.then(data => {
+					console.log(data);
+					let id = data.peerID;
+					user = {userName: data.username, password: data.password, pfp: data.pfp, id: data.id}
+					peer = new Peer(id, {debug: 2})
+					peer.on('open', (id) => {
+						alert("peer created with an id of " + id);
+					})
+					peer.on('connection', (connection) => {
+						conn = connection;
+						openConnection();
+						console.log(id + " recieving peer connection")
+					})
+					peer.on('call', function(call) {
+						getUserMedia({video: true, audio: true}, function(stream) {
+    						call.answer(stream); // Answer the call with an A/V stream.
+    						call.on('stream', function(remoteStream) {
+								openCall();
+    						});
+							}, function(err) {
+								console.log('Failed to get local stream' ,err);
 						});
-					}
-				});
+					});
+					let welcome = document.querySelector(".welcome");
+					let main = document.querySelector(".main");
+					welcome.style.zIndex = "-1";
+					main.style.zIndex = "1";
+					mode = "noAccount";
+					let accountInfoUsername = document.querySelector("#accountInfoUser");
+					accountInfoUsername.textContent = user.userName;
+					addAddDmChatButton();
+				})
+				.catch(err => {
+					console.error("Account already exists or it can't be created", err);
+				})
 		}
 		else{
 			alert("The username and/or password that you entered used one the following: < > : \" / \\ | ? *. The username and password that you enter are not allowed to contain the previous characters.")
