@@ -61,6 +61,16 @@ button{
     cursor: pointer;
 }
 
+#notification{
+    border-radius: 20px;
+    height: 10vh;
+    width: 90vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-top: 10px;
+    z-index: 99;
+}
+
 .welcome{
     background-color: var(--lightLight-color);
     z-index: 1;
@@ -115,8 +125,9 @@ button{
 .welcomeText a, .welcomeText a:link, .welcomeText a:visited{
     color: #616effff;
 	text-decoration: none;
-	font-weight: 500;
-	font-family: fantasy, 'Open-sans', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+	font-family: 'Open-sans', sans-serif;
 }
 
 .welcomeTopBar{

@@ -349,9 +349,8 @@ async function login(){
 			})
 			.then(data => {
 				console.log(data);
-				let id = data.peerID;
-				user = {userName: data.username, password: data.password, pfp: data.pfp, id: data.id}
-				peer = new Peer(id, {debug: 2})
+				user = {userName: data.username, password: data.password, pfp: data.pfp, id: data.peerID}
+				peer = new Peer(user.id, {debug: 3})
 				peer.on('open', (id) => {
 					alert("peer created with an id of " + id);
 				})
@@ -447,8 +446,8 @@ async function createAccount(){
 	let username = document.querySelector("#createAccountUsername").value;
 	let password = document.querySelector("#createAccountPassword").value;
 	if(!(username === "" || password === "")){
-		if(!(username.includes("<") || username.includes(">") || username.includes(":") || username.includes("\"") || username.includes("/") || username.includes("\\") || username.includes("|") || username.includes("?") || username.includes("*")) && !(pass.includes("<") || pass.includes(">") || pass.includes(":") || pass.includes("\"") || pass.includes("/") || pass.includes("\\") || pass.includes("|") || pass.includes("?") || pass.includes("*"))){
-			fetch(`https://datcord-api.onrender.com/user/${username}/${password}`, {method: "POST"})
+		if(!(username.includes("-") || username.includes("_"))){
+			fetch(`https://datcord-api.onrender.com/user/${username}/${password}`, {method: 'POST'})
 				.then(res => {
 					if(!res.ok)
 						throw new Error();
@@ -456,9 +455,8 @@ async function createAccount(){
 				})
 				.then(data => {
 					console.log(data);
-					let id = data.peerID;
-					user = {userName: data.username, password: data.password, pfp: data.pfp, id: data.id}
-					peer = new Peer(id, {debug: 2})
+					user = {userName: data.username, password: data.password, pfp: data.pfp, id: data.peerID}
+					peer = new Peer(user.id, {debug: 3})
 					peer.on('open', (id) => {
 						alert("peer created with an id of " + id);
 					})
@@ -491,7 +489,7 @@ async function createAccount(){
 				})
 		}
 		else{
-			alert("The username and/or password that you entered used one the following: < > : \" / \\ | ? *. The username and password that you enter are not allowed to contain the previous characters.")
+			alert("The username that you entered used one the following: - _ The username that you enter is not allowed to contain the previous characters.")
 		}
 	}
 	else{
@@ -506,6 +504,15 @@ function generateRandHex(size){
 		result.push(hexRef[Math.floor(Math.random() * 16)]);
 	}
 	return result.join('');
+}
+
+function notify(msg) {
+    let notification = document.getElementById("notification")
+    notification.innerHTML = msg
+    notification.hidden = false
+    setTimeout(() => {
+        notification.hidden = true;
+    }, 3000)
 }
 
 async function sendMessage(){
