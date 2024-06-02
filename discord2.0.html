@@ -18,7 +18,7 @@
 	</head>
 	<body>
 		<div id="notification">
-			
+
 		</div>
 		<div class="welcome">
 			<div class="welcomeBox">
@@ -183,9 +183,14 @@
 				</div>
 				<div class="accountInfo">
 					<img class="accountInfoPFP" src="./images/dmIcon.png">
-					<h2 id="accountInfoUser" class="accountInfoText">
-						This text should not be here
-					</h2>
+					<div class="accountInfoTextBox">
+						<h2 id="accountInfoUser" class="accountInfoText">
+							This text should not be here
+						</h2>
+						<h2 id="accountInfoID" class="accountInfoText">
+							This text should not be here
+						</h2>
+					</div>
 					<button type="button" id="toggleInputMute" class="openSettingsButton" onclick="toggleInputMute()">
 						<span id="toggleInputMuteIcon" class="material-symbols-rounded">mic</span>
 					</button>
@@ -203,9 +208,7 @@
 					<div class="chatActionOptions">
 						<!--
 						<button type="button" class="chatAction" title="Start Audio Call" onclick="startMediaStrem('audio')" ><span class="chatActionIcon material-symbols-rounded">call</span></button>
-						-->
 						<button type="button" class="chatAction" title="Start Video Call" onclick="startCall('video')" ><span class="chatActionIcon material-symbols-rounded">video_chat</span></button>
-						<!--
 						<button type="button" class="chatAction" title="Add Person to Chat"><span class="chatActionIcon material-symbols-rounded">person_add</span></button>
 						<button type="button" class="chatAction" title="Toggle Peer Data" ><span class="chatActionIcon material-symbols-rounded">account_circle</span></button>
 						-->

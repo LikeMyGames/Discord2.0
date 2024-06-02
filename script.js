@@ -233,7 +233,9 @@ async function useWithoutAccount(){
 	main.style.zIndex = "1";
 	mode = "noAccount";
 	let accountInfoUsername = document.querySelector("#accountInfoUser");
+	let accountInfoID = document.querySelector("#accountInfoID");
 	accountInfoUsername.textContent = user.userName;
+	accountInfoID.textContent = user.id;
 	addAddDmChatButton();
 }
 
@@ -271,11 +273,7 @@ async function addDMChat(){
 		if(e.code === "Enter"){
 			e.preventDefault();
 			console.log(idInput.value);
-			let input = idInput.value.toLowerCase();
-			if(input.length != 4){
-				alert("Input an ID that is in hexideciaml format and is 4 characters long");
-				return;
-			}
+			let input = idInput.value;
 			let messageList = document.querySelector(".MessageList");
 			let addDmWindow = document.querySelector("#addDmWindow");
 			addDmWindow.remove();
@@ -375,7 +373,9 @@ async function login(){
 				main.style.zIndex = "1";
 				mode = "noAccount";
 				let accountInfoUsername = document.querySelector("#accountInfoUser");
+				let accountInfoID = document.querySelector("#accountInfoID");
 				accountInfoUsername.textContent = user.userName;
+				accountInfoID.textContent = user.id;
 				addAddDmChatButton();
 			})
 			.catch(error => {
@@ -481,7 +481,9 @@ async function createAccount(){
 					main.style.zIndex = "1";
 					mode = "noAccount";
 					let accountInfoUsername = document.querySelector("#accountInfoUser");
+					let accountInfoID = document.querySelector("#accountInfoID");
 					accountInfoUsername.textContent = user.userName;
+					accountInfoID.textContent = user.id;
 					addAddDmChatButton();
 				})
 				.catch(err => {
@@ -708,9 +710,15 @@ async function changeSettingsContent(id){
 				<div class="AccountInfo">
 					<div class="genericInfoBar">
 						<img class="pfp" src="./images/dmIcon.png">
-						<h2>
-							UserName
-						</h2>
+						<div style="display: flex; flex-direction: column; align-item: center; justify-content: center;">
+							<h2>
+								UserName
+							</h2>
+							<br>
+							<h2>
+								ID: ${user.id}
+							</h2>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -959,14 +959,25 @@ button#idInput{
     float: left;
 }
 
+.accountInfoTextBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    gap: 2px;
+}
+
 .accountInfoText{
-    margin-top: 10px;
-    margin-left: 10px;
+    margin: 0px;
     padding-left: 0px;
-    width: 150px;
+    width: 100px;
     font-size: 14px;
     font-weight: 400;
     align-self: flex-start;
+    overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .accountInfoSecondBox{
@@ -1176,6 +1187,8 @@ button#idInput{
 }
 
 .pfp{
+    height: 80px;
+    aspect-ratio: 1 / 1;
     border-radius: 50px;
     width: 80px;
     margin-right: 20px;
